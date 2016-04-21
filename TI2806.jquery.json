@@ -1,0 +1,26 @@
+{
+  "name": "TI2806",
+  "title": "Data Analysation",
+  "description": "Code review data visualisation",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mboom/TI2806",
+  "author": {
+    "name": "BorekBeker",
+    "email": "bekerborek@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mboom/TI2806.git"
+  },
+  "bugs": "https://github.com/mboom/TI2806/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mboom/TI2806/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
