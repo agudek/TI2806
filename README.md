@@ -20,6 +20,17 @@ jQuery(function($) {
 </script>
 ```
 
+## Project
+### Team
+* [Borek Beker](https://github.com/borek2)
+* [Marco Boom](https://github.com/mboom)
+* [Leendert van Doorn](https://github.com/lvdoorn)
+* [Ahmet Gudek](https://github.com/agudek)
+* [Daan van der Valk](https://github.com/DaanvanderValk)
+
+### Sprint backlogs and retrospectives
+1. [Sprint backlog for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_1.pdf) (April 25–29)
+
 ## Documentation
 _(Coming soon)_
 
