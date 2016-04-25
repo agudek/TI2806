@@ -13,9 +13,3 @@ function loadScripts(scripts) {
         document.getElementsByTagName('head')[0].appendChild(script);
     }
 }
-
-function init() {
-    req(host + '/docs', (function (res) {
-        document.getElementsByTagName('body')[0].innerHTML += res;
-    })());
-}
