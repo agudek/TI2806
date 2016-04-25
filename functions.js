@@ -5,6 +5,7 @@ function req(url, callback) {
             callback(http.responseText);
         }
     };
-    http.open("GET", url, true);
+    http.open('GET', url, true);
+    http.setRequestHeader('Access-Control-Allow-Headers', 'x-requested-with');
     http.send(null);
 }
