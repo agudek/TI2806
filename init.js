@@ -15,7 +15,7 @@ function loadScripts(scripts) {
 }
 
 function init() {
-    req(host + 'docs', (function (res) {
+    req(host + '/docs', (function (res) {
         document.getElementsByTagName('body')[0].innerHTML += res;
     })());
 }
