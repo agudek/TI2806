@@ -1,4 +1,4 @@
-function req(url, callback) {
+function get(url, callback) {
     var http = new XMLHttpRequest();
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
