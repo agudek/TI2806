@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mboom/TI2806.png?label=ready&title=Ready)](https://waffle.io/mboom/TI2806)
 # Data Analysation
 
 Code review data visualisation
