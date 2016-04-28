@@ -32,8 +32,8 @@ jQuery(function($) {
 1. [Sprint backlog for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_1.pdf) (April 25–29)
 
 ### Project reports
-1. [Product Vision](https://github.com/mboom/TI2806/blob/master/doc/product_vision.pdf) (April 28)
-
+1. [Product Vision](https://github.com/mboom/TI2806/blob/master/doc/project/product_vision.pdf) (April 28)
+2. [Product Planning](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning.pdf) (April 28)
 
 ## Documentation
 _(Coming soon)_
