@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Product planning}
+\author{Group: TSE 1}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE TI2806: Context Project \par}
+	\vspace{1cm}
+	{\scshape\Large Tools for Software Engineering\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Product planning\par}
+	\vspace{0.5cm}
+	{\Large\bfseries Octopeer Viewer\par}
+	\vspace{2cm}
+	{\Large
+	  Group: TSE1 \\
+	  \vspace{0.5cm}
+	  \itshape
+        Borek Beker \\
+        Marco Boom \\
+        Leendert van Doorn \\
+        Ahmet Gudek \\
+        Daan van der Valk \\
+    \par}
+
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\section{Introduction}
+
+The Octopeer project focuses on creating an analysis tool for peer reviews on revision management systems such as Github and Bitbucket. The goal of the project is to track a users actions throughout the peer reviewing process and eventually present this information to the user through visualisations, in an easily understandable and highly informative matter. With this data, the users will be able to gain insights on their peer reviewing routines an will have the ability to improve these through time. This document contains the description, requirements and other necessary information required for the creation of Octopeer Viewer, a client-side software responsible for the visualisation of the acquired peer review data. 
+
+\section{Product}
+
+The program we are creating will have to adhere to certain requirements and desired features. In this section, a high-level product backlog is given. This backlog lists features the software will or might have at the end of the project. Also a roadmap is created in which our release goals and schedule are depicted. 
+
+    \subsection{High-level product backlog} \label{HL Product BL}
+    
+    \begin{itemize}
+        \item The product will need an accessible page.
+        \item The page needs to connect to a back-end with the user's data.
+        \item The data will need to be requested from this back-end.
+        \item The received data will need to be mined for useful data.
+        \item The useful data needs to be visualised for the user.
+        \item The visualisations should to be divided into multiple categories.
+        \item The user should be able to only view the desired data category.
+    \end{itemize}
+    
+    \subsection{Roadmap}
+    
+    At the end of this ten week project we desire to have fully implemented the items listed in section \ref{HL Product BL}.
+    
+\section{Product backlog} 
+
+This sections contains a description of the software's (current) features and defects, technical improvements and know-how acquisition through the use of user stories (If applicable). Additionally, an initial release plan is included.
+
+    \subsection{User stories of features}
+    
+    As a user I want :
+    
+    \begin{itemize}
+        \item A portal to see data on peer reviews.
+        \item This portal to acquire and visualise my peer review data.
+        \item Insights on the peer reviews I have completed, such as the ...
+            \subitem number of peer reviews.
+            \subitem length and review times.
+        \item Information about my behaviour while peer reviewing, such as the ...
+            \subitem mouse behaviour and clicked components.
+            \subitem actual amount of time spent on peer reviewing.
+            \subitem external resources used.
+    \end{itemize}
+    
+    \subsection{User stories of defects} (if applicable)
+    \subsection{User stories of technical improvements} (if applicable)
+    \subsection{User stories of know-how acquisition} -
+    \subsection{Initial release plan}
+    
+    The project is divided into eight weekly sprints with sub-deliverables that we will call milestones. We expect the following functionalities to be implemented on these milestones :
+    \\
+    Milestone 1
+    \begin{itemize}
+        \item A front page is created that can be accessed by the user.
+        \item A connection is established to the database with peer review data.
+        \item GET requests are implemented for data acquisition from the database.
+        \item Demo visuals are created with dummy data which will be replaced with actual user data in the following sprints.
+    \end{itemize}
+    
+    Milestone 2
+    \begin{itemize}
+        \item A backbone architecture is created.
+        \item Mimicked data is inserted into the database and in turn used for visualisation creation.
+        \item Simple visualisations completed.
+    \end{itemize}
+    
+\section{Definition of Done}
+
+When a certain aspect of the project is completed by the project team, it will be placed under the "Done" category. The following rules apply for the tasks in this category : 
+
+\begin{itemize}
+    \item When a software feature is done, the feature has been coded and tested with unit tests and/or UI tests to a degree deemed acceptable by all team members.
+    \item When a software feature is done, the code has been commented and well documented.
+    \item When a software feature is done, it has been reviewed and accepted by at least two other team members and merged with the main code by a third.
+    \item When a software feature is done and thus has been merged with the main code, the new version of the code has passed all new and previous unit tests.
+    \item A sprint is considered done when all tasks are done according to the points above, or for all uncompleted tasks a valid technical reason is given for not completing it.
+    \item When a sprint is done, all identified bugs on the products of the previous sprints have been fixed.
+    \item The final product is considered done when the main features are implemented and no technically viable requirement remains uncompleted.
+\end{itemize}
+
+\section{Glossary}
+-
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
