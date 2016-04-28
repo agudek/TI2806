@@ -37,7 +37,7 @@ jQuery(function($) {
 2. [Product Vision](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning.pdf) (April 28)
 
 ## Documentation
-_(Coming soon)_
+1. [Software architecture](https://github.com/mboom/TI2806/blob/master/doc/project/Architecture.pdf) 
 
 ## Examples
 _(Coming soon)_
