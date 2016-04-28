@@ -32,7 +32,7 @@ jQuery(function($) {
 1. [Sprint backlog for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_1.pdf) (April 25–29)
 
 ## Documentation
-_(Coming soon)_
+1. [Software architecture](https://github.com/mboom/TI2806/blob/master/doc/project/Architecture.pdf) 
 
 ## Examples
 _(Coming soon)_
