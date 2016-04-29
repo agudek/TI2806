@@ -53,17 +53,17 @@ The following tools and systems are used to realize the visualization tool.
 
 \subsubsection{Programming languages}
 
-The visualization tool is mainly written in the usual web development languages (HTML, Javascript and CSS). To make writing Javascript code a bit easier, a framework called jQuery is used. Also to make a large amount of different kind of graphs the frame work D3 is used. This framework is an extension of Javascript and is used to create great looking and useable graphs.
+The visualization tool is mainly written in the usual web development languages (HTML, Javascript and CSS). To make writing Javascript code a bit easier, a framework called jQuery is used. Also to make a large amount of different kind of graphs the framework D3 is used. This framework is an extension of Javascript and is used to create great looking and useable graphs.
 
 \subsubsection{Project management}
 
 Github is used to maintain the code repositories. By the use of pull request the tool will be improved constantly.
 
+Waffle.io is used to manage and keep track of tasks. It gives good insights in project development and progress.
+
 \subsubsection{Continuous Integration}
 
 To make sure that every pull request that get merged won't break the tool and that a good quality is maintained, continuous integration is mandatory. A good tool that is able to handle this is GruntJS in combination with Travis. A pull request can not be merged until all the tests are passed.
-
-\subsubsection{Libraries}
 
 \subsection{Persistent data management}
 
@@ -78,7 +78,7 @@ A goal of this project is scalability. This means that when the user base grows 
 \begin{enumerate}
     \item \textbf{UX}: User Experience
     \item \textbf{ORM}: Object Relational Mapping language. This is a language that maps a database to a more useable language. Django is an example of this.
-    \item \textbf{Continuous Integration}: CI automate tests and builds. Travis is an example of this.
+    \item \textbf{CI}: Continuous Integration automate tests and builds. Travis is an example of this.
 \end{enumerate}
 
 \end{document}
