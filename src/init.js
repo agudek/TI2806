@@ -1,7 +1,7 @@
 var scriptfiles = [
     'https://code.jquery.com/jquery-2.2.3.js',
     'settings.js',
-    'functions.js'
+    'dummy.js'//'functions.js'
 ];
 
 loadScripts(scriptfiles);

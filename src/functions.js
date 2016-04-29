@@ -5,7 +5,7 @@ function get(query, callback) {
             callback(JSON.parse(http.responseText));
         }
     };
-    http.open('GET', host + query + '?format=json', true);
+    http.open('GET', host + query.replace(host, '') + '?format=json', true);
     http.setRequestHeader('Access-Control-Allow-Headers', 'x-requested-with');
     http.send(null);
 }
