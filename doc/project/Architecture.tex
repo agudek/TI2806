@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{graphicx}
+
+\title{Architecture Design}
+\author{Daan van der Valk\and
+Ahmet Gudek\and
+Marco Boom\and
+Leendert van Doorn\and
+Borek Beker}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In this document the result of the Context Project with the subject tools for software engineering will be described. First, a description and explaination of the goals of the project is described. In the next chapter, a description of the chosen tools and system architecture is given.
+
+\subsection{Design goals}
+
+In this subsection the design goals of the product are described. These are goals that summarize the aim of the project.
+
+\begin{itemize}
+    \item \textbf{Give meaning to data}:
+    The data that is collected from Bitbucket and Github is mainly raw data. A goal of this project is to filter and aggregate the data. The reason for this is that not all the data might be very useful. Also with the use of aggregation, data that is meaningless on it's own, will get meaning when aggregated together.
+    \item \textbf{Usability} (User Experience): A goal that is aimed to be achieved in this project is the goal Usability. The reason why this is a goal, is that the users need to have a good experience without too much hassle when using the tool. The user need to quickly analyze the presented data. Moreover, a user needs to find his way within the app. It should be clear for a user how to use the features of the app.
+    \item \textbf{Maintainable}: This project is part of a study course. After the end of this course this tool might be widely used among software engineers. To keep providing a great working tool the tools needs to be updated constantly. Because of this the code needs to be maintainable by future software engineers that will work on this project.
+    \item \textbf{Scaleable}: As described before, if a lot of software engineers start using the tool, it needs to be resilient to a rapid growing user amount. If the software breaks due to high traffic, it will also hurt the usability of the tool.
+\end{itemize}
+
+\section{Software architecture}
+
+To realize the goals that are described in the last chapter, the best tools and architecture need to be used.
+
+\subsection{Basic system decomposition}
+
+Octopeer basically consists of three clients. Two clients collect data from BitBucket and GitHub. These clients (Google Chrome Extensions) will collect data like mouse movement and actions of a software engineer. Data that is collected will be sent to a database that runs on the octopeer domain.
+
+The visualization tool only connects to the database. The data that is provided by that database will be used by the tool and it will aggregated and visualized locally.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=10cm]{BasicSystem.png}
+\caption{Basic system decomposition}
+\end{figure}
+
+\subsection{Subsystems}
+
+The following tools and systems are used to realize the visualization tool.
+
+\subsubsection{Programming languages}
+
+The visualization tool is mainly written in the usual web development languages (HTML, Javascript and CSS). To make writing Javascript code a bit easier, a framework called jQuery is used. Also to make a large amount of different kind of graphs the frame work D3 is used. This framework is an extension of Javascript and is used to create great looking and useable graphs.
+
+\subsubsection{Project management}
+
+Github is used to maintain the code repositories. By the use of pull request the tool will be improved constantly.
+
+\subsubsection{Continuous Integration}
+
+To make sure that every pull request that get merged won't break the tool and that a good quality is maintained, continuous integration is mandatory. A good tool that is able to handle this is GruntJS in combination with Travis. A pull request can not be merged until all the tests are passed.
+
+\subsubsection{Libraries}
+
+\subsection{Persistent data management}
+
+The database is on the external Octopeer domain. This domain handles the data with the use of Django (a Python ORM language). Because of the fact that this is another project good communication with the engineers of the project is required.
+
+\subsection{Concurrency}
+
+A goal of this project is scalability. This means that when the user base grows rapidly big, the tool should not break down. A lot of concurrent users should not be hold back. The external Octopeer domain should be able to handle a lot of traffic.
+
+\section{Glossary}
+
+\begin{enumerate}
+    \item \textbf{UX}: User Experience
+    \item \textbf{ORM}: Object Relational Mapping language. This is a language that maps a database to a more useable language. Django is an example of this.
+    \item \textbf{Continuous Integration}: CI automate tests and builds. Travis is an example of this.
+\end{enumerate}
+
+\end{document}
