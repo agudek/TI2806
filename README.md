@@ -1,4 +1,5 @@
-﻿# Data Analysation
+﻿[![Stories in Ready](https://badge.waffle.io/mboom/TI2806.png?label=ready&title=Ready)](https://waffle.io/mboom/TI2806)
+# Data Analysation
 
 Code review data visualisation
 
@@ -32,8 +33,13 @@ jQuery(function($) {
 1. [Sprint backlog for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_1.pdf) (April 25–29)
 2. [Sprint backlog for week 3](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_2.pdf) (May 2–4)
 3. [Sprint retro for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_1.pdf) (April 25–29)
+
+### Project reports
+1. [Product Vision](https://github.com/mboom/TI2806/blob/master/doc/project/product_vision.pdf) (April 28)
+2. [Product Planning](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning.pdf) (April 28)
+
 ## Documentation
-_(Coming soon)_
+1. [Software architecture](https://github.com/mboom/TI2806/blob/master/doc/project/Architecture.pdf) 
 
 ## Examples
 _(Coming soon)_
