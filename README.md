@@ -31,6 +31,7 @@ jQuery(function($) {
 ### Sprint backlogs and retrospectives
 1. [Sprint backlog for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_1.pdf) (April 25–29)
 2. [Sprint backlog for week 3](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_2.pdf) (May 2–4)
+3. [Sprint retro for week 2](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_1.pdf) (April 25–29)
 ## Documentation
 _(Coming soon)_
 
