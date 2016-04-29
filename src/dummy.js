@@ -1,23 +1,30 @@
 function get(query, callback) {
     switch (query.replace(host, '')) {
+        case '':
         case '/':
             callback(db.root);
             break;
+        case '/users':
         case '/users/':
             callback(db.users);
             break;
+        case '/pull-requests':
         case '/pull-requests/':
             callback(db.pullrequests);
             break;
+        case '/sessions':
         case '/sessions/':
             callback(db.sessions);
             break;
+        case '/events':
         case '/events/':
             callback(db.events);
             break;
+        case '/event-positions':
         case '/event-positions/':
             callback(db.eventpositions);
             break;
+        case '/event-types':
         case '/event-types/':
             callback(db.eventtypes);
             break;
