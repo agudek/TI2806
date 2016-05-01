@@ -1,32 +1,85 @@
 function get(query, callback) {
-    switch (query.replace(host, '')) {
+    query = query.replace(host, '');
+    if (query.charAt(query.length - 1) == "/") {
+        query = query.substring(0, query.length - 1);
+    }
+    var parts = query.split('/');
+    var idcheck = false;
+    var id = 0;
+    if (!isNaN(parts[parts.length - 1])) {
+        idcheck = true;
+        id = parts[parts.length - 1];
+        query = query.substring(0, query.length - id.length - 1);
+    }
+    switch (query) {
         case '':
-        case '/':
             callback(db.root);
             break;
         case '/users':
-        case '/users/':
-            callback(db.users);
+            if (idcheck == true) {
+                if (id < 1 || id > db.users.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.users.results[id - 1]);
+                }
+            } else {
+                callback(db.users);
+            }
             break;
         case '/pull-requests':
-        case '/pull-requests/':
-            callback(db.pullrequests);
+            if (idcheck == true) {
+                if (id < 1 || id > db.pullrequests.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.pullrequests.results[id - 1]);
+                }
+            } else {
+                callback(db.pullrequests);
+            }
             break;
         case '/sessions':
-        case '/sessions/':
-            callback(db.sessions);
+            if (idcheck == true) {
+                if (id < 1 || id > db.sessions.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.sessions.results[id - 1]);
+                }
+            } else {
+                callback(db.sessions);
+            }
             break;
         case '/events':
-        case '/events/':
-            callback(db.events);
+            if (idcheck == true) {
+                if (id < 1 || id > db.events.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.events.results[id - 1]);
+                }
+            } else {
+                callback(db.events);
+            }
             break;
         case '/event-positions':
-        case '/event-positions/':
-            callback(db.eventpositions);
+            if (idcheck == true) {
+                if (id < 1 || id > db.eventpositions.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.eventpositions.results[id - 1]);
+                }
+            } else {
+                callback(db.eventpositions);
+            }
             break;
         case '/event-types':
-        case '/event-types/':
-            callback(db.eventtypes);
+            if (idcheck == true) {
+                if (id < 1 || id > db.eventtypes.results.length) {
+                    callback(db.notFound);
+                } else {
+                    callback(db.eventtypes.results[id - 1]);
+                }
+            } else {
+                callback(db.eventtypes);
+            }
             break;
         default:
             break;
@@ -49,7 +102,7 @@ var database = function () {
     function genDate() {
         var date = new Date();
         date.setDate(genNumber(28));
-        return date.toTimeString();
+        return date.toJSON();
     }
     var userscount = genNumber(100);
     var pullrequestscount = genNumber(100);
@@ -58,6 +111,9 @@ var database = function () {
     var eventpositionscount = genNumber(100);
     var eventtypescount = genNumber(100);
 
+    this.notFound = {
+        'detail': 'Not found.'
+    };
     this.root = {
         'users': host + '/users/',
         'pull-requests': host + '/pull-requests/',
