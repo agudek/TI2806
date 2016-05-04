@@ -1,5 +1,7 @@
 ﻿[![Stories in Ready](https://badge.waffle.io/mboom/TI2806.png?label=ready&title=Ready)](https://waffle.io/mboom/TI2806)
 
+[![](https://api.travis-ci.org/mboom/TI2806.svg?branch=master)](https://travis-ci.org/mboom/TI2806)
+
 Repository homepage: https://mboom.github.io/TI2806/
 
 View on Traivs-CI: https://travis-ci.org/mboom/TI2806
