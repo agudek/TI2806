@@ -3,9 +3,14 @@ function get(query, callback) {
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
             callback(JSON.parse(http.responseText));
+        } else {
+            var error = {
+                'http-status': http.status,
+                'response-headers': http.getAllResponseHeaders().toString()
+            }
+            callback(error);
         }
     };
-    http.open('GET', host + query + '?format=json', true);
-    http.setRequestHeader('Access-Control-Allow-Headers', 'x-requested-with');
+    http.open('GET', host + query.replace(host, '') + '?format=json', true);
     http.send(null);
 }
