@@ -43,7 +43,8 @@ jQuery(function($) {
 
 ### Project reports
 1. [Product Vision](https://github.com/mboom/TI2806/blob/master/doc/project/product_vision.pdf) (April 28)
-2. [Product Planning](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning.pdf) (April 28)
+2. [Product Planning Draft](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning.pdf) (April 28)
+2. [Product Planning](https://github.com/mboom/TI2806/blob/master/doc/project/Product_Planning_final.pdf) (May 4)
 
 ## Documentation
 1. [Software architecture](https://github.com/mboom/TI2806/blob/master/doc/project/Architecture.pdf) 
