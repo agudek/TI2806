@@ -1,4 +1,11 @@
 ﻿[![Stories in Ready](https://badge.waffle.io/mboom/TI2806.png?label=ready&title=Ready)](https://waffle.io/mboom/TI2806)
+
+Repository homepage: https://mboom.github.io/TI2806/
+
+View on Traivs-CI: https://travis-ci.org/mboom/TI2806
+
+View on Waffle.io: https://waffle.io/mboom/TI2806
+
 # Data Analysation
 
 Code review data visualisation
