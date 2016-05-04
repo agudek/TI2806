@@ -1,33 +1,60 @@
 \documentclass{article}
+\usepackage[american]{babel}
 \usepackage[utf8]{inputenc}
 
 \title{Product vision}
-\author{Group: TSE 1}
+\author{Group: BussInfraManDevOps}
 \date{\today}
 
-\usepackage{natbib}
+\usepackage{csquotes}
+\usepackage[style=apa,backend=biber]{biblatex}
+\DeclareLanguageMapping{english}{american-apa}
+\addbibresource{references.bib}
+
 \usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{hyperref}
+
 
 \begin{document}
 \begin{titlepage}
 	\centering
 	{\scshape\LARGE TI2806: Context Project \par}
-	\vspace{1cm}
+	\vspace{0.2cm}
 	{\scshape\Large Tools for Software Engineering\par}
 	\vspace{1.5cm}
-	{\huge\bfseries Product Vision\par}
+	{\Huge\bfseries Product Vision\par}
 	\vspace{0.5cm}
-	{\Large\bfseries Octopeer Viewer\par}
-	\vspace{2cm}
-	{\Large
-	  Group: TSE1 \\
-	  \vspace{0.5cm}
+	{\LARGE\bfseries Octopeer Analytics\par}
+	\vspace{3cm}
+	{\LARGE
+	  Group: BussInfraManDevOps \\
+	  \vspace{0.4cm}
+	  \Large
 	  \itshape
-        Borek Beker \\
-        Marco Boom \\
-        Leendert van Doorn \\
-        Ahmet Gudek \\
-        Daan van der Valk \\
+        Borek Beker \textnormal{(4118650)}\\
+        Marco Boom \textnormal{(4393031)}\\
+        Leendert van Doorn \textnormal{(4373286)}\\
+        Ahmet Gudek \textnormal{(4307445)}\\
+        Daan van der Valk \textnormal{(4094751)}\\
+    \par}
+	\vspace{1cm}
+	{\LARGE
+	  Supervisors \\
+	  \Large
+        
+        \begin{multicols}{3}
+        Context coordinator\\
+        \textit{Alberto Bachelli}
+        \columnbreak
+        
+        Context T.A.\\
+        \textit{Aaron Ang}\\
+        \columnbreak
+        
+        Software Engineering T.A.\\
+        \textit{Bastiaan Reijm}\\
+        \end{multicols}
     \par}
 
 	\vfill
@@ -36,48 +63,72 @@
 	{\large \today\par}
 \end{titlepage}
 
-\section{Introduction}
-Last couple of years, services for version control and continuous integration of software, like GitHub, have become popular tools to make software development easier. A cloud based codebase made it significantly easier for (large) teams to work on the same project, both commercially and non-profit. For both public and private projects, contributors suggest a major change by creating a pull request. These changes are then reviewed by the responsible project members or other contributors in so called \textit{peer reviews}. The \textit{Octopeer} project aims to collect data about these peer review sessions throught a browser extension.
+\tableofcontents
+\newpage
 
-The goal of the \textbf{Octopeer Viewer} is to present data collected by the Octopeer extension in the most clear and useful way. It is a web application, accessible via the browser extension, and can be adjusted to the users needs. It should give insights in the reviews of individuals, as well as reviews on project or company scale.
 
-\section{Target audience}
-As part of the Octopeer project, the Octopeer Viewer mainly targets Software Engineers, Testers, Managers, Computer Science students, and others involved in software engineering where code reviews are a part of the work cycle. It is essential to the popularity and effectiveness of the project, to become part of as many software projects as possible. This will be achieved by making it a handy tool for both code reviewers and managers. The following personas could all be potential users of the Octopeer Viewer, having different backgrounds and goals.
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\section{Introduction} \label{section:introduction}
+This document describes the product vision of \textit{Octopeer Analytics}, part of the \textit{Octopeer} project. In this section, some important concepts regarding software peer reviews are introduced. Also, the Octopeer project is introduced and sets up the following sections.
 
-\subsection{Personas}
-\subsubsection{Lars}
+Last couple of years, online services for version control and continuous integration of software, like GitHub and Bitbucket, have become popular tools to make software development easier. A cloud based codebase made it significantly easier for (large) teams to work on the same project, both commercially and non-profit. For both public and private projects, contributors suggest a change by creating a \textit{pull request}. These changes are then inspected by the responsible project members or other contributors in so called \textit{peer reviews}. During a peer review, the suggested changes are examined, possibly commented on, and approved or rejected by the reviewer. This concept is used for code reviews since a couple of decades ago. \parencite{softwareinspections}
+
+Although research has shown that the functionality of continuous integration is not always used in practise \parencite{contin}, the popularity of the such platforms can hardly be disputed. GitHub announced it's 10 millionth repository at the end of 2013. \parencite{githubblog} In both GitHub and Bitbucket, managing and reviewing pull requests are important parts of the development work flow. According to \cite{insupportofpeercodereview}, using peer code reviews at an undergraduate level Software Engineering course ``has been positive in terms of [improving] code quality''.
+
+
+The \textit{Octopeer} project aims to collect data about these peer review sessions through a browser extension. The goal of \textbf{Octopeer Analytics} is to present data collected by the Octopeer extension in the most clear and useful way. It is a web application, accessible via the browser extension, and can be adjusted to the users needs. It should give insights in the reviews of individuals, as well as reviews on project or company scale.
+
+
+\section{Target audience} \label{section:targetaudience}
+As part of the Octopeer project, the Octopeer Analytics mainly targets Software Engineers, Testers, Managers, Computer Science students, and others involved in software engineering where code reviews are a part of the work cycle. It is essential to the popularity and effectiveness of the project, to become part of as many software projects as possible. This will be achieved by making it a handy tool for both code reviewers and managers. We do not aim for researchers, making the assumption that they will prefer to study the dataset of the Octopeer project itself. The following personas could all be potential users of the Octopeer Analytics, having different backgrounds and goals.
+
+\subsection{Personas} \label{section:personas}
+\subsubsection{Lars}  \label{persona:lars}
 Lars (48) is a project manager of a software development company. The teams he is involved in produce a lot of code, aiming to produce a working deliverable every two weeks. To recognize and eliminate as much bugs as possible, Lars' company intensively uses peer reviews before branches are merged with the master. Lars would like to make this peer review process as efficient as possible, by measuring the code reviews of his team members. He aims to select his best code reviewers, in terms of speed and number of found bugs, to create a comprehensive protocol for peer reviews, getting the best out of his employees. Lars decides to use Octopeer, hosted on a company server, to use with his teams.
 
 \subsubsection{Lisa}
-Lisa (19) is a first year Computer Science student. She has just learned to program in java, and wants to contribute to Open Source projects on Bitbucket. A project in which she is interested, demands her to install the Octopeer plugin for Chrome to monitor her code reviews. Lisa is not so much interested in this, but agrees and uses the plugin anyways. After some months and a lot of both programming and code reviewing in various project, she opens the Octopeer Viewer and is curious to see whether her code review sessions have changed. See is able to see how her code review speed (per changed line) and quality (usefulness of comments, spotted bugs) have changed.
+Lisa (19) is a first year Computer Science student. Because she is single, boys are giving her always a lot of attention. She has just learned to program in Java, and wants to contribute to Open Source projects on Bitbucket for a study project. The project supervisor demands her to install the Octopeer plugin for Chrome to monitor her code reviews. Lisa thinks it can help her. Because her team mates always complimenting her work to much she never receives negative feedback. Therefore it is hard for her to improve her peer review skills. She hopes that she can use Octopeer Analytics to compare her skills with other team members. Also she have better insights when her review skills are graded.
 
 \subsubsection{Eric}
-Eric (37) is a software developer at an Open Source IT company. He works in a multidisciplinary team in which Eric both commits and reviews code. Eric would like to get insights on his code review sessions, aiming to do work faster, without missing any problematic parts. He installs the Octopeer browser plugin to get statistics helping him assess his GitHub peer review sessions, taking a look at the data using Octopeer Viewer.
+Eric (37) is a software developer at an Open Source IT company. He works in a multidisciplinary team in which Eric both commits and reviews code. After 12 years of experience, he knows peer reviews are very important to improve the code quality. Eric would like to get insights on his code review sessions, aiming to do work faster, without missing any problematic parts. He installs the Octopeer browser plugin to get statistics helping him assess his GitHub peer review sessions, taking a look at the data using Octopeer Analytics.
 
-\subsubsection{Tim}
-Tim (27) is a PhD student who researches peer reviewing procedures. He would like to get access to as much data as possible about different people looking at merge requests. Tim uses the public Octopeer database, containing the information of Octopeer users who agreed on sharing their anonymised data with the project. The various overviews and graphs of the Octopeer Viewer help Tim to analyse and understand the information gathered by the Octopeer project.
-
-\section{Customer needs}
-There are a few different perspectives on the Octopeer Viewer product:
+\section{Customer needs} \label{section:customerneeds}
+The main problem of code reviewing at the current moment is that there is no kind of validation of the quality of code reviewing. For example: even if a pull request is created, it is easy to merge a branch directly without looking one second to the code. If there is no integrated test service, it is also unknown whether the code works correctly or contains bugs. Therefore a little help may be useful. The idea of Octopeer Analytics is that you have insight in how developers deal with pull requests. There are a few different perspectives on the Octopeer Analytics product:
 \begin{itemize}
 \item Generally, software reviewers will mostly be interested in their own statistics, comparing their own development and changes over time, and might want to compare this to team/project averages;
-\item Project managers may want to see statistics on reviews of their project(s);
-\item Researchers will be interested in analysing as much data as possible.
+\item Project managers may want to see statistics on reviews of their project(s). They can monitor the progress of a project and the performance of a team in terms of quality. For example: when needed, they can adjust developers who perform worse in peer reviewing than other team members.
 \end{itemize}
 
-\section{Crucial product attributes}
+\section{Crucial product attributes} \label{section:crucialproductattributes}
+\subsection{High-level product backlog} \label{section:highlevelproductbacklog}
+    
+    \begin{itemize}
+        \item The product will need an accessible page.
+        \item The page needs to connect to a back-end with the user's data.
+        \item The data will need to be requested from this back-end.
+        \item The received data will need to be mined for useful data.
+        \item The useful data needs to be visualized for the user.
+        \item The visualizations should to be divided into multiple categories.
+        \item The user should be able to only view the desired data category.
+    \end{itemize}
+
+\subsection{Non-functional requirements} \label{section:nonfunctionalrequirements}
+
 The stated customer needs imply that there are several distinct pages required, corresponding to the scale the user is interested in. The most important product attributes are:
 \begin{itemize}
-\item Usefulness: by presenting useful data, the users will get practical and statistical insight in the peer review process. The Octopeer Viewer not only be fun to play with, but provide helpful analytic tools.
-\item Speed: as there is a lot of data being generated by the Octopeer extension, the Octopeer Reviewer should generate graphs and overviews fast.
+\item Usefulness: by presenting useful data, the users will get practical and statistical insight in the peer review process. The Octopeer Analytics not only be fun to play with, but provide helpful analytic tools.
+\item Performance: as there is a lot of data being generated by the Octopeer extension, Octopeer Analytics should generate graphs and overviews fast.
 \item Adaptability: different users will focus on different elements of the data. This might not only vary from scale, but also to focus on specific parts of the data: mouse movements, coverage of all changes, comments and so on.
 \end{itemize}
 
-\section{Comparison to existing products}
-Although there exist many tools for software reviewing, like Crucible \\ (https://www.atlassian.com/software/crucible), there are no software review analysis tools available to the public. This provides a great opportunity for the Octopeer project.
+\section{Comparison to existing products} \label{section:comparisontoexistingproducts}
+Several tools are available to assist peer code reviews, in particular using static code analysis. These tools usually aim to help the reviewer by providing information about the pull request itself. According to \cite{comparisonstatic}, who compared three static code analysis tools, ``using up-to-date static analysis tools can be recommended for any serious software project''. \cite{findbugscheckstyle} recommends to use some different tools simultaneously, as they ``give just in the combination 100\% functionality you may need in your project''. Code visualization can be a useful addition to the reviewer. Some concepts of visualized code reviewing, in particular concerning the reviewer-visualization tool relation, are patented by Microsoft. \parencite{wang2015visualized}. Octopeer Analytics will not compete with these tools, as it has a completely different target (namely to provide information about the \textit{reviews}).
 
-\section{Project time span}
-This project takes 10 weeks, and will contain 8 one-week sprints with a working deliverable. The project will be completed on June 17, 2016, and the final report will be handed in on June 23, 2016. After this, Octopeer Viewer should be merged with the Octopeer project.
+Another field of competition may arise regarding the problem of finding the most appropriate peer reviewer(s) for a pull request. Several methods have been developed to achieve this. According to  \cite{automaticallyrecommending}, their developed tool \textit{cHRev} outperforms other existing tools, by combining factors like recency of other reviews, number of comments, addition to the file, etc. Although this is not the main focus of Octopeer Analytics, it may include a tool for this purpose. To be competitive, Octopeer Analytics should not (only) aim to rank the peer reviewers, but provide insight in this ranking process.
 
-\bibliographystyle{plain}
+\section{Project time span} \label{section:projecttimespan}
+This project takes 10 weeks, and will contain 8 one-week sprints with a working deliverable. The project will be completed on June 17, 2016, and the final report will be handed in on June 23, 2016. After this, Octopeer Analytics should be merged with the Octopeer project.
+
+\printbibliography 
 \end{document}
