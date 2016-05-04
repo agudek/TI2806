@@ -12,6 +12,5 @@ function get(query, callback) {
         }
     };
     http.open('GET', host + query.replace(host, '') + '?format=json', true);
-    http.setRequestHeader('Access-Control-Allow-Headers', 'x-requested-with');
     http.send(null);
 }
