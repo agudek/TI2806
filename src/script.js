@@ -1,4 +1,4 @@
-var w = 1000,
+var w = 600,
     h = 300,
     pad = 20,
     left_pad = 100,
@@ -11,7 +11,7 @@ for (var i = 0; i < data1.length; i++) {
     data[i] = [data1[i], data2[i]];
 }
 
-var svg = d3.select("#scatter")
+var svg = d3.selectAll(".scatter")
         .append("svg")
         .attr("width", w)
         .attr("height", h);
