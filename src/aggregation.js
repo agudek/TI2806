@@ -16,8 +16,23 @@ function OctopeerService() {
 	}
 }
 
+function GithubService() {
+	var caller = new GitHubAPICaller();
+
+	this.getPullRequest = function(owner, repo, number, callback){
+		caller.get('repos/' + owner + '/' + repo + '/pulls' + '/' + number, function (pullrequest) {
+			callback(pullrequest);
+		});
+	}
+}
+
 var octopeerService = new OctopeerService();
 octopeerService.getPullRequestsAmount(function (amount) {
 	$('#pullrequests-count').text(amount);
+});
+
+var githubService = new GithubService();
+githubService.getPullRequest('mboom', 'TI2806', 65, function (pullrequest) {
+	console.log(pullrequest);
 });
 
