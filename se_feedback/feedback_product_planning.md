@@ -1,6 +1,6 @@
 |      |            |
 |------|------------|
-|Group | TSE One |
+|Group | BussInfraManDevOps |
 |Assignment|Product Planning|
 |Date|10/05/16|
 |TA|Bastiaan Reijm|
@@ -8,7 +8,7 @@
 #Feedback
 Feedback for the product planning.
 
-Total:
+Total: 8
 
 |                | Score |
 |----------------|-------|
