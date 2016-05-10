@@ -2,9 +2,12 @@ $(document).ready(function () {
 	var lastLoadedScriptIndex = 0;
 	var scriptfiles = [
 	    'settings.js',
-	    'functions.js',
+	    'apicallers.js',
 	    'dummy.js',
-	    'aggregation.js'
+	    'services/OctopeerService.js',
+	    'services/GithubService.js',
+	    'services/BitBucketService.js',
+	    'example-services.js'
 	];
 
 	loadScript(scriptfiles[0]);
@@ -14,12 +17,16 @@ $(document).ready(function () {
 		script.src = scriptName;
 		script.type = 'text/javascript';
 		$('head')[0].appendChild(script);
-		$('#script-' + scriptName).ready(function () {
+		$('#script-' + parseName(scriptName)).ready(function () {
 			lastLoadedScriptIndex++;
 			if(lastLoadedScriptIndex < scriptfiles.length){
 				loadScript(scriptfiles[lastLoadedScriptIndex]);
 			}
 		});
 
+	}
+
+	function parseName(scriptName){
+		return scriptName.replace('/','');
 	}
 });
