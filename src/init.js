@@ -3,12 +3,11 @@ $(document).ready(function () {
 	var scriptfiles = [
 	    'settings.js',
 	    'apicallers.js',
-	    'dummy.js',
 	    'pullrequestTransformer.js',
 	    'services/OctopeerService.js',
 	    'services/GithubService.js',
 	    'services/BitBucketService.js',
-	    'example-services.js'
+	    'graph.js'
 	];
 
 	loadScript(scriptfiles[0]);
