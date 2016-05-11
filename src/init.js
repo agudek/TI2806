@@ -7,7 +7,8 @@ $(document).ready(function () {
 	    'services/OctopeerService.js',
 	    'services/GithubService.js',
 	    'services/BitBucketService.js',
-	    'example-services.js'
+	    'example-services.js',
+        'ranking.js'
 	];
 
 	loadScript(scriptfiles[0]);
