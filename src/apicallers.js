@@ -2,9 +2,9 @@ function OctopeerCaller(host) {
 	this.get = function get(query, callback) {
 	    var http = new XMLHttpRequest();
 	    http.onreadystatechange = function () {
-		if (http.readyState == 4 && http.status == 200) {
+		if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 		    callback(JSON.parse(http.responseText));
-		} else {
+		} else if (http.status >= 400){
 		    var error = {
 			'http-status': http.status,
 			'response-headers': http.getAllResponseHeaders().toString()
@@ -23,9 +23,9 @@ function GitHubAPICaller(){
 	this.get = function(endpoint, callback){
 		var http = new XMLHttpRequest();
 		http.onreadystatechange = function () {
-			if (http.readyState == 4 && http.status == 200) {
+			if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 				callback(JSON.parse(http.responseText));
-			} else {
+			} else if (http.status >= 400) { 
 			    var error = {
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
@@ -44,9 +44,9 @@ function BitBucketAPICaller(){
 	this.get = function(endpoint, callback){
 		var http = new XMLHttpRequest();
 		http.onreadystatechange = function () {
-			if (http.readyState == 4 && http.status == 200) {
+			if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 				callback(JSON.parse(http.responseText));
-			} else {
+			} else if (http.status >= 400) {
 			    var error = {
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()

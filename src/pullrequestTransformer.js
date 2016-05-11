@@ -1,22 +1,35 @@
-function pullRequestTransformer(pullrequest, type) {
-	switch (type) {
-		case "GITHUB":
-			return transformGithubPullrequest(pullrequest);
-		case "BITBUCKET":
-			return transformBitbucketPullrequest(pullrequest);
-		default:
-			console.log("Unaccepted type");
+function PullRequestTransformer() {
+	this.transform = function(pullrequest, type){
+		switch (type) {
+			case "GITHUB":
+				return transformGithubPullrequest(pullrequest);
+			case "BITBUCKET":
+				return transformBitbucketPullrequest(pullrequest);
+			default:
+				console.log("Unaccepted type");
+		}
+	}
+	this.transformGithubFiles = function(files) {
+		return files.map(function(file) {
+			return {
+				"filename": file.filename,
+				"additions": file.additions,
+				"deletions": file.deletions,
+				"status": file.status
+			}
+		});
 	}
 	
 	function transformGithubPullrequest(pullrequest) {
+		var merged = (pullrequest.merged_at !== null);
 		return {
 			"title": pullrequest.title,
 			"author": pullrequest.user.login,
-			"created_on": pullrequest.created_at,
-			"updated_on": pullrequest.updated_at,
+			"created_at": pullrequest.created_at,
+			"updated_at": pullrequest.updated_at,
 			"description": pullrequest.body,
 			"state": pullrequest.state,
-			"merged": pullrequest.merged
+			"merged": merged
 		}
 	}
 
@@ -25,12 +38,14 @@ function pullRequestTransformer(pullrequest, type) {
 		return {
 			"title": pullrequest.title,
 			"author": pullrequest.author.username,
-			"created_on": pullrequest.created_on,
-			"updated_on": pullrequest.updated_on,
+			"created_at": pullrequest.created_on,
+			"updated_at": pullrequest.updated_on,
 			"description": pullrequest.description,
 			"state": pullrequest.state,
 			"merged": merged
 		}
 	}
+
+
 }
 

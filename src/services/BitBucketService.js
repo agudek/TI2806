@@ -3,8 +3,9 @@ function BitBucketService(){
 	
 	this.getPullRequests = function(owner, repo, callback) {
 		caller.get('repositories/' + owner + '/' + repo + '/pullrequests', function (pullrequests) {
+			var transformer = new PullRequestTransformer();
 			var transformed = pullrequests.values.map(function(item){
-				return pullRequestTransformer(item, "BITBUCKET");
+				return transformer.transform(item, "BITBUCKET");
 			});	
 			callback(transformed);
 		});
