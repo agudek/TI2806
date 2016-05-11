@@ -31,6 +31,14 @@ var Rank = function () {
             val += 1 / (reviewer.f.T - file.T);
         }
     }
+
+    function Score(r) {
+        var val = 0;
+        for (var i = 0; i < RE.getFiles(r) ; ++i) {
+            var f = RE.getFiles(r)[i];
+            val += xFactor(r, f);
+        }
+    }
 };
 
 var REmap = function () {
@@ -61,6 +69,10 @@ var REmap = function () {
             'T': T
         };
     };
+
+    this.getFiles(r) = function (r) {
+        return Object.keys(map.r);
+    }
 };
 
 var FRmap = function () {
