@@ -6,15 +6,16 @@
 	<script src="https://code.jquery.com/jquery-2.2.3.js"></script>
 	<script src="init.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="sidebar.js"></script>
-    <link href="sidebar.css" rel="stylesheet">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="sidebar.js"></script>
+	<link href="sidebar.css" rel="stylesheet">
+	<link href="charts.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-inverse sidebar" role="navigation">
@@ -32,8 +33,8 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-				<li><a href="#">Development<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-signal"></span></a></li>
+				<li class="active"><a data-toggle="tab" href="#tab-landing">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+				<li><a data-toggle="tab" href="#tab-inverted">Development<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-signal"></span></a></li>
 				<li ><a href="#">Personal overview<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 				<li ><a href="#">Project overview<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
 				<li class="dropdown">
@@ -50,22 +51,39 @@
 		</div>
 	</div>
 </nav>
-<div class="main">
+<div class="main" class="tab-content">
+	<div id="tab-landing" class="tab-pane fade in active">
         <div id="bodyrow" class="row">
-            <div id="content" class="col-md-6 no-float">
-                <div class="scatter"></div>
-                <div class="scatter"></div>
+            <div class="col-md-6 no-float">
+                <div id="timeLookingAtPullRequestVsLinesChanged"></div>
+                <div></div>
             </div>
-            <div id="content" class="col-md-6 no-float">
-                <div class="scatter"></div>
-                <div class="scatter"></div>
-                <div class="row" style="margin-top: 60px;">
-                </div>
+            <div class="col-md-6 no-float">
+                <div id="timeSpentPerReview">
+					<button onClick="changeData()">Change Data</button>
+				</div>
+                <div></div>
             </div>
         </div>
     </div>
-    <script src="http://d3js.org/d3.v2.min.js"></script>
-    <script src="script.js" type="text/javascript"></script>
+
+	<div id="tab-inverted" class="tab-pane fade">
+        <div id="bodyrow" class="row">
+            <div class="col-md-6 no-float">
+                <div>New content here</div>
+                <div></div>
+            </div>
+            <div class="col-md-6 no-float">
+                <div>
+					Other content here.
+				</div>
+                <div></div>
+            </div>
+        </div>
+    </div>
 </div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="chart_timeLookingAtPullRequestVsLinesChanged.js" type="text/javascript"></script>
+<script src="chart_timeSpentPerReview.js" type="text/javascript"></script>
 </body>
 </html>
