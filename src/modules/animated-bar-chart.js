@@ -57,7 +57,6 @@ define(function () {
                     .transition()
                     .attr("y",function (d) {return h-d});
 
-
             return svg[0];
         }
     };
