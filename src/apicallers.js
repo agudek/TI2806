@@ -9,7 +9,7 @@ function OctopeerCaller(host) {
 			'http-status': http.status,
 			'response-headers': http.getAllResponseHeaders().toString()
 		    }
-		    callback(error);
+		    console.log(error);
 		}
 	    };
 	    http.open('GET', host + query.replace(host, '') + '?format=json', true);
@@ -30,7 +30,7 @@ function GitHubAPICaller(){
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
 			    }
-			    callback(error);
+			    console.log(error);
 			}
 		    };
 		    http.open('GET', host + endpoint.replace(host, ''), true);
@@ -51,7 +51,7 @@ function BitBucketAPICaller(){
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
 			    }
-			    callback(error);
+			    console.log(error);
 			}
 		    };
 		    http.open('GET', host + endpoint.replace(host, ''), true);

@@ -4,6 +4,7 @@ $(document).ready(function () {
 	    'settings.js',
 	    'apicallers.js',
 	    'dummy.js',
+	    'pullrequestTransformer.js',
 	    'services/OctopeerService.js',
 	    'services/GithubService.js',
 	    'services/BitBucketService.js',

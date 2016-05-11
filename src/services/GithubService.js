@@ -3,7 +3,8 @@ function GithubService() {
 
 	this.getPullRequest = function(owner, repo, number, callback){
 		caller.get('repos/' + owner + '/' + repo + '/pulls' + '/' + number, function (pullrequest) {
-			callback(pullrequest);
+			var transformed = pullRequestTransformer(pullrequest, "GITHUB");
+			callback(transformed);
 		});
 	}
 }
