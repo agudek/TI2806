@@ -1,4 +1,6 @@
-var protocol = 'http';
-var hostname = 'localhost';
-var port = '8000';
-var host = protocol + '://' + hostname + ((port.length > 0) ? ':' + port : '') + '/api';
+function Settings() {
+	this.protocol = 'http';
+	this.hostname = 'localhost';
+	this.port = '8000';
+	this.host = this.protocol + '://' + this.hostname + ((this.port.length > 0) ? ':' + this.port : '') + '/api';
+}
