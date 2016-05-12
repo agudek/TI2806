@@ -66,12 +66,12 @@ define(['modules/moduleList'], function (dynModules) {
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
         for (var i = 0; i < arguments.length; i++){
-			var parentContainer = $('div#modules');
+			var parentContainer = $('div#bodyrow');
         	if(arguments[i].parentSelector)
         		parentContainer = $(arguments[i].parentSelector);
         	var outerdiv = $(document.createElement('div'));
         	if(!arguments[i].customContainer)
-	        	outerdiv.addClass('module').addClass('size'+arguments[i].size);
+	        	outerdiv.addClass('col-md-6').addClass('no-float');
         	outerdiv.attr('id',arguments[i].name).appendTo(parentContainer);
         	var ajaxArray = generateAjaxArray(arguments[i].ajax);
         	if(ajaxArray && ajaxArray!=[])

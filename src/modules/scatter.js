@@ -2,7 +2,7 @@ define(function () {
     return {
     	name: "scatter",
         size: 1,
-        parentSelector: "#modules",
+        parentSelector: "#bodyrow",
         body: function () {
         var w = 720,
             h = 350,
@@ -18,8 +18,9 @@ define(function () {
         }
 
         var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", w)
-                .attr("height", h);
+                .attr("width", '100%')
+                .attr("height", '100%')
+                .attr("viewBox", "0 0 "+w+" "+h);
 
         var x = d3.scale.linear().domain([0, 100]).range([left_pad, w-pad]),
             y = d3.scale.linear().domain([300, 0]).range([pad, h-pad*2]);

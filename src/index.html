@@ -19,24 +19,15 @@
         <!-- Import sidebar -->
         <script src="sidebar.js"></script>
         <link href="sidebar.css" rel="stylesheet">
-
         <style type="text/css">
-        .module{
-        	background-color: rgba(0,0,0,0.05);
-        	float:left;
-        	box-sizing: border-box;
-    		margin: 10px;
-        }
-        .size1{
-        	width: 100%;
-        }
-        .size2{
-        	width: 50%;
-        }
-        .size3{
-        	width: calc(100%/3);
-        }
-        </style>
+	        div.tab-pane {
+			    height: 0px;
+			    overflow: hidden;
+			}
+			div.tab-pane.active {
+			    height: initial;
+			}
+		</style>
     </head>
     <body>
         <nav class="navbar navbar-inverse sidebar" role="navigation">
@@ -77,12 +68,6 @@
         <div class="main" class="tab-content">
             <div id="tab-home" class="tab-pane fade in active">
                 <div id="bodyrow" class="row">
-                    <div class="col-md-6 no-float">
-                        <div id="modules"></div>
-                    </div>
-                    <div class="col-md-6 no-float">
-
-                    </div>
                 </div>
             </div>
 

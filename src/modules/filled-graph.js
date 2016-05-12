@@ -2,7 +2,7 @@ define(function () {
     return {
     	name: "filled-graph",
         size: 1,
-        parentSelector: "#modules",
+        parentSelector: "#bodyrow",
         body: function () {
             var w = 720,
                 h = 350,
@@ -14,8 +14,9 @@ define(function () {
                 }
 
             var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", w)
-                .attr("height", h)
+                .attr("width", '100%')
+                .attr("height", '100%')
+                .attr("viewBox", "0 0 "+w+" "+h);
             var defs = svg.append('defs');
             var filter = svg.append('filter')
                 .attr('id','f3')
