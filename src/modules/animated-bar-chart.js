@@ -1,8 +1,8 @@
 define(function () {
     return {
     	name: "animated-bar-chart",
-    	size: 3,
-        noAjax: true,
+    	size: 1,
+        parentSelector: "#modules",
         body: function () {
             var w = 720,
                 h = 350,
@@ -56,7 +56,6 @@ define(function () {
                 .attr("filter","url(#f3)")
                     .transition()
                     .attr("y",function (d) {return h-d});
-
 
             return svg[0];
         }
