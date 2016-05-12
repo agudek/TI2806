@@ -48,7 +48,7 @@ define(['modules/moduleList'], function (dynModules) {
         //Return true if at least one Ajax request has failed.
         function singleFail(objects) {
         	for(ajax in objects)
-        		if(ajax.responseText === null)
+        		if(ajax.responseText === null && ajax.required)
         			return true;
         	return false;
         }
@@ -66,11 +66,13 @@ define(['modules/moduleList'], function (dynModules) {
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
         for (var i = 0; i < arguments.length; i++){
-			var container = $('div#modules');
+			var parentContainer = $('div#modules');
         	if(arguments[i].parentSelector)
-        		container = $(arguments[i].parentSelector);
+        		parentContainer = $(arguments[i].parentSelector);
         	var outerdiv = $(document.createElement('div'));
-        	outerdiv.addClass('module').addClass('size'+arguments[i].size).attr('id',arguments[i].name).appendTo(container);
+        	if(!module.customContainer)
+	        	outerdiv.addClass('module').addClass('size'+arguments[i].size);
+        	outerdiv.attr('id',arguments[i].name).appendTo(container);
         	var ajaxArray = generateAjaxArray(arguments[i].ajax);
         	if(ajaxArray && ajaxArray!=[])
         		whenAjaxArray(arguments[i],ajaxArray,outerdiv);

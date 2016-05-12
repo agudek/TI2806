@@ -1,8 +1,8 @@
 define(function () {
     return {
     	name: "filled-graph",
-    	size: 3,
-        noAjax: true,
+        size: 1,
+        parentSelector: "#modules",
         body: function () {
             var w = 720,
                 h = 350,
