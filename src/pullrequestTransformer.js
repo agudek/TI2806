@@ -29,7 +29,8 @@ function PullRequestTransformer() {
 			"updated_at": pullrequest.updated_at,
 			"description": pullrequest.body,
 			"state": pullrequest.state,
-			"merged": merged
+			"merged": merged,
+			"number": pullrequest.number
 		}
 	}
 
