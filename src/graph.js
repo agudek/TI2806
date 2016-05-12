@@ -35,9 +35,11 @@ function main() {
     var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
     var arr = [];
     var data = [];
-    new GithubService().getPullRequests("mboom", "TI2806", function (pullrequests) {
-        for (var i = 0; i < pullrequests.length; i++) {
-            arr.push(pullrequests[i]);
+    new GithubService().getPullRequests("mboom", "TI2806", processPRs);
+
+function processPRs (prs) {
+    for (var i = 0; i < prs.length; i++) {
+            arr.push(prs[i]);
         }
 	var raw = [];
 	new GitHubAPICaller().get('repos/' + OWNER + '/' + REPO_NAME + '/pulls?state=all', function (pr) { pr.forEach( function (current, index, array) { raw.push(current); }) });
@@ -45,20 +47,16 @@ function main() {
         for (var i = 0; i < arr.length; i++) {
             data.push([parser.parse(arr[i].created_at), Math.random() * 300, arr[i].merged]);
         }
-        svgContainer.selectAll("circle")
+    svgContainer.selectAll("circle")
     .data(arr)
     .enter()
     .append("circle")
     .attr("cx", function (d) { return xScale(parser.parse(d.created_at)); })
     .attr("cy", function (d) { return yScale(Math.random() * 300); })
     .style("fill", function (d) { return d.merged ? "green" : (d.state == "closed" ? "red" : "orange"); })
+    .style("cursor", "pointer")
     .attr("r", 5)
     .on("click", function (d) { window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number); })
 }
-
-)};
-
-var processPR = function (pr) {
-
 }
 $.ready(main());
