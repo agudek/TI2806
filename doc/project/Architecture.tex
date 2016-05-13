@@ -47,9 +47,9 @@ The visualization tool only connects to the database. The data that is provided 
 \caption{Basic system decomposition}
 \end{figure}
 
-\subsection{Octopeer Viewer decomposition}
+\subsection{Octopeer Analytics decomposition}
 
-For the client itself a basic structure will be described. The calls to the Octopeer Domain, Github API and the BitBucket API are made by the "APICallers". These callers are called by objects called "Services. These services consists of concrete definitions on what the type of objects you want to get. For example, with the GitHubService, you can call a function "getPullRequest". This functions needs a callback as parameter, and this callback will be called when the APICaller got the pullrequest from the GitHub API. The other services work the same. The front-end of Octopeer Viewer will use these services to get the data from the API's that are being used.
+For the client itself a basic structure will be described. The calls to the Octopeer Domain, Github API and the BitBucket API are made by the "APICallers". These callers are called by objects called "Services. These services consists of concrete definitions on what the type of objects you want to get. For example, with the GitHubService, you can call a function "getPullRequest". This functions needs a callback as parameter, and this callback will be called when the APICaller got the pullrequest from the GitHub API. The other services work the same. The front-end of Octopeer Analytics will use these services to get the data from the API's that are being used.
 
 \begin{figure}[htp]
 \centering
