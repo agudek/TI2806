@@ -2,14 +2,14 @@ function OctopeerCaller(host) {
 	this.get = function get(query, callback) {
 	    var http = new XMLHttpRequest();
 	    http.onreadystatechange = function () {
-		if (http.readyState == 4 && http.status == 200) {
+		if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 		    callback(JSON.parse(http.responseText));
-		} else {
+		} else if (http.status >= 400){
 		    var error = {
 			'http-status': http.status,
 			'response-headers': http.getAllResponseHeaders().toString()
 		    }
-		    callback(error);
+		    console.log(error);
 		}
 	    };
 	    http.open('GET', host + query.replace(host, '') + '?format=json', true);
@@ -23,14 +23,14 @@ function GitHubAPICaller(){
 	this.get = function(endpoint, callback){
 		var http = new XMLHttpRequest();
 		http.onreadystatechange = function () {
-			if (http.readyState == 4 && http.status == 200) {
+			if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 				callback(JSON.parse(http.responseText));
-			} else {
+			} else if (http.status >= 400) { 
 			    var error = {
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
 			    }
-			    callback(error);
+			    console.log(error);
 			}
 		    };
 		    http.open('GET', host + endpoint.replace(host, ''), true);
@@ -44,14 +44,14 @@ function BitBucketAPICaller(){
 	this.get = function(endpoint, callback){
 		var http = new XMLHttpRequest();
 		http.onreadystatechange = function () {
-			if (http.readyState == 4 && http.status == 200) {
+			if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
 				callback(JSON.parse(http.responseText));
-			} else {
+			} else if (http.status >= 400) {
 			    var error = {
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
 			    }
-			    callback(error);
+			    console.log(error);
 			}
 		    };
 		    http.open('GET', host + endpoint.replace(host, ''), true);

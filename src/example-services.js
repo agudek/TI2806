@@ -4,7 +4,7 @@ octopeerService.getPullRequestsAmount(function (amount) {
 });
 
 var githubService = new GithubService();
-githubService.getPullRequest('mboom', 'TI2806', 65, function (pullrequest) {
+githubService.getPullRequests('mboom', 'TI2806', function (pullrequest) {
 	console.log(pullrequest);
 });
 
