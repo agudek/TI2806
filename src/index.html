@@ -4,7 +4,7 @@
         <title>Octopeer Analyser</title>
         <!-- data-main attribute tells require.js to load
              scripts/main.js after require.js loads. -->
-             <script type="text/javascript"> var modules = [] </script>
+             <script src="script.TI2806.js"></script>
         <!--<script type="text/javascript" src="../libs/jquery-loader.js"></script>-->
         <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
         <script src="http://d3js.org/d3.v2.min.js"></script>
@@ -18,24 +18,8 @@
 
         <!-- Import sidebar -->
         <script src="sidebar.js"></script>
-        <link href="sidebar.css" rel="stylesheet">
-        <style type="text/css">
-	        div.tab-pane {
-			    height: 0px;
-			    overflow: hidden;
-			}
-			div.tab-pane.active {
-			    height: initial;
-			}
-			div.main {
-			    height: 100vh;
-			    box-sizing: border-box;
-			    overflow-y: auto;
-			}
-			nav.navbar{
-			    height: 100vh;
-			}
-		</style>
+        <link href="styles/sidebar.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/style.TI2806.css">
     </head>
     <body>
         <nav class="navbar navbar-inverse sidebar" role="navigation">
@@ -53,12 +37,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a data-toggle="tab" href="#tab-home">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                        <li><a data-toggle="tab" href="#tab-development">Development<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-signal"></span></a></li>
-                        <li ><a data-toggle="tab" href="#tab-personal">Personal overview<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-                        <li ><a data-toggle="tab" href="#tab-project">Project overview<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab-home">Home<span class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                        <li><a data-toggle="tab" href="#tab-development">Development<span class="pull-right hidden-xs showopacity glyphicon glyphicon-signal"></span></a></li>
+                        <li ><a data-toggle="tab" href="#tab-personal">Personal overview<span class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                        <li ><a data-toggle="tab" href="#tab-project">Project overview<span class="pull-right hidden-xs showopacity glyphicon glyphicon-folder-open"></span></a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Switch project <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-menu-hamburger"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Switch project <span class="caret"></span><span class="pull-right hidden-xs showopacity glyphicon glyphicon-menu-hamburger"></span></a>
                             <ul class="dropdown-menu forAnimate" role="menu">
                                 <li><a href="#">TI2806</a></li>
                                 <li><a href="#">Octopeer</a></li>
@@ -66,7 +50,7 @@
                                 <li><a href="#">Super classified project</a></li>
                             </ul>
                         </li>
-                        <li ><a data-toggle="tab" href="#tab-settings">Settings<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a></li>
+                        <li ><a data-toggle="tab" href="#tab-settings">Settings<span class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a></li>
                     </ul>
                 </div>
             </div>
