@@ -1,6 +1,7 @@
 var Rank = function () {
     var RE = new REmap();
     var FR = new FRmap();
+    var RF = new RFmap();
     var Dr = {
         "ranking_js": ["marco", "leendert", "borek"],
         "testing_js": []
@@ -39,8 +40,6 @@ var Rank = function () {
             val += xFactor(r, f);
         }
     }
-
-
 };
 
 var REmap = function () {
@@ -98,3 +97,23 @@ var FRmap = function () {
         };
     };
 };
+
+var RFmap = function () {
+    var map = {
+        'marco': 0
+    };
+    
+    this.addScore = function (r, s) {
+        map.r = s;
+    };
+    this.RF = function (m) {
+        var arr = new Array();
+        for (var i = 0; i < Object.keys(map).length; ++i) {
+            var x = new Array();
+            x.push(Object.keys(map)[i]);
+            x.push(map[i]);
+        }
+        arr.sort(function (a, b) { return (b[1] - a[1]); });
+        return arr.slice(0, m);
+    }
+}
