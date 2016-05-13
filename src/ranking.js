@@ -39,6 +39,8 @@ var Rank = function () {
             val += xFactor(r, f);
         }
     }
+
+
 };
 
 var REmap = function () {
@@ -70,7 +72,7 @@ var REmap = function () {
         };
     };
 
-    this.getFiles(r) = function (r) {
+    this.getFiles = function (r) {
         return Object.keys(map.r);
     }
 };
