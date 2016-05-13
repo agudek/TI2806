@@ -5,7 +5,7 @@
 var REPO_NAME = "TI2806";
 var OWNER = "mboom"
 
-function main() {
+function drawPullRequests() {
     var bottomPad = 40;
     var leftPad = 50;
     var w = 1000;
@@ -27,36 +27,33 @@ function main() {
     var yAxis = d3.svg.axis().scale(yScale).orient("left");
     var xAxisGroup = svgContainer.append("g").attr("transform", "translate(" + leftPad + "," + (h - bottomPad) + ")").call(xAxis).selectAll("text")
     // from http://www.d3noob.org/2013/01/how-to-rotate-text-labels-for-x-axis-of.html
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-65)");
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
     var yAxisGroup = svgContainer.append("g").attr("transform", "translate(" + leftPad + "," + 0 + ")").call(yAxis);
     var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
     var arr = [];
-    var data = [];
     new GithubService().getPullRequests("mboom", "TI2806", processPRs);
 
-function processPRs (prs) {
-    for (var i = 0; i < prs.length; i++) {
+    function processPRs(prs) {
+        for (var i = 0; i < prs.length; i++) {
             arr.push(prs[i]);
         }
-	var raw = [];
-	new GitHubAPICaller().get('repos/' + OWNER + '/' + REPO_NAME + '/pulls?state=all', function (pr) { pr.forEach( function (current, index, array) { raw.push(current); }) });
-	console.log(raw);
-        for (var i = 0; i < arr.length; i++) {
-            data.push([parser.parse(arr[i].created_at), Math.random() * 300, arr[i].merged]);
-        }
-    svgContainer.selectAll("circle")
-    .data(arr)
-    .enter()
-    .append("circle")
-    .attr("cx", function (d) { return xScale(parser.parse(d.created_at)); })
-    .attr("cy", function (d) { return yScale(Math.random() * 300); })
-    .style("fill", function (d) { return d.merged ? "green" : (d.state == "closed" ? "red" : "orange"); })
-    .style("cursor", "pointer")
-    .attr("r", 5)
-    .on("click", function (d) { window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number); })
+        var raw = [];
+        new GitHubAPICaller().get('repos/' + OWNER + '/' + REPO_NAME + '/pulls?state=all', function (pr) {
+            pr.forEach(function (current, index, array) { raw.push(current); })
+        });
+        svgContainer.selectAll("circle")
+        .data(arr)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return xScale(parser.parse(d.created_at)); })
+        .attr("cy", function (d) { return yScale(Math.random() * 300); })
+        .style("fill", function (d) { return d.merged ? "green" : (d.state == "closed" ? "red" : "orange"); })
+        .style("cursor", "pointer")
+        .attr("r", 5)
+        .on("click", function (d) { window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number); })
+    }
 }
-}
-$.ready(main());
+$.ready(drawPullRequests());
