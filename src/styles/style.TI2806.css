@@ -1,18 +1,92 @@
- div.tab-pane {
-    height: 0px;
-    overflow: hidden;
-}
-div.tab-pane.active {
-    height: initial;
-}
+
 div.main {
     height: 100vh;
     box-sizing: border-box;
     overflow-y: auto;
 }
-nav.navbar{
-    height: 100vh;
+
+.side-nav.fixed a {
+	padding-right: 20px
 }
-ul.nav.navbar-nav > li > a > span.glyphicon{
-	font-size:16px;
+
+nav i.material-icons {
+    margin-right: 12px;
+	margin-top: 6px; 
+}
+
+body{background-color: #F3F3F3;}
+
+#slide-out {
+  transition: left ease-out 0.2s, transform ease-out 0.2s;
+  width: 240px !important;
+  display: block;
+}
+
+nav {
+	transition: margin-top ease-out 0.2s;
+	margin-top: 0;
+}
+
+nav .tabs .tab {
+	text-align: left;
+    line-height: 64px;
+    height: 64px;
+    width: 100%;
+}
+
+nav .tabs .tab .active{
+	background-color: rgba(0,0,0,0.09);
+}
+
+nav .tabs .tab a:hover {
+    color: #C3C3C3;
+}
+
+nav a {
+    padding: 0px 8px !important;
+}
+
+#AppName{
+	padding: 0 30px;
+	font-size: x-large;
+	font-weight: 400;
+}
+
+#AppName span {
+		    width: 100%;
+		    display: block;
+}
+
+#AppName svg {
+	position: relative;
+	top: 8px;
+	right: -20px;
+	float: right;
+}
+
+ header, main, footer {
+   padding-left: 240px;
+  transition : padding-left ease-out 0.2s;
+}
+main {
+	padding-top: 4px;
+}
+
+main > div.tab-pane > div.row {
+	margin-bottom: 0;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer, nav>ul.show-on-med-and-down{
+    padding-left: 80px;
+  }
+	#slide-out {
+	  left : 80px;
+	}
+}
+
+@media (max-width: 600px) {
+	nav {
+		margin-top: -60px;
+	}
 }
