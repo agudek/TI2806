@@ -6,8 +6,7 @@ $(document).ready(function () {
 	    'pullrequestTransformer.js',
 	    'services/OctopeerService.js',
 	    'services/GithubService.js',
-	    'services/BitBucketService.js',
-	    'graph.js'
+	    'services/BitBucketService.js'
 	];
 
 	loadScript(scriptfiles[0]);

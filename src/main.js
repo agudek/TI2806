@@ -1,6 +1,7 @@
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
 define(['modules/moduleList'], function (dynModules) {
-    require(dynModules, function(){
+	require(dynModules[0]);
+    require(dynModules[1], function(){
     	modules = Array.prototype.slice.call(arguments); //Set global modules variable to a list of all imported modules after converting pseudo-array to array
 
         //http://stackoverflow.com/questions/5627284/pass-in-an-array-of-deferreds-to-when
