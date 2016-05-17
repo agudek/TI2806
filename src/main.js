@@ -70,9 +70,13 @@ define(['modules/moduleList'], function (dynModules) {
         	if(arguments[i].parentSelector)
         		parentContainer = $(arguments[i].parentSelector);
         	var outerdiv = $(document.createElement('div'));
-        	if(!arguments[i].customContainer)
-	        	outerdiv.addClass('col-md-6').addClass('no-float');
         	outerdiv.attr('id',arguments[i].name).appendTo(parentContainer);
+        	if(!arguments[i].customContainer) {
+	        	outerdiv.addClass('col s12 m6');
+	        	outerdiv = $(document.createElement('div'))
+	        		.addClass('card-panel').addClass("hoverable")
+	        		.appendTo(outerdiv);
+        	}
         	var ajaxArray = generateAjaxArray(arguments[i].ajax);
         	if(ajaxArray && ajaxArray!=[])
         		whenAjaxArray(arguments[i],ajaxArray,outerdiv);

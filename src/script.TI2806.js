@@ -1,1 +1,1 @@
-var modules = []
+var modules = [];

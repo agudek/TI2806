@@ -53,6 +53,7 @@ define(function () {
             .style("position", "absolute")
             .style("z-index", "10")
             .style("visibility", "hidden")
+            .style("bottom", 0)
             .text("Pull request information");
         return svg[0];
         }
