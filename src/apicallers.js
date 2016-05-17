@@ -1,5 +1,20 @@
 /*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller */
-
+function get(url, callback){
+	var http = new XMLHttpRequest();
+	http.onreadystatechange = function () {
+		if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
+			callback(JSON.parse(http.responseText));
+		} else if (http.status >= 400){
+			var error = {
+				'http-status': http.status,
+				'response-headers': http.getAllResponseHeaders().toString()
+			}
+			console.log(error);
+		}
+	};
+	http.open('GET', url, true);
+	http.send(null);
+}
 function OctopeerCaller(host) {
     this.get = function get(query, callback) {
         var http = new XMLHttpRequest();
