@@ -1,4 +1,4 @@
-/*export randomData, changeData */
+/*exported randomData, changeData */
 
 (function () {
     var gradPie = {};
