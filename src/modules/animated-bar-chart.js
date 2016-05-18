@@ -1,5 +1,6 @@
 /* globals define */
 /* exported d */
+/* jshint unused : vars */
 
 define(function () {
     return {

@@ -1,7 +1,18 @@
 /*exported randomData, changeData */
 
+var gradPie = {};
+
+function randomData() {
+    return salesData.map(function (d) {
+        return { label: d.label, value: 1000 * Math.random(), color: d.color };
+    });
+}
+
+function changeData() {
+    gradPie.transition("timePerReviewPie", randomData(), 140);
+}
+
 (function () {
-    var gradPie = {};
 
     var pie = d3.layout.pie().sort(null).value(function (d) { return d.value; });
 
@@ -19,7 +30,7 @@
 			.attr("stop-opacity", 1);
 
         gradient.append("stop").attr("offset", "70%")
-			.attr("stop-color", function (d) { return "black"; })
+			.attr("stop-color", "black")
 			.attr("stop-opacity", 1);
     };
 
@@ -69,18 +80,3 @@ svg.append("text")
         .attr("text-anchor", "middle")
         .attr("class", "chartTitle")
         .text("Time spent per review");
-
-var legendRectSize = 18;
-var legendSpacing = 4;
-
-var color = d3.scale.category20b();
-
-function randomData() {
-    return salesData.map(function (d) {
-        return { label: d.label, value: 1000 * Math.random(), color: d.color };
-    });
-}
-
-function changeData() {
-    gradPie.transition("timePerReviewPie", randomData(), 140);
-}

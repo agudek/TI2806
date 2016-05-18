@@ -27,6 +27,13 @@ svg.append("g").attr("transform", "translate(" + left_pad + ",0)").call(yAxis);
 svg.append("text").attr("text-anchor", "end").attr("x", w).attr("y", h - 30).text("Amount of lines changed");
 svg.append("text").attr("text-anchor", "begin").attr("x", 0).attr("y", 15).text("Time spent looking at pull request");
 
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .text("Pull request information");
+
 svg.selectAll("circle")
     .data(data)
     .enter()
@@ -40,9 +47,3 @@ svg.selectAll("circle")
     })
     .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
 // from http://stackoverflow.com/questions/10805184/d3-show-data-on-mouseover-of-circle
-var tooltip = d3.select("body")
-    .append("div")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .text("Pull request information");

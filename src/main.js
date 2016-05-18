@@ -1,4 +1,5 @@
-/* globals define, modules, ajax */
+/* globals define, modules : true, ajax */
+/* exported ajax */
 
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
 define(['modules/moduleList'], function (dynModules) {
@@ -26,7 +27,7 @@ define(['modules/moduleList'], function (dynModules) {
 
         //Make an array of Ajax objects with the parameters retreived from the module 'ajax' field
         function generateAjaxArray(json) {
-            if (json === undefined || json === {}) { return [] }
+            if (json === undefined || json === {}) { return []; }
             var ajaxArray = json.ajax;
             var ret = [];
             for (var ajax in ajaxArray) {
@@ -68,7 +69,7 @@ define(['modules/moduleList'], function (dynModules) {
                 else {
                     $(module.body(generateResponseArray(objects))).appendTo(outerdiv);
                 }
-            })
+            });
         }
 
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
@@ -84,7 +85,7 @@ define(['modules/moduleList'], function (dynModules) {
             }
             outerdiv.attr('id', arguments[i].name).appendTo(parentContainer);
             var ajaxArray = generateAjaxArray(arguments[i].ajax);
-            if (ajaxArray && ajaxArray != []) {
+            if (ajaxArray && ajaxArray !== []) {
                 whenAjaxArray(arguments[i], ajaxArray, outerdiv);
             }
             else {

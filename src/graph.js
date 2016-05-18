@@ -1,4 +1,4 @@
-/* globals GitHubService, GitHubAPICaller */
+/* globals GithubService, GitHubAPICaller */
 
 // Display the pull requests reviewed by the user during the last 30 days
 // Allow the user to hover over PRs to display additional information
@@ -45,7 +45,7 @@ function drawPullRequests() {
         }
         var raw = [];
         new GitHubAPICaller().get('repos/' + OWNER + '/' + REPO_NAME + '/pulls?state=all', function (pr) {
-            pr.forEach(function (current, index, array) { raw.push(current); })
+            pr.forEach(function (current, index, array) { raw.push(current); });
         });
         svgContainer.selectAll("circle")
         .data(arr)
@@ -53,10 +53,12 @@ function drawPullRequests() {
         .append("circle")
         .attr("cx", function (d) { return xScale(parser.parse(d.created_at)); })
         .attr("cy", function (d) { return yScale(Math.random() * 300); })
-        .style("fill", function (d) { return d.merged ? "green" : (d.state == "closed" ? "red" : "orange"); })
+        .style("fill", function (d) { return d.merged ? "green" : (d.state === "closed" ? "red" : "orange"); })
         .style("cursor", "pointer")
         .attr("r", 5)
-        .on("click", function (d) { window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number); })
+        .on("click", function (d) {
+            window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number);
+        })
     }
 
     new GithubService().getPullRequests("mboom", "TI2806", processPRs);
