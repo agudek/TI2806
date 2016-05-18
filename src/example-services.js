@@ -2,7 +2,7 @@
 
 var octopeerService = new OctopeerService();
 octopeerService.getPullRequestsAmount(function (amount) {
-	octopeerService.getSemanticEventsFor(function(asdf){
+	octopeerService.getPullRequestsAndTime(function(asdf){
 		console.log('asdf');
 	});
 });

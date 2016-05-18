@@ -35,6 +35,34 @@ function OctopeerService() {
 			
 	}
 
+	this.getPullRequestsAndTime = function(callback){
+		let url = api.urlBuilder(api.endpoints.semanticEvents, {});
+		var promise = new RSVP.Promise(function(fulfill, reject){
+			get(url, function(events){
+				fulfill({
+					"results": events.results,
+					"attribute": "session"
+				});
+			});
+		});
+		promise.then(urlResolver)
+			.then(resolveEventName)
+			.then(printResult);
+	}
+
+	function printResult(objects){
+		console.log(objects);
+	}
+
+	function resolveEventName(events){
+		events.map(function(event){
+			get(event.event_type, function(eventType){
+				return event.event_type = eventType;
+			});
+		});
+		return events;
+	}
+
 	this.getSemanticEventsFor = function(callback) {
 		let url = api.urlBuilder(api.endpoints.semanticEvents, {});
 		var promise = new RSVP.Promise(function(fulfill, reject) {
