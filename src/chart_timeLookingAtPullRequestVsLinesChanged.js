@@ -1,3 +1,5 @@
+/* globals d3 */
+
 var w = 600,
     h = 350,
     pad = 20,
