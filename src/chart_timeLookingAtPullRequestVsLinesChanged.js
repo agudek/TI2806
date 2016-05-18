@@ -1,5 +1,3 @@
-/* globals d3 */
-
 var w = 600,
     h = 350,
     pad = 20,
@@ -29,6 +27,13 @@ svg.append("g").attr("transform", "translate(" + left_pad + ",0)").call(yAxis);
 svg.append("text").attr("text-anchor", "end").attr("x", w).attr("y", h - 30).text("Amount of lines changed");
 svg.append("text").attr("text-anchor", "begin").attr("x", 100).attr("y", 15).text("Time spent looking at pull request");
 
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .text("Pull request information");
+
 svg.selectAll("circle")
     .data(data)
     .enter()
@@ -40,12 +45,7 @@ svg.selectAll("circle")
     (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
 .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
-var tooltip = d3.select("body")
-    .append("div")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .text("Pull request information");
+
 
 svg.append("text")
         .attr("x", (w / 2))             
