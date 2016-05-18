@@ -1,5 +1,4 @@
 {
-  // Enforcing
   "curly"   : true,
   "eqeqeq"  : true,
   "immed"   : true,
@@ -17,11 +16,9 @@
   "maxcomplexity" : 6,
   "maxlen" : 120,
 
-  // Environments
   "node"    : true,
   "jquery"  : true,
   "browser" : true,
 
-  // Global variables
   "globals" : {"d3"}
 }
