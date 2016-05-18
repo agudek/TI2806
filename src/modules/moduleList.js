@@ -1,3 +1,5 @@
+/* globals define */
+
 define([], function () {
     return [
     	'modules/scatter',

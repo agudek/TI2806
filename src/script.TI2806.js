@@ -1,1 +1,3 @@
-var modules = []
+/* exported modules */
+
+var modules = [];
