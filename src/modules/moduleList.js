@@ -10,8 +10,9 @@ define([], function () {
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
-    	'modules/filled-graph',
-    	'modules/animated-bar-chart',
+    	'modules/time-and-pr-size',
+    	'modules/time',
+    	'modules/pr-size',
     	'modules/pull-requests'
     	]
     ]; 

@@ -75,8 +75,9 @@ define(['modules/moduleList'], function (dynModules) {
         	if(!arguments[i].customContainer) {
 	        	outerdiv.addClass('col s12 m6');
 	        	outerdiv = $(document.createElement('div'))
-	        		.addClass('card-panel').addClass("hoverable")
+	        		.addClass('card-panel').addClass("hoverable").addClass("relative")
 	        		.appendTo(outerdiv);
+                //var badge = createBadge.appendTo(outerdiv);
         	}
         	var ajaxArray = generateAjaxArray(arguments[i].ajax);
         	if(ajaxArray && ajaxArray!=[])

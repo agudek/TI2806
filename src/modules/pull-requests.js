@@ -37,6 +37,7 @@ define(function () {
 			    var xScale = d3.time.scale().domain(data2).range([0, w - 10]);
 			    var xAxis = d3.svg.axis().scale(xScale).tickFormat(format).ticks(30).orient("bottom");
 			    var svgContainer = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+				    .attr("class","noOverflow")
 				    .attr("width", "100%")
 				    .attr("height", "100%")
 				    .attr("viewBox", "0 0 "+w+" "+(h+20));

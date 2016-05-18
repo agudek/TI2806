@@ -1,3 +1,27 @@
+.thinAxis path,
+.thinAxis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.noAxis path,
+.noAxis line {
+  fill: none;
+}
+
+.visibleTicks .tick{
+    stroke: rgba(0, 0, 0, 0.4);
+    shape-rendering: initial;
+}
+
+main svg:not(.noOverflow){
+	overflow: visible;
+}
+
+.relative {
+	position: relative;
+}
 
 div.main {
     height: 100vh;
