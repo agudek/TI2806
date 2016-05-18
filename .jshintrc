@@ -1,24 +1,28 @@
 {
-  "curly"   : true,
-  "eqeqeq"  : true,
-  "immed"   : true,
-  "latedef" : true,
-  "newcap"  : true,
-  "noarg"   : true,
-  "sub"     : true,
-  "undef"   : true,
-  "unused"  : true,
-  "boss"    : true,
-  "eqnull"  : true,
-  "maxparams" : 5,
-  "maxdepth" : 4,
+  "curly"         : true,
+  "eqeqeq"        : true,
+  "immed"         : true,
+  "latedef"       : true,
+  "newcap"        : true,
+  "noarg"         : true,
+  "sub"           : true,
+  "undef"         : true,
+  "unused"        : true,
+  "boss"          : true,
+  "eqnull"        : true,
+  "maxparams"     : 5,
+  "maxdepth"      : 4,
   "maxstatements" : 30,
   "maxcomplexity" : 6,
-  "maxlen" : 120,
+  "maxlen"        : 120,
 
-  "node"    : true,
-  "jquery"  : true,
-  "browser" : true,
+  "node"          : true,
+  "jquery"        : true,
+  "browser"       : true,
 
-  "globals" : {"d3"}
+  "globals" : {
+              "d3": false, 
+          "jQuery": false, 
+               "$": false
+              }
 }

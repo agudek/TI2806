@@ -6,7 +6,7 @@
 
 Repository homepage: https://mboom.github.io/TI2806/
 
-View on Traivs-CI: https://travis-ci.org/mboom/TI2806
+View on Travis-CI: https://travis-ci.org/mboom/TI2806
 
 View on Waffle.io: https://waffle.io/mboom/TI2806
 
