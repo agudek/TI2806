@@ -31,6 +31,7 @@ define(['modules/moduleList'], function (dynModules) {
             var ajaxArray = json.ajax;
             var ret = [];
             for (var ajax in ajaxArray) {
+                console.log(ajax);
                 //TODO  Create Ajax objects (or other deferred objects) from given JSON object
                 //		Currently not planning to implement as needs to be implemented in a way 
                 //		that supports the data collection engine of Borek. This does mean that 

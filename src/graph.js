@@ -1,4 +1,5 @@
 /* globals GithubService, GitHubAPICaller */
+/* jshint unused : vars */
 
 // Display the pull requests reviewed by the user during the last 30 days
 // Allow the user to hover over PRs to display additional information
@@ -58,7 +59,7 @@ function drawPullRequests() {
         .attr("r", 5)
         .on("click", function (d) {
             window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number);
-        })
+        });
     }
 
     new GithubService().getPullRequests("mboom", "TI2806", processPRs);

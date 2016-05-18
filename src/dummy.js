@@ -1,6 +1,6 @@
 /* jshint maxstatements : 50, maxcomplexity : 40, shadow : true */
-/* exported DummyCaller */
-/* globals Settings */
+/* exported DummyCaller, database */
+/* globals Settings, Database */
 
 var db = new Database(new Settings().host);
 

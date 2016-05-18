@@ -1,6 +1,14 @@
 /*exported randomData, changeData */
 
+var svg = d3.select("#timeSpentPerReview").append("svg").attr("width", 600).attr("height", 350);
 var gradPie = {};
+var salesData = [
+	{ label: "Basic", color: "#3366CC" },
+	{ label: "Plus", color: "#DC3912" },
+	{ label: "Lite", color: "#FF9900" },
+	{ label: "Elite", color: "#109618" },
+	{ label: "Delux", color: "#990099" }
+];
 
 function randomData() {
     return salesData.map(function (d) {
@@ -59,16 +67,6 @@ function changeData() {
 
     this.gradPie = gradPie;
 }());
-
-var salesData = [
-	{ label: "Basic", color: "#3366CC" },
-	{ label: "Plus", color: "#DC3912" },
-	{ label: "Lite", color: "#FF9900" },
-	{ label: "Elite", color: "#109618" },
-	{ label: "Delux", color: "#990099" }
-];
-
-var svg = d3.select("#timeSpentPerReview").append("svg").attr("width", 600).attr("height", 350);
 
 svg.append("g").attr("id", "timePerReviewPie");
 
