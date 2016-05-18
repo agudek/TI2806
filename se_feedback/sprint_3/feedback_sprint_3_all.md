@@ -49,16 +49,18 @@ Total: ****
 
 | Continuous Integration | Score |
 |------------------------|-------|
-| Building               |      |
-| Testing                |      |
+| Building               |  10    |
+| Testing                |  4    |
 
 |         | Score |
 |---------|-------|
-| Tooling |      |
+| Tooling | 8     |
 
 | Pull-based Development | Score |
 |------------------------|-------|
-| Branching              |      |
-| Code Review            |      |
+| Branching              |  10    |
+| Code Review            |  6    |
 
 ##Notes
+* Testing for this version was low, looking forward to awarding more points for the next sprint
+* Need some more insight into you're reviewing process. If you don't write it, there's no proof for me that you did it
