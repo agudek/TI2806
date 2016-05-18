@@ -20,9 +20,5 @@
   "jquery"        : true,
   "browser"       : true,
 
-  "globals" : {
-              "d3": false, 
-          "jQuery": false, 
-               "$": false
-              }
+  "predef"        : ["d3", "jQuery", "$"]
 }
