@@ -1,92 +1,8 @@
-function DummyCaller(host) {
-	this.get = function (query, callback) {
-	    query = query.replace(host, '');
-	    if (query.charAt(query.length - 1) == "/") {
-		query = query.substring(0, query.length - 1);
-	    }
-	    var parts = query.split('/');
-	    var idcheck = false;
-	    var id = 0;
-	    if (!isNaN(parts[parts.length - 1])) {
-		idcheck = true;
-		id = parts[parts.length - 1];
-		query = query.substring(0, query.length - id.length - 1);
-	    }
-	    switch (query) {
-		case '':
-		    callback(db.root);
-		    break;
-		case '/users':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.users.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.users.results[id - 1]);
-			}
-		    } else {
-			callback(db.users);
-		    }
-		    break;
-		case '/pull-requests':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.pullrequests.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.pullrequests.results[id - 1]);
-			}
-		    } else {
-			callback(db.pullrequests);
-		    }
-		    break;
-		case '/sessions':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.sessions.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.sessions.results[id - 1]);
-			}
-		    } else {
-			callback(db.sessions);
-		    }
-		    break;
-		case '/events':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.events.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.events.results[id - 1]);
-			}
-		    } else {
-			callback(db.events);
-		    }
-		    break;
-		case '/event-positions':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.eventpositions.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.eventpositions.results[id - 1]);
-			}
-		    } else {
-			callback(db.eventpositions);
-		    }
-		    break;
-		case '/event-types':
-		    if (idcheck == true) {
-			if (id < 1 || id > db.eventtypes.results.length) {
-			    callback(db.notFound);
-			} else {
-			    callback(db.eventtypes.results[id - 1]);
-			}
-		    } else {
-			callback(db.eventtypes);
-		    }
-		    break;
-		default:
-		    break;
-	    }
-	}
-}
+/* jshint maxstatements : 50, maxcomplexity : 40, shadow : true */
+/* exported DummyCaller, database */
+/* globals Settings, Database */
+
+var db = new Database(new Settings().host);
 
 var database = function (host) {
     function genNumber(n) {
@@ -163,9 +79,9 @@ var database = function (host) {
     };
     for (var i = 1; i <= sessionscount; ++i) {
         var pullrequest = genNumber(pullrequestscount);
-        pullrequest = (pullrequest == 0) ? 1 : pullrequest;
+        pullrequest = (pullrequest === 0) ? 1 : pullrequest;
         var user = genNumber(userscount);
-        user = (user == 0) ? 1 : user;
+        user = (user === 0) ? 1 : user;
         var session = {
             'url': host + '/sessions/' + i + '/',
             'platform': genName(),
@@ -183,9 +99,9 @@ var database = function (host) {
     };
     for (var i = 1; i <= eventscount; ++i) {
         var session = genNumber(sessionscount);
-        session = (session == 0) ? 1 : session;
+        session = (session === 0) ? 1 : session;
         var eventtype = genNumber(eventtypescount);
-        eventtype = (eventtype == 0) ? 1 : eventtype;
+        eventtype = (eventtype === 0) ? 1 : eventtype;
         var event = {
             'url': host + '/events/' + i + '/',
             'started_at': genDate(),
@@ -204,7 +120,7 @@ var database = function (host) {
     };
     for (var i = 1; i <= eventpositionscount; ++i) {
         var event = genNumber(eventscount);
-        event = (event == 0) ? 1 : event;
+        event = (event === 0) ? 1 : event;
         var eventposition = {
             'url': host + '/event-positions/' + i + '/',
             'filename': genName(),
@@ -225,6 +141,94 @@ var database = function (host) {
         };
         this.eventtypes.results.push(eventtype);
     }
-}
+};
 
-var db = new database(new Settings().host);
+function DummyCaller(host) {
+    this.get = function (query, callback) {
+        query = query.replace(host, '');
+        if (query.charAt(query.length - 1) === "/") {
+            query = query.substring(0, query.length - 1);
+        }
+        var parts = query.split('/');
+        var idcheck = false;
+        var id = 0;
+        if (!isNaN(parts[parts.length - 1])) {
+            idcheck = true;
+            id = parts[parts.length - 1];
+            query = query.substring(0, query.length - id.length - 1);
+        }
+        switch (query) {
+            case '':
+                callback(db.root);
+                break;
+            case '/users':
+                if (idcheck) {
+                    if (id < 1 || id > db.users.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.users.results[id - 1]);
+                    }
+                } else {
+                    callback(db.users);
+                }
+                break;
+            case '/pull-requests':
+                if (idcheck) {
+                    if (id < 1 || id > db.pullrequests.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.pullrequests.results[id - 1]);
+                    }
+                } else {
+                    callback(db.pullrequests);
+                }
+                break;
+            case '/sessions':
+                if (idcheck) {
+                    if (id < 1 || id > db.sessions.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.sessions.results[id - 1]);
+                    }
+                } else {
+                    callback(db.sessions);
+                }
+                break;
+            case '/events':
+                if (idcheck) {
+                    if (id < 1 || id > db.events.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.events.results[id - 1]);
+                    }
+                } else {
+                    callback(db.events);
+                }
+                break;
+            case '/event-positions':
+                if (idcheck) {
+                    if (id < 1 || id > db.eventpositions.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.eventpositions.results[id - 1]);
+                    }
+                } else {
+                    callback(db.eventpositions);
+                }
+                break;
+            case '/event-types':
+                if (idcheck) {
+                    if (id < 1 || id > db.eventtypes.results.length) {
+                        callback(db.notFound);
+                    } else {
+                        callback(db.eventtypes.results[id - 1]);
+                    }
+                } else {
+                    callback(db.eventtypes);
+                }
+                break;
+            default:
+                break;
+        }
+    };
+}
