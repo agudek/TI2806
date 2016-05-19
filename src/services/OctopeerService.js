@@ -1,4 +1,5 @@
-/*globals console, get, RSVP, Settings, OctopeerAPI, OctopeerCaller, ObjectResolver*/
+/*exported OctopeerService*/
+/*globals get, RSVP, Settings, OctopeerAPI, OctopeerCaller, ObjectResolver*/
 function OctopeerService() {
     "use strict";
     var settings, api, caller, cache;
@@ -8,11 +9,11 @@ function OctopeerService() {
     caller = new OctopeerCaller(settings.host);
 	//var caller = new DummyCaller(settings.host);
 
-	this.getUsers = function (callback) {
+	this.getUsers = function () {
         var url, promise;
 		url = api.urlBuilder(api.endpoints.users, {});
         
-        promise = new RSVP.Promise(function (fulfill, reject) {
+        promise = new RSVP.Promise(function (fulfill) {
             get(url, function (users) {
                 fulfill(users);
             });
@@ -20,12 +21,12 @@ function OctopeerService() {
         return promise;
 	};
 
-	this.getPullRequestsFor = function (from, to, callback) {
+	this.getPullRequests = function () {
         var url, objectResolver, promise;
         objectResolver = new ObjectResolver(["session"]);
 		url = api.urlBuilder(api.endpoints.pullRequests, {});
         
-        promise = new RSVP.Promise(function (fulfill, reject) {
+        promise = new RSVP.Promise(function (fulfill) {
             get(url, function (pullRequests) {
                 fulfill(objectResolver.resolveArray(pullRequests));
             });
@@ -33,12 +34,12 @@ function OctopeerService() {
         return promise;
 	};
 
-	this.getSemanticEvents = function (callback) {
+	this.getSemanticEvents = function () {
         var url, objectResolver, promise;
         objectResolver = new ObjectResolver(["element_type", "event_type", "session"]);
 		url = api.urlBuilder(api.endpoints.semanticEvents, {});
         
-        promise = new RSVP.Promise(function (fulfill, reject) {
+        promise = new RSVP.Promise(function (fulfill) {
             get(url, function (events) {
                 fulfill(objectResolver.resolveArray(events.results));
             });
@@ -46,11 +47,11 @@ function OctopeerService() {
         return promise;
 	};
     
-    this.getRepositories = function (callback) {
+    this.getRepositories = function () {
         var url, promise;
 		url = api.urlBuilder(api.endpoints.repositories, {});
         
-        promise = new RSVP.Promise(function (fulfill, reject) {
+        promise = new RSVP.Promise(function (fulfill) {
             get(url, function (users) {
                 fulfill(users);
             });
@@ -58,4 +59,3 @@ function OctopeerService() {
         return promise;
     };
 }
-

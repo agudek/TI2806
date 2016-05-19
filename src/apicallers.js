@@ -1,14 +1,16 @@
-/*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller */
-function get(url, callback){
+/*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller, get */
+/*globals console*/
+function get(url, callback) {
+    "use strict";
 	var http = new XMLHttpRequest();
 	http.onreadystatechange = function () {
-		if (http.readyState == 4 && http.status >= 200 && http.status < 400) {
+		if (http.readyState === 4 && http.status >= 200 && http.status < 400) {
 			callback(JSON.parse(http.responseText));
-		} else if (http.status >= 400){
+		} else if (http.status >= 400) {
 			var error = {
 				'http-status': http.status,
 				'response-headers': http.getAllResponseHeaders().toString()
-			}
+			};
 			console.log(error);
 		}
 	};
@@ -16,6 +18,7 @@ function get(url, callback){
 	http.send(null);
 }
 function OctopeerCaller(host) {
+    "use strict";
     this.get = function get(query, callback) {
         var http = new XMLHttpRequest();
         http.onreadystatechange = function () {
@@ -34,7 +37,8 @@ function OctopeerCaller(host) {
     };
 }
 
-function GitHubAPICaller(){
+function GitHubAPICaller() {
+    "use strict";
 	var host = 'https://api.github.com/';
 
 	this.get = function (endpoint, callback) {
@@ -55,7 +59,8 @@ function GitHubAPICaller(){
 	};
 }
 
-function BitBucketAPICaller(){
+function BitBucketAPICaller() {
+    "use strict";
 	var host = 'https://api.bitbucket.org/2.0/';
 
 	this.get = function (endpoint, callback) {

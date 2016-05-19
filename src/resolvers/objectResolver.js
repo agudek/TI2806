@@ -1,3 +1,4 @@
+/*exported ObjectResolver*/
 /*globals get*/
 /*jshint -W083*/
 function ObjectResolver(attributes) {
@@ -13,7 +14,7 @@ function ObjectResolver(attributes) {
     }
     
     function resolveObject(object) {
-        var attr, promises;
+        var attr;
         
         for (attr in attributes) {
             resolveAttributeFromObject(object, attributes[attr]);
