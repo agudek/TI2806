@@ -1,5 +1,12 @@
 /*exported OctopeerService*/
 /*globals get, RSVP, Settings, OctopeerAPI, OctopeerCaller, ObjectResolver*/
+/**
+ * This object will create a service object. This object contains useful calls to the octopeer
+ * server. Every function will return promises.
+ *
+ * @constructor
+ * @this {OctopeerService}
+ */
 function OctopeerService() {
     "use strict";
     var settings, api, caller, cache;
