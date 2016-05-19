@@ -29,6 +29,28 @@ var Rank = function () {
         }
     }
 
+    this.addReviewer = function (uname, files) {
+        var r = ''; // reviewer name
+        var f = []; // reviewer files
+        RE.addReviewer(r, f);
+        for (var i = 0; i < files.length; ++i) {
+            var fname = '';
+            var C = '';
+            var W = '';
+            var T = '';
+            RE.addFile(r, fname, C, W, T);
+        }
+
+    };
+    this.addFiles = function (files) {
+        for (var i = 0; i < files.length; ++i) {
+            var fname = '';
+            var C = '';
+            var W = '';
+            var T = '';
+            FR.addFile(f, C, W, T);
+        }
+    };
     this.rank = function (m) {
         return RF.RF(m);
     };
