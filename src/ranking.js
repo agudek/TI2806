@@ -30,21 +30,19 @@ var Rank = function () {
     }
 
     this.addReviewer = function (uname, files) {
-        var r = ''; // reviewer name
-        var f = []; // reviewer files
-        RE.addReviewer(r, f);
+        RE.addReviewer(uname, {});
         for (var i = 0; i < files.length; ++i) {
-            var fname = '';
+            var f = '';
             var C = '';
             var W = '';
             var T = '';
-            RE.addFile(r, fname, C, W, T);
+            RE.addFile(uname, f, C, W, T);
         }
 
     };
     this.addFiles = function (files) {
         for (var i = 0; i < files.length; ++i) {
-            var fname = '';
+            var f = '';
             var C = '';
             var W = '';
             var T = '';
@@ -79,7 +77,7 @@ var Rank = function () {
         };
         this.addFile = function (r, f, C, W, T) {
             f = f.replace('.', '_');
-            map.r = {};
+            (typeof map.r == 'undefined') ? map.r = {} : null;
             map.r.f = {
                 'C': C,
                 'W': W,
