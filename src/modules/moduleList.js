@@ -9,7 +9,8 @@ define([], function () {
 	    'pullrequestTransformer',
 	    'services/OctopeerService',
 	    'services/GithubService',
-	    'services/BitBucketService'
+	    'services/BitBucketService',
+	    'script.TI2806.js'
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',

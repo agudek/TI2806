@@ -1,4 +1,4 @@
-/* globals define, GithubService */
+/* globals define, githubService */
 /* exported xAxisGroup, yAxisGroup */
 /* jshint unused : vars */
 
@@ -74,7 +74,7 @@ define(function () {
                 .call(yAxis);
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
-            new GithubService().getPullRequests("mboom", "TI2806", processPRs);
+            githubService.getPullRequests("mboom", "TI2806", processPRs);
 
             return svgContainer[0];
         }
