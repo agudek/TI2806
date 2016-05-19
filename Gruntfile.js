@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
-        jshintrc: true
+        jshintrc: '.jshintrc'
       },
       gruntfile: {
         src: 'Gruntfile.js'
@@ -84,8 +84,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha');
 
-  // Default task.
+  // Default task.=
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'mocha']);
-  grunt.registerTask('travis', ['qunit']);
+  grunt.registerTask('travis', ['qunit', 'jshint']);
 
 };
