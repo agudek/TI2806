@@ -28,7 +28,9 @@ define(function () {
                 })
                 .style("cursor", "pointer")
                 .attr("r", 5)
-                .on("click", function (d) { window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number); });
+                .on("click", function (d) {
+                    window.open("https://www.github.com/" + OWNER + "/" + REPO_NAME + "/pull/" + d.number);
+                });
             }
 
             var REPO_NAME = "TI2806";
@@ -41,7 +43,7 @@ define(function () {
             var today = new Date();
             var month = today.getMonth();
             // Because months are 0-11 this will get the previous month.
-            data2.push(new Date().setMonth((month + 11) % 12)); 
+            data2.push(new Date().setMonth((month + 11) % 12));
             data2.push(today);
 
             var format = d3.time.format("%d/%m");
@@ -56,7 +58,7 @@ define(function () {
                 .axis()
                 .scale(yScale)
                 .orient("left");
-            var xAxisGroup = svgContainer
+            var xAxisGroup = svgContainer // jshint ignore:line
                 .append("g")
                 .attr("transform", "translate(" + leftPad + "," + (h - bottomPad) + ")")
                 .call(xAxis)
@@ -66,12 +68,15 @@ define(function () {
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
                 .attr("transform", "rotate(-65)");
-            var yAxisGroup = svgContainer.append("g").attr("transform", "translate(" + leftPad + "," + 0 + ")").call(yAxis);
+            var yAxisGroup = svgContainer // jshint ignore:line
+                .append("g")
+                .attr("transform", "translate(" + leftPad + "," + 0 + ")")
+                .call(yAxis);
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
             new GithubService().getPullRequests("mboom", "TI2806", processPRs);
 
             return svgContainer[0];
         }
-    }
+    };
 });
