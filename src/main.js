@@ -3,15 +3,12 @@
 
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
 define(['modules/moduleList'], function (dynModules) {
-<<<<<<< HEAD
-    require(dynModules, function () {
-        //Set global modules variable to a list of all imported modules after converting pseudo-array to array
-        modules = Array.prototype.slice.call(arguments);
-=======
+
 	require(dynModules[0]);
     require(dynModules[1], function(){
-    	modules = Array.prototype.slice.call(arguments); //Set global modules variable to a list of all imported modules after converting pseudo-array to array
->>>>>>> master
+        // Set global modules variable to a list of all imported modules after converting pseudo-array to array
+    	modules = Array.prototype.slice.call(arguments); 
+
 
         //http://stackoverflow.com/questions/5627284/pass-in-an-array-of-deferreds-to-when
         //Define function when.all() with which multiple deferreds can be passed to when() in an 
@@ -81,25 +78,7 @@ define(['modules/moduleList'], function (dynModules) {
 
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
-<<<<<<< HEAD
-        for (var i = 0; i < arguments.length; i++) {
-            var parentContainer = $('div#bodyrow');
-            if (arguments[i].parentSelector) {
-                parentContainer = $(arguments[i].parentSelector);
-            }
-            var outerdiv = $(document.createElement('div'));
-            if (!arguments[i].customContainer) {
-                outerdiv.addClass('col-md-6').addClass('no-float');
-            }
-            outerdiv.attr('id', arguments[i].name).appendTo(parentContainer);
-            var ajaxArray = generateAjaxArray(arguments[i].ajax);
-            if (ajaxArray && ajaxArray !== []) {
-                whenAjaxArray(arguments[i], ajaxArray, outerdiv);
-            }
-            else {
-                $(arguments[i].body()).appendTo(outerdiv);
-            }
-=======
+
         for (var i = 0; i < arguments.length; i++){
 			var parentContainer = $('div#bodyrow');
         	if(arguments[i].parentSelector)
@@ -117,7 +96,6 @@ define(['modules/moduleList'], function (dynModules) {
         		whenAjaxArray(arguments[i],ajaxArray,outerdiv);
         	else
         		$(arguments[i].body()).appendTo(outerdiv);
->>>>>>> master
         }
 
     });
