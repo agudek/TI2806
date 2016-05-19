@@ -4,10 +4,10 @@
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
 define(['modules/moduleList'], function (dynModules) {
 
-	require(dynModules[0]);
-    require(dynModules[1], function(){
+    require(dynModules[0]);
+    require(dynModules[1], function () {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
-    	modules = Array.prototype.slice.call(arguments); 
+        modules = Array.prototype.slice.call(arguments);
 
 
         //http://stackoverflow.com/questions/5627284/pass-in-an-array-of-deferreds-to-when
@@ -79,23 +79,26 @@ define(['modules/moduleList'], function (dynModules) {
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
 
-        for (var i = 0; i < arguments.length; i++){
-			var parentContainer = $('div#bodyrow');
-        	if(arguments[i].parentSelector)
-        		parentContainer = $(arguments[i].parentSelector);
-        	var outerdiv = $(document.createElement('div'));
-        	outerdiv.attr('id',arguments[i].name).appendTo(parentContainer);
-        	if(!arguments[i].customContainer) {
-	        	outerdiv.addClass('col s12 m6');
-	        	outerdiv = $(document.createElement('div'))
+        for (var i = 0; i < arguments.length; i++) {
+            var parentContainer = $('div#bodyrow');
+            if (arguments[i].parentSelector) {
+                parentContainer = $(arguments[i].parentSelector);
+            }
+            var outerdiv = $(document.createElement('div'));
+            outerdiv.attr('id', arguments[i].name).appendTo(parentContainer);
+            if (!arguments[i].customContainer) {
+                outerdiv.addClass('col s12 m6');
+                outerdiv = $(document.createElement('div'))
 	        		.addClass('card-panel').addClass("hoverable")
 	        		.appendTo(outerdiv);
-        	}
-        	var ajaxArray = generateAjaxArray(arguments[i].ajax);
-        	if(ajaxArray && ajaxArray!=[])
-        		whenAjaxArray(arguments[i],ajaxArray,outerdiv);
-        	else
-        		$(arguments[i].body()).appendTo(outerdiv);
+            }
+            var ajaxArray = generateAjaxArray(arguments[i].ajax);
+            if (ajaxArray && ajaxArray !== []) {
+                whenAjaxArray(arguments[i], ajaxArray, outerdiv);
+            }
+            else {
+                $(arguments[i].body()).appendTo(outerdiv);
+            }
         }
 
     });
