@@ -2,16 +2,16 @@
 /*globals get*/
 /*jshint -W083*/
 /**
- * This object will create a resolver object. This object contains functions which returns promises
- * that contain the requests that are sent to the Octopeer server.
- *
- * @constructor
- * @this {ObjectResolver}
- * @param {[String]} The attributes which contains urls you want to resolve
- */
+* This object will create a resolver object. This object contains functions which returns promises
+* that contain the requests that are sent to the Octopeer server.
+*
+* @constructor
+* @this {ObjectResolver}
+* @param {[String]} The attributes which contains urls you want to resolve
+*/
 function ObjectResolver(attributes) {
     "use strict";
-    
+
     /**
     * This function will resolve the attribute of the object
     *
@@ -26,7 +26,7 @@ function ObjectResolver(attributes) {
             object[attr] = obj;
         });
     }
-    
+
     /**
     * This function will resolve the object
     *
@@ -34,21 +34,22 @@ function ObjectResolver(attributes) {
     */
     function resolveObject(object) {
         var attr;
-        
+
         for (attr in attributes) {
             resolveAttributeFromObject(object, attributes[attr]);
         }
     }
-    
+
     /**
     * This function will resolve a single object
     *
     * @param {Object} object The containing object you want to resolve
     */
     this.resolveSingleObject = function (object) {
-        return resolveObject(object);
+        resolveObject(object);
+        return object;
     };
-    
+
     /**
     * This function will resolve an array of objects
     *
