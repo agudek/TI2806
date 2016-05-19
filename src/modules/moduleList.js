@@ -7,9 +7,12 @@ define([], function () {
 	    'settings',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'resolvers/objectResolver',
+	    'services/OctopeerAPI',
 	    'services/OctopeerService',
 	    'services/GithubService',
-	    'services/BitBucketService'
+	    'services/BitBucketService',
+	    'example-services'
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
