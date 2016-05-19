@@ -2,9 +2,11 @@
 
 [![](https://api.travis-ci.org/mboom/TI2806.svg?branch=master)](https://travis-ci.org/mboom/TI2806)
 
+[![Coverage Status](https://coveralls.io/repos/github/mboom/TI2806/badge.svg?branch=master)](https://coveralls.io/github/mboom/TI2806?branch=master)
+
 Repository homepage: https://mboom.github.io/TI2806/
 
-View on Traivs-CI: https://travis-ci.org/mboom/TI2806
+View on Travis-CI: https://travis-ci.org/mboom/TI2806
 
 View on Waffle.io: https://waffle.io/mboom/TI2806
 

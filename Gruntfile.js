@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
-        jshintrc: true
+        jshintrc: '.jshintrc'
       },
       gruntfile: {
         src: 'Gruntfile.js'
@@ -77,6 +77,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-  grunt.registerTask('travis', ['qunit']);
+  grunt.registerTask('travis', ['qunit', 'jshint']);
 
 };

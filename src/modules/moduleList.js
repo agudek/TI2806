@@ -1,3 +1,5 @@
+/* globals define */
+
 define([], function () {
     return [
 	    [// Array of non-visualisation modules
