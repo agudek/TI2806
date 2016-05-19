@@ -38,31 +38,6 @@ define(function () {
                 .attr("height", '100%')
                 .attr("viewBox", "0 0 "+w+" "+h);
 
-            var defs = svg.append('defs');
-
-            var filter = defs.append('filter')
-                .attr('id','f3')
-                .attr('x',0)
-                .attr('y',0)
-                .attr('width','200%')
-                .attr('height','200%');
-
-            filter.append('feOffset')
-                .attr('result','offOut')
-                .attr('in','SourceAlpha')
-                .attr('dx',1)
-                .attr('dy',-1);
-
-            filter.append('feGaussianBlur')
-                .attr('result','blurOut')
-                .attr('in','offOut')
-                .attr('stdDeviation',2);
-
-            filter.append('feBlend')
-                .attr('in','SourceGraphic')
-                .attr('in2','blurOut')
-                .attr('mode','normal');
-
             var xTimeScale = d3.scale.linear()
                 .domain([0,timeData.length])
                 .range([pad,w-pad]),
@@ -134,7 +109,6 @@ define(function () {
                 .attr("width",function () {return (w/(timeData.length-1))-20;})
                 .attr("height",function (d) {return yTimeScale(d.y);})
                 .attr("style", "fill:rgb(77, 136, 255);")
-                .attr("filter","url(#f3)")
                     .transition()
                     .attr("y",function (d) {return h-padBottom-yTimeScale(d.y);});
 

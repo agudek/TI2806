@@ -7,10 +7,13 @@ define([], function () {
 	    'settings',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'resolvers/objectResolver',
+	    'services/OctopeerAPI',
 	    'services/OctopeerService',
 	    'services/GithubService',
 	    'services/BitBucketService',
-	    'script.TI2806.js'
+	    'example-services',
+        'script.TI2806.js'
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
