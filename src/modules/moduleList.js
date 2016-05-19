@@ -7,6 +7,7 @@ define([], function () {
 	    'settings',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'resolvers/objectResolver',
 	    'services/OctopeerAPI',
 	    'services/OctopeerService',
 	    'services/GithubService',

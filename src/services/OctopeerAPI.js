@@ -1,5 +1,7 @@
-function OctopeerAPI(){
-	this.apiUrl = "http://146.185.128.124/api";
+function OctopeerAPI() {
+	"use strict";
+    
+    this.apiUrl = "http://146.185.128.124/api";
 	this.endpoints = {
 		'repositories' : "/repositories",
 		'users' : "/users/",
@@ -14,20 +16,25 @@ function OctopeerAPI(){
 		'mouseClickEvents' : "/mouse-click-events",
 		'mouseScrollEvents' : "/mouse-scroll-events",
 		'windowResolutionEvents' : "/window-resolution-events"
-	};	
-	this.urlBuilder = function(endpoint, parameters){
-		var url = this.apiUrl + endpoint; 
-		var firstParameter = true;
-		for (var attribute in parameters){
-			if(firstParameter){
-				firstParameter = false;
-				url += "?" + attribute + "=" + encodeURIComponent(parameters[attribute]);
-			} else {
-				url += "&" + attribute + "=" + encodeURIComponent(parameters[attribute]);
-			}
+	};
+    
+	this.urlBuilder = function (endpoint, parameters) {
+        var url, firstParameter, attribute;
+        url = this.apiUrl + endpoint;
+		firstParameter = true;
+        
+		for (attribute in parameters) {
+            if (parameters[attribute] !== undefined) {
+                if (firstParameter) {
+                    firstParameter = false;
+                    url += "?" + attribute + "=" + encodeURIComponent(parameters[attribute]);
+                } else {
+                    url += "&" + attribute + "=" + encodeURIComponent(parameters[attribute]);
+                }
+            }
 		}
 		
-		return url
-	}
+		return url;
+	};
 }
 
