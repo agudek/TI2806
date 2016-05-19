@@ -1,3 +1,4 @@
+/* globals define, area */
 define(function () {
     return {
     	name: "average-comment-size-compared",
@@ -83,19 +84,23 @@ define(function () {
                 .orient("bottom")
                 .tickSize(-h+padBottom+padTop);
 
-            svg.append("g").attr("transform", "translate("+pad+"," + (h - padBottom) + ")").attr("class","noAxis visibleTicks").call(xAxis)
-            .selectAll("text")
-                .attr("y", 0)
-                .attr("x", 9)
-                .attr("dy", ".35em")
-                .attr("transform", "rotate(65)")
-                .style("text-anchor", "start");
+            svg.append("g")
+                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
+                .attr("class","noAxis visibleTicks").call(xAxis)
+                .selectAll("text")
+                    .attr("y", 0)
+                    .attr("x", 9)
+                    .attr("dy", ".35em")
+                    .attr("transform", "rotate(65)")
+                    .style("text-anchor", "start");
 
             var yScale = d3.scale.linear().domain([0,maxValue]).range([h-padBottom-padTop,0]).nice();
 
             var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(6).tickSize(-w+2*pad);
 
-            svg.append("g").attr("transform", "translate("+pad+","+padTop+")").attr("class","noAxis visibleTicks").call(yAxis);
+            svg.append("g")
+                .attr("transform", "translate("+pad+","+padTop+")")
+                .attr("class","noAxis visibleTicks").call(yAxis);
 
             svg.append("line")
                 .attr("x1",pad)
@@ -112,7 +117,7 @@ define(function () {
                 .attr("style","stroke-width:1px;stroke:black");
 
             svg.append("path")
-                .attr("d",area(sizeData,h-padBottom,"linear",function(x){return xSizeScale(x)},ySizeScale))
+                .attr("d",area(sizeData,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale))
                 .attr("style","stroke:rgb(212, 51, 51);fill:rgba(212, 51, 51,0.5);stroke-width: 2px;");  
 
             return svg[0];

@@ -1,3 +1,4 @@
+/* globals define */
 define(function () {
     return {
     	name: "time",
@@ -62,8 +63,13 @@ define(function () {
                 .attr('in2','blurOut')
                 .attr('mode','normal');
 
-            var xTimeScale = d3.scale.linear().domain([0,timeData.length]).range([pad,w-pad]),
-            yTimeScale = d3.scale.linear().domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))]).range([0, h-padBottom-padTop]).nice();
+            var xTimeScale = d3.scale.linear()
+                .domain([0,timeData.length])
+                .range([pad,w-pad]),
+                yTimeScale = d3.scale.linear()
+                    .domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))])
+                    .range([0, h-padBottom-padTop])
+                    .nice();
 
             var xAxisScale = d3.scale.ordinal()
                 .domain([
@@ -80,19 +86,32 @@ define(function () {
                 .scale(xAxisScale)
                 .orient("bottom");
 
-            svg.append("g").attr("transform", "translate("+pad+"," + (h - padBottom) + ")").attr("class","noAxis").call(xAxis)
-            .selectAll("text")
-                .attr("y", 0)
-                .attr("x", 9)
-                .attr("dy", ".35em")
-                .attr("transform", "rotate(65)")
-                .style("text-anchor", "start");
+            svg.append("g")
+                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
+                .attr("class","noAxis")
+                .call(xAxis)
+                .selectAll("text")
+                    .attr("y", 0)
+                    .attr("x", 9)
+                    .attr("dy", ".35em")
+                    .attr("transform", "rotate(65)")
+                    .style("text-anchor", "start");
 
-            var yAxisScale = d3.scale.linear().domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))]).range([h-padBottom-padTop,0]).nice();
+            var yAxisScale = d3.scale.linear()
+                .domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))])
+                .range([h-padBottom-padTop,0])
+                .nice();
 
-            var yAxis = d3.svg.axis().scale(yAxisScale).orient("left").ticks(6).tickSize(-w+2*pad);
+            var yAxis = d3.svg.axis()
+                .scale(yAxisScale)
+                .orient("left")
+                .ticks(6)
+                .tickSize(-w+2*pad);
 
-            svg.append("g").attr("transform", "translate("+pad+","+padTop+")").attr("class","noAxis visibleTicks").call(yAxis);
+            svg.append("g")
+                .attr("transform", "translate("+pad+","+padTop+")")
+                .attr("class","noAxis visibleTicks")
+                .call(yAxis);
 
             svg.append("line")
                 .attr("x1",pad)
@@ -110,14 +129,14 @@ define(function () {
 
             svg.selectAll("rect").data(timeData).enter()
                 .append("rect")
-                .attr("x",function (d) {return xTimeScale(d.x)+9})
+                .attr("x",function (d) {return xTimeScale(d.x)+9;})
                 .attr("y",h-padBottom)
-                .attr("width",function (d) {return (w/(timeData.length-1))-20})
-                .attr("height",function (d) {return yTimeScale(d.y)})
+                .attr("width",function () {return (w/(timeData.length-1))-20;})
+                .attr("height",function (d) {return yTimeScale(d.y);})
                 .attr("style", "fill:rgb(77, 136, 255);")
                 .attr("filter","url(#f3)")
                     .transition()
-                    .attr("y",function (d) {return h-padBottom-yTimeScale(d.y)});
+                    .attr("y",function (d) {return h-padBottom-yTimeScale(d.y);});
 
             return svg[0];
         }

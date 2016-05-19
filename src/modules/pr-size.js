@@ -1,3 +1,4 @@
+/* globals define, line */
 define(function () {
     return {
     	name: "pr-size",
@@ -62,8 +63,12 @@ define(function () {
                 .attr('in2','blurOut')
                 .attr('mode','normal');
 
-            var xSizeScale = d3.scale.linear().domain([0,sizeData.length]).range([pad,w-pad]),
-            ySizeScale = d3.scale.linear().domain([Math.max.apply(Math,sizeData.map(function(o){return o.y;})),0]).range([padTop, h-padBottom]).nice();
+            var xSizeScale = d3.scale.linear()
+                .domain([0,sizeData.length])
+                .range([pad,w-pad]),
+            ySizeScale = d3.scale.linear()
+                .domain([Math.max.apply(Math,sizeData.map(function(o){return o.y;})),0])
+                .range([padTop, h-padBottom]).nice();
 
             var xAxisScale = d3.scale.ordinal()
                 .domain([
@@ -80,19 +85,30 @@ define(function () {
                 .scale(xAxisScale)
                 .orient("bottom");
 
-            svg.append("g").attr("transform", "translate("+pad+"," + (h - padBottom) + ")").attr("class","noAxis").call(xAxis)
-            .selectAll("text")
-                .attr("y", 0)
-                .attr("x", 9)
-                .attr("dy", ".35em")
-                .attr("transform", "rotate(65)")
-                .style("text-anchor", "start");
+            svg.append("g")
+                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
+                .attr("class","noAxis").call(xAxis)
+                .selectAll("text")
+                    .attr("y", 0)
+                    .attr("x", 9)
+                    .attr("dy", ".35em")
+                    .attr("transform", "rotate(65)")
+                    .style("text-anchor", "start");
 
-            var yScale = d3.scale.linear().domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))]).range([h-padBottom-padTop,0]).nice();
+            var yScale = d3.scale.linear()
+                .domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))])
+                .range([h-padBottom-padTop,0]).nice();
 
-            var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(6).tickSize(-w+2*pad);
+            var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(6)
+                .tickSize(-w+2*pad);
 
-            svg.append("g").attr("transform", "translate("+pad+","+padTop+")").attr("class","noAxis visibleTicks").call(yAxis);
+            svg.append("g")
+                .attr("transform", "translate("+pad+","+padTop+")")
+                .attr("class","noAxis visibleTicks")
+                .call(yAxis);
 
             svg.append("line")
                 .attr("x1",pad)
@@ -108,16 +124,18 @@ define(function () {
                 .attr("y2",0)
                 .attr("style","stroke-width:1px;stroke:black");
 
-            var tempSizeData = [{"x":-0.5, "y":0}].concat(sizeData).concat([{"x":sizeData.length-0.5, "y":0}]);
+            var tempSizeData = [{"x":-0.5, "y":0}]
+                .concat(sizeData)
+                .concat([{"x":sizeData.length-0.5, "y":0}]);
 
             svg.append("path")
-                .attr("d",line(tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5)},ySizeScale))
+                .attr("d",line(tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5);},ySizeScale))
                 .attr("style","stroke:rgb(212, 51, 51);fill:none;stroke-width: 3px;");
 
             svg.selectAll("circle").data(sizeData).enter()
                 .append("circle")
-                .attr("cx",function (d) {return xSizeScale(d.x+0.5)})
-                .attr("cy",function (d) {return ySizeScale(d.y)})
+                .attr("cx",function (d) {return xSizeScale(d.x+0.5);})
+                .attr("cy",function (d) {return ySizeScale(d.y);})
                 .attr("r",3)
                 .attr("style","fill:rgb(212, 51, 51);stroke-width: 3px;");
 
