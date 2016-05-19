@@ -76,6 +76,16 @@ define(['modules/moduleList'], function (dynModules) {
             });
         }
 
+        function showModalBadge() {
+            $( this ).find(".modalBadge").addClass("show");
+        }
+        function hideModalBadge() {
+            $( this ).find(".modalBadge").removeClass("show");
+        }
+        function openDemoModal() {
+            $('#demo-modal').openModal();
+        }
+
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
 
@@ -87,14 +97,44 @@ define(['modules/moduleList'], function (dynModules) {
             var outerdiv = $(document.createElement('div'));
             outerdiv.attr('id', arguments[i].name).appendTo(parentContainer);
             if (!arguments[i].customContainer) {
-                outerdiv.addClass('col s12 m6');
+                outerdiv
+                    .addClass('col s12 m6')
+                    .hover(showModalBadge,hideModalBadge);
                 outerdiv = $(document.createElement('div'))
-	        		.addClass('card-panel')
+	        		.addClass('card')
                     .addClass("hoverable")
                     //The 'relative' class allow us to place absolute elements inside the card
                     //This will probably be more important in the coming sprints.
                     .addClass("relative")
 	        		.appendTo(outerdiv);
+                outerdiv = $(document.createElement('div'))
+                    .addClass('card-content')
+                    .appendTo(outerdiv);
+                $(document.createElement('span'))
+                    .addClass("card-title")
+                    .addClass("truncate")
+                    .addClass("flow-text")
+                    .html(arguments[i].title)
+                    .appendTo(outerdiv);
+                $(document.createElement('li'))
+                    .addClass("material-icons")
+                    .html("search")
+                    .appendTo(
+                    $(document.createElement('div'))
+                        .addClass('modalBadge')
+                        .click(openDemoModal)
+                        .appendTo(outerdiv)
+                    );
+                $(document.createElement('li'))
+                    .addClass("material-icons")
+                    .addClass("warningBadge")
+                    .html("warning")
+                    .appendTo(outerdiv);
+                $(document.createElement('li'))
+                    .addClass("material-icons")
+                    .addClass("errorBadge")
+                    .html("error")
+                    .appendTo(outerdiv);
             }
             var ajaxArray = generateAjaxArray(arguments[i].ajax);
             if (ajaxArray && ajaxArray !== []) {

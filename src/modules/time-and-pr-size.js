@@ -2,6 +2,7 @@
 define(function () {
     return {
     	name: "time-and-pr-size",
+        title: "Time spent + size pr",
     	size: 1,
         parentSelector: "#bodyrow",
         body: function () {

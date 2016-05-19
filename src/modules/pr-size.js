@@ -2,6 +2,7 @@
 define(function () {
     return {
     	name: "pr-size",
+        title: "Size of pr",
     	size: 1,
         parentSelector: "#bodyrow",
         body: function () {

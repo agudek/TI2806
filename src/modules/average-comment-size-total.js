@@ -1,7 +1,8 @@
 /* globals define, area */
 define(function () {
     return {
-    	name: "average-comment-size-compared",
+    	name: "average-comment-size-total",
+        title: "Total average comment size",
     	size: 1,
         parentSelector: "#bodyrow",
         body: function () {

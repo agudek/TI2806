@@ -2,6 +2,7 @@
 define(function () {
     return {
     	name: "average-comment-size-compared",
+        title: "Average comment sizes",
     	size: 1,
         parentSelector: "#bodyrow",
         body: function () {
