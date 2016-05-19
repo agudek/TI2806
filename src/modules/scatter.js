@@ -60,6 +60,7 @@ define(function () {
                         .attr("cx", function (d) { return x(d[0]); })
                         .attr("cy", function (d) { return y(d[1]); });
 
+
             // from http://stackoverflow.com/questions/10805184/d3-show-data-on-mouseover-of-circle
             var tooltip = d3.select("body")
                 .append("div")

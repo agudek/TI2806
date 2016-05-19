@@ -83,11 +83,17 @@ The database is on the external Octopeer domain. This domain handles the data wi
 
 A goal of this project is scalability. This means that when the user base grows rapidly big, the tool should not break down. A lot of concurrent users should not be hold back. The external Octopeer domain should be able to handle a lot of traffic.
 
+\subsection{Modularity}
+
+Modularity is the concept of separating as many parts of the program as possible. This allows small changes to the code to be executed easily, as the code of the different parts are in separate locations. For the modularity of this project, RequireJS is used. This library loads in the modules of visualisations and integrates them into the main html file.
+
+To be able to complete this process as easily and efficient as possible, a specific format has been designed for the visualisation modules. The format requires a pre-set set of fields to be defined in a JavaScript file which are read, executed and appended to the DOM by a main script. The full documentation for this function can be found in Module\_documentation.pdf.
+
 \section{Glossary}
 
 \begin{enumerate}
     \item \textbf{UX}: User Experience
-    \item \textbf{ORM}: Object Relational Mapping language. This is a language that maps a database to a more useable language. Django is an example of this.
+    \item \textbf{ORM}: Object Relational Mapping language. This is a language that maps a database to a more usable language. Django is an example of this.
     \item \textbf{CI}: Continuous Integration automate tests and builds. Travis is an example of this.
 \end{enumerate}
 
