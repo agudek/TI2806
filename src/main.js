@@ -33,7 +33,7 @@ define(['modules/moduleList'], function (dynModules) {
         		//		that supports the data collection engine of Borek. This does mean that 
         		//		Ajax calls from inside modules by defining the ajax field will not work.
         		//		However, until this is implemented, Ajax calls could be executed from
-        		//		inside the body in a synchronous manner.
+        		//		inside the body in a(n) (a)synchronous manner.
         	}
         	return ret;
         }
