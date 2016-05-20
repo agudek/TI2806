@@ -34,9 +34,6 @@ module.exports = function(grunt) {
         dest: 'dist/jquery.<%= pkg.name %>.min.js'
       },
     },
-    qunit: {
-      files: ['test/TI2806.html']
-    },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -65,14 +62,14 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
-    mocha: {
-      all: {
-        src: ['test/mocha.html'],
-      },
+    jasmine: {
+      src: ['src/**/*.js'],
       options: {
-        run: true
+        specs: 'test/*_test.js',
+        vendor: ['libs/jquery/jquery.js', 'libs/require.js']
       }
     }
+  
   });
 
   // These plugins provide necessary tasks.
@@ -82,10 +79,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Default task.=
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'mocha']);
-  grunt.registerTask('travis', ['qunit', 'jshint', 'mocha']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'jasmine']);
+  grunt.registerTask('travis', ['jshint', 'jasmine']);
 
 };
