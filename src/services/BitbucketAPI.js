@@ -1,4 +1,4 @@
-/*exported BitbucketAPI*/
+/*exported BitBucketAPI*/
 /**
 * This will try to easily create an url to call for the Bitbucket api
 *

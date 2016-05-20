@@ -11,7 +11,7 @@ function get(url, callback) {
         url: url,
         type: "GET",
         context: document.body,
-        success: function (result, objectName, ajaxObject) {
+        success: function (result) {
             cache[url] = result;
             callback(result);
         },
@@ -32,7 +32,7 @@ function getJSON(url, callback, errorCallback) {
         url: url,
         type: "GET",
         context: document.body,
-        success: function (result, objectName, ajaxObject) {
+        success: function (result) {
             cache[url] = result;
             callback(result);
         },

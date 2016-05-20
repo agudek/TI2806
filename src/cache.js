@@ -1,1 +1,2 @@
+/*exported cache*/
 var cache = {};
