@@ -40,7 +40,7 @@ define(['modules/moduleList'], function (dynModules) {
                 //		that supports the data collection engine of Borek. This does mean that 
                 //		Ajax calls from inside modules by defining the ajax field will not work.
                 //		However, until this is implemented, Ajax calls could be executed from
-                //		inside the body in a synchronous manner.
+                //		inside the body in a(n) (a-)synchronous manner.
             }
             return ret;
         }
@@ -89,7 +89,11 @@ define(['modules/moduleList'], function (dynModules) {
             if (!arguments[i].customContainer) {
                 outerdiv.addClass('col s12 m6');
                 outerdiv = $(document.createElement('div'))
-	        		.addClass('card-panel').addClass("hoverable")
+	        		.addClass('card-panel')
+                    .addClass("hoverable")
+                    //The 'relative' class allow us to place absolute elements inside the card
+                    //This will probably be more important in the coming sprints.
+                    .addClass("relative")
 	        		.appendTo(outerdiv);
             }
             var ajaxArray = generateAjaxArray(arguments[i].ajax);

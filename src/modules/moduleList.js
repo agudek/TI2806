@@ -16,9 +16,13 @@ define([], function () {
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
-    	'modules/filled-graph',
-    	'modules/animated-bar-chart',
-    	'modules/pull-requests'
+    	'modules/pull-requests',
+    	'modules/time-and-pr-size',
+    	'modules/time',
+    	'modules/pr-size',
+    	'modules/average-comment-size-compared',
+    	'modules/average-comment-size-yours',
+    	'modules/average-comment-size-total'
     	]
     ]; 
 });
