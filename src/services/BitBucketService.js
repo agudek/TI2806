@@ -1,13 +1,18 @@
-/* globals BitBucketAPICaller, PullRequestTransformer */
+/* globals BitBucketAPI, PullRequestTransformer, getJSON */
 /* exported BitBucketService */
-
 function BitBucketService() {
-    var caller = new BitBucketAPICaller();
-
+    "use strict";
+    var api;
+    api = new BitBucketAPI();
+    
     this.getPullRequests = function (owner, repo, callback) {
-        caller.get('repositories/' + owner + '/' + repo + '/pullrequests', function (pullrequests) {
-            var transformer = new PullRequestTransformer();
-            var transformed = pullrequests.values.map(function (item) {
+        getJSON(api.urlBuilder('repositories/' +
+                               owner + '/' +
+                               repo +
+                               '/pullrequests', {}), function (pullrequests) {
+            var transformer, transformed;
+            transformer = new PullRequestTransformer();
+            transformed = pullrequests.values.map(function (item) {
                 return transformer.transform(item, "BITBUCKET");
             });
             callback(transformed);

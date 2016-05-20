@@ -1,82 +1,44 @@
-/*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller, get */
-/*globals console*/
-function get(url, callback) {
+/*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller, get, getJSON */
+/*globals console, cache, $*/
+function get(url, callback, bypassCash) {
     "use strict";
-    var http = new XMLHttpRequest();
-    http.onreadystatechange = function () {
-        if (http.readyState === 4 && http.status >= 200 && http.status < 400) {
-            callback(JSON.parse(http.responseText));
-        } else if (http.status >= 400) {
-            var error = {
-                'http-status': http.status,
-                'response-headers': http.getAllResponseHeaders().toString()
-            };
+    
+    if (cache.hasOwnProperty(url) && !bypassCash) {
+        callback(cache[url]);
+    }
+    
+    $.ajax({
+        url: url,
+        type: "GET",
+        context: document.body,
+        success: function (result) {
+            cache[url] = result;
+            callback(result);
+        },
+        error: function (error) {
             console.log(error);
         }
-    };
-    http.open('GET', url, true);
-    http.send(null);
+    });
 }
-function OctopeerCaller(host) {
+
+function getJSON(url, callback, errorCallback, bypassCash) {
     "use strict";
-    this.get = function get(query, callback) {
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function () {
-            if (http.readyState === 4 && http.status >= 200 && http.status < 400) {
-                callback(JSON.parse(http.responseText));
-            } else if (http.status >= 400) {
-                var error = {
-                    'http-status': http.status,
-                    'response-headers': http.getAllResponseHeaders().toString()
-                };
-                console.log(error);
-            }
-        };
-        http.open('GET', host + query.replace(host, '') + '?format=json', true);
-        http.send(null);
-    };
+    
+    if (cache.hasOwnProperty(url) && !bypassCash) {
+        callback(cache[url]);
+    }
+    
+    $.getJSON({
+        url: url,
+        type: "GET",
+        context: document.body,
+        success: function (result) {
+            cache[url] = result;
+            callback(result);
+        },
+        error: function (error) {
+            errorCallback(error);
+        }
+    });
 }
 
-function GitHubAPICaller() {
-    "use strict";
-    var host = 'https://api.github.com/';
-
-    this.get = function (endpoint, callback) {
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function () {
-            if (http.readyState === 4 && http.status >= 200 && http.status < 400) {
-                callback(JSON.parse(http.responseText));
-            } else if (http.status >= 400) {
-                var error = {
-                    'http-status': http.status,
-                    'response-headers': http.getAllResponseHeaders().toString()
-                };
-                console.log(error);
-            }
-        };
-        http.open('GET', host + endpoint.replace(host, ''), true);
-        http.send(null);
-    };
-}
-
-function BitBucketAPICaller() {
-    "use strict";
-    var host = 'https://api.bitbucket.org/2.0/';
-
-    this.get = function (endpoint, callback) {
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function () {
-            if (http.readyState === 4 && http.status >= 200 && http.status < 400) {
-                callback(JSON.parse(http.responseText));
-            } else if (http.status >= 400) {
-                var error = {
-                    'http-status': http.status,
-                    'response-headers': http.getAllResponseHeaders().toString()
-                };
-                console.log(error);
-            }
-        };
-        http.open('GET', host + endpoint.replace(host, ''), true);
-        http.send(null);
-    };
-}

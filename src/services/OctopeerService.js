@@ -1,5 +1,5 @@
 /*exported OctopeerService*/
-/*globals get, RSVP, Settings, OctopeerAPI, OctopeerCaller, ObjectResolver*/
+/*globals RSVP, Settings, OctopeerAPI, ObjectResolver, getJSON*/
 /**
  * This object will create a service object. This object contains useful calls to the octopeer
  * server. Every function will return promises.
@@ -9,11 +9,9 @@
  */
 function OctopeerService() {
     "use strict";
-    var settings, api, caller, cache;
-    cache = {};
+    var settings, api;
     settings = new Settings();
     api = new OctopeerAPI();
-    caller = new OctopeerCaller(settings.host);
     //var caller = new DummyCaller(settings.host);
 
     this.getUsers = function () {
@@ -21,7 +19,7 @@ function OctopeerService() {
         url = api.urlBuilder(api.endpoints.users, {});
 
         promise = new RSVP.Promise(function (fulfill) {
-            get(url, function (users) {
+            getJSON(url, function (users) {
                 fulfill(users);
             });
         });
@@ -34,7 +32,7 @@ function OctopeerService() {
         url = api.urlBuilder(api.endpoints.pullRequests, {});
 
         promise = new RSVP.Promise(function (fulfill) {
-            get(url, function (pullRequests) {
+            getJSON(url, function (pullRequests) {
                 fulfill(objectResolver.resolveArray(pullRequests));
             });
         });
@@ -46,9 +44,11 @@ function OctopeerService() {
         objectResolver = new ObjectResolver(["element_type", "event_type", "session"]);
         url = api.urlBuilder(api.endpoints.semanticEvents, {});
 
-        promise = new RSVP.Promise(function (fulfill) {
-            get(url, function (events) {
+        promise = new RSVP.Promise(function (fulfill, reject) {
+            getJSON(url, function (events) {
                 fulfill(objectResolver.resolveArray(events.results));
+            }, function (error) {
+                reject(error);
             });
         });
         return promise;
@@ -59,7 +59,7 @@ function OctopeerService() {
         url = api.urlBuilder(api.endpoints.repositories, {});
 
         promise = new RSVP.Promise(function (fulfill) {
-            get(url, function (users) {
+            getJSON(url, function (users) {
                 fulfill(users);
             });
         });
