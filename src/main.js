@@ -21,14 +21,14 @@ define(['modules/moduleList'], function (dynModules) {
 		                deferred.resolve(Array.prototype.slice.call(arguments));
 		            },
 		            function () {
-		                deferred.fail(Array.prototype.slice.call(arguments));
+		                deferred.reject(Array.prototype.slice.call(arguments));
 		            });
 
                 return deferred;
             };
         }
 
-        //Make an array of Ajax objects with the parameters retreived from the module 'ajax' field
+       /* //Make an array of Ajax objects with the parameters retreived from the module 'ajax' field
         function generateAjaxArray(json) {
             if (json === undefined || json === {}) { return []; }
             var ajaxArray = json.ajax;
@@ -52,9 +52,9 @@ define(['modules/moduleList'], function (dynModules) {
                 ret.push(ajax.response);
             }
             return ret;
-        }
+        }*/
 
-        //Return true if at least one Ajax request has failed.
+       /* //Return true if at least one Ajax request has failed.
         function singleFail(objects) {
             for (var ajax in objects) {
                 if (ajax.responseText === null && ajax.required) {
@@ -62,9 +62,9 @@ define(['modules/moduleList'], function (dynModules) {
                 }
             }
             return false;
-        }
+        }*/
 
-        //The when() call for the array of deferreds of this module
+       /* //The when() call for the array of deferreds of this module
         function whenAjaxArray(module, ajaxArray, outerdiv) {
             $.when.all(ajaxArray).then(function (objects) {
                 if (singleFail(objects) && module.failBody) {
@@ -73,6 +73,27 @@ define(['modules/moduleList'], function (dynModules) {
                 else {
                     $(module.body(generateResponseArray(objects))).appendTo(outerdiv);
                 }
+            });
+        }*/
+
+        function performDataRequests(data, module, outerdiv) {
+            var promises = [];
+            for(var i = 0 ; i < data.length ; i++){
+                var promise = data[i].serviceCall();
+                promise.onSuccess = data[i].onSuccess;
+                promises.push(promise);
+            }
+            $.when.all(promises).then(function (objects) {
+                for(var i = 0 ; i < data.length ; i++){
+                    console.log(objects[i][1]);
+                }
+                $(module.body()).appendTo(outerdiv);
+                /*if (singleFail(objects) && module.failBody) {
+                    $(module.failBody()).appendTo(outerdiv);
+                }
+                else {
+                    $(module.body(objects)).appendTo(outerdiv);
+                }*/
             });
         }
 
@@ -96,10 +117,13 @@ define(['modules/moduleList'], function (dynModules) {
                     .addClass("relative")
 	        		.appendTo(outerdiv);
             }
-            var ajaxArray = generateAjaxArray(arguments[i].ajax);
+            if(arguments[i].data) {
+                performDataRequests(arguments[i].data, arguments[i], outerdiv);
+            }
+           /* var ajaxArray = generateAjaxArray(arguments[i].ajax);
             if (ajaxArray && ajaxArray !== []) {
                 whenAjaxArray(arguments[i], ajaxArray, outerdiv);
-            }
+            }*/
             else {
                 $(arguments[i].body()).appendTo(outerdiv);
             }
