@@ -76,16 +76,6 @@ define(['modules/moduleList'], function (dynModules) {
             });
         }
 
-        function showModalBadge() {
-            $( this ).find(".modalBadge").addClass("show");
-        }
-        function hideModalBadge() {
-            $( this ).find(".modalBadge").removeClass("show");
-        }
-        function openDemoModal() {
-            $('#demo-modal').openModal();
-        }
-
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
         //if available and append it to the DOM.
 
@@ -98,8 +88,7 @@ define(['modules/moduleList'], function (dynModules) {
             outerdiv.attr('id', arguments[i].name).appendTo(parentContainer);
             if (!arguments[i].customContainer) {
                 outerdiv
-                    .addClass('col s12 m6')
-                    .hover(showModalBadge,hideModalBadge);
+                    .addClass('col s12 m6');
                 outerdiv = $(document.createElement('div'))
 	        		.addClass('card')
                     .addClass("hoverable")
