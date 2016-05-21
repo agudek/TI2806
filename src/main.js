@@ -118,15 +118,6 @@ define(['modules/moduleList'], function (dynModules) {
                     .appendTo(outerdiv);
                 $(document.createElement('li'))
                     .addClass("material-icons")
-                    .html("search")
-                    .appendTo(
-                    $(document.createElement('div'))
-                        .addClass('modalBadge')
-                        .click(openDemoModal)
-                        .appendTo(outerdiv)
-                    );
-                $(document.createElement('li'))
-                    .addClass("material-icons")
                     .addClass("warningBadge")
                     .html("warning")
                     .appendTo(outerdiv);
