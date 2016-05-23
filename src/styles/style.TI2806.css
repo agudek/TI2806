@@ -181,3 +181,7 @@ main > div.tab-pane > div.row {
 	min-height: 80%;
 	max-height: 80%;
 }
+
+.card .card-title {
+	text-align: center;
+}
