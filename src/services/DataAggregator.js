@@ -1,4 +1,5 @@
-/*globals OctopeerService, GithubService, BitBucketService, RSVP, console, hasOwnProperty*/
+/*exported DataAggregator*/
+/*globals OctopeerService, GithubService, BitBucketService, RSVP, console*/
 function DataAggregator() {
     "use strict";
     var opService, ghService, bbService;
@@ -12,7 +13,7 @@ function DataAggregator() {
             
         promises = [];
         sessions.forEach(function (session) {
-            promises.push(new RSVP.Promise(function (fulfill, reject) {
+            promises.push(new RSVP.Promise(function (fulfill) {
                 opService.getSemanticEventsBySession(session.id).then(function (semanticEvents) {
                     session.events = semanticEvents.results;
                     fulfill(session);
@@ -56,8 +57,8 @@ function DataAggregator() {
     
     this.graphCommentAmountPerPullRequests = function (userName) {
         var promise;
-        
-        promise = new RSVP.Promise(function (fulfill, reject) {
+        console.log(userName);
+        promise = new RSVP.Promise(function (fulfill) {
             opService.getSessions()
             //opService.getSessionsFromUser(userName)
                 .then(setSemanticEvents)

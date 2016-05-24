@@ -1,4 +1,4 @@
-/*globals DataAggregator, console, $*/
+/*globals DataAggregator, console*/
 
 var data = new DataAggregator();
 data.graphCommentAmountPerPullRequests("borek2").then(function (result) {

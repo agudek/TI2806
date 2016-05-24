@@ -1,5 +1,5 @@
 /*exported OctopeerService*/
-/*globals RSVP, Settings, OctopeerAPI, ObjectResolver, getJSON, console*/
+/*globals RSVP, Settings, OctopeerAPI, ObjectResolver, getJSON*/
 /**
  * This object will create a service object. This object contains useful calls to the octopeer
  * server. Every function will return promises.
@@ -27,7 +27,7 @@ function OctopeerService() {
     };
     
     this.getSessions = function () {
-        var url, objectResolver, promise;
+        var url, promise;
         url = api.urlBuilder(api.endpoints.sessions, {});
 
         promise = new RSVP.Promise(function (fulfill) {
@@ -66,7 +66,7 @@ function OctopeerService() {
         return promise;
     };
     
-    this.getSemanticEventsBySession = function (sessionId) {
+    this.getSemanticEventsBySession = function () {//sessionId) {
         var url, promise;
         url = api.urlBuilder(api.endpoints.semanticEvents, {});
         //url = api.urlBuilder(api.endpoints.sessions + sessionId + "/semanticEvents", {});
@@ -93,7 +93,7 @@ function OctopeerService() {
         return promise;
     };
     
-    this.getPullRequests = function (userId) {
+    this.getPullRequests = function () {//userId) {
         var promise, url;
         //url = api.urlBuilder(api.endpoints.users + userId + '/pullrequests/', {});
         url = api.urlBuilder(api.endpoints.pullRequests, {});
@@ -121,7 +121,7 @@ function OctopeerService() {
     };
     
     this.getSessionsFromUser = function (userName) {
-        var promise, url, objectResolver;
+        var url;
         url = api.urlBuilder(api.endpoints.users + userName, {});
         
         return new RSVP.Promise(function (fulfill, reject) {
