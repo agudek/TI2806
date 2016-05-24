@@ -57,6 +57,8 @@ For the client itself a basic structure will be described. The calls to the Octo
 \caption{Ocotpeer viewer decomposition}
 \end{figure}
 
+To handle the asynchronous calls easier, we made use of RSVP.js. This is a library which implements the Promises paradigm. This way you can send multiple asynchronous HTTP requests and handle them as if they are responded to synchronously.
+
 \subsection{Subsystems}
 
 The following tools and systems are used to realize the visualization tool.

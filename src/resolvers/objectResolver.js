@@ -11,6 +11,11 @@
 */
 function ObjectResolver(attributes) {
     "use strict";
+    
+    function isUrl(s) {
+        var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        return regexp.test(s);
+    }
 
     /**
     * This function will resolve the attribute of the object
@@ -19,8 +24,8 @@ function ObjectResolver(attributes) {
     * @param {Object} object The containing object
     */
     function resolveAttributeFromObject(object, attr) {
-        if (object[attr] === undefined) {
-            return undefined;
+        if (!isUrl(object[attr]) || object[attr] === undefined) {
+            return object[attr];
         }
         get(object[attr], function (obj) {
             object[attr] = obj;

@@ -1,9 +1,8 @@
-/*globals OctopeerService, console*/
+/*globals DataAggregator, console*/
 
-var octopeerService = new OctopeerService();
-octopeerService.getSemanticEvents().then(function (prs) {
-    "use strict";
-    console.log(prs);
+var data = new DataAggregator();
+data.graphCommentAmountPerPullRequests("borek2").then(function (result) {
+    console.log(result);
 });
 
 //var githubService = new GithubService();

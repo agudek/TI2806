@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       },
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: ['test/TI2806.html']
     },
     jshint: {
       options: {
@@ -65,6 +65,14 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
+    mocha: {
+      all: {
+        src: ['test/mocha.html'],
+      },
+      options: {
+        run: true
+      }
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -74,9 +82,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-mocha');
 
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
-  grunt.registerTask('travis', ['qunit', 'jshint']);
+  // Default task.=
+  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'mocha']);
+  grunt.registerTask('travis', ['qunit', 'jshint', 'mocha']);
 
 };
