@@ -5,7 +5,10 @@
 define(['modules/moduleList'], function (dynModules) {
 
     require(dynModules[0]);
-    require(dynModules[1], function () {
+    require([dynModules[1]], function(module) {
+        defaultModule = module;
+    })
+    require(dynModules[2], function () {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
 
@@ -93,7 +96,6 @@ define(['modules/moduleList'], function (dynModules) {
 	        		.addClass('card')
                     .addClass("hoverable")
                     //The 'relative' class allow us to place absolute elements inside the card
-                    //This will probably be more important in the coming sprints.
                     .addClass("relative")
 	        		.appendTo(outerdiv);
                 outerdiv = $(document.createElement('div'))
@@ -116,13 +118,15 @@ define(['modules/moduleList'], function (dynModules) {
                     .html("error")
                     .appendTo(outerdiv);
             }
-            var ajaxArray = generateAjaxArray(arguments[i].ajax);
+            arguments[i].svg = createSVG(arguments[i])[0][0];
+            $(arguments[i].svg).appendTo(outerdiv);
+            /*var ajaxArray = generateAjaxArray(arguments[i].ajax);
             if (ajaxArray && ajaxArray !== []) {
                 whenAjaxArray(arguments[i], ajaxArray, outerdiv);
             }
-            else {
-                $(arguments[i].body()).appendTo(outerdiv);
-            }
+            else {*/
+                $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
+            //}
         }
 
     });

@@ -5,6 +5,25 @@ define(function () {
         title: "Average comment sizes",
     	size: 1,
         parentSelector: "#bodyrow",
+        xAxisLabel: "Average comment size (size/count)",
+        yAxisLabel: "Pull request",
+        xAxisLine: true,
+        yAxisLine: true,
+        xAxisTicks: true,
+        yAxisTicks: true,
+        xAxisLabelRotation: 65,
+        xAxisScale: function() { 
+            var axisScale = d3.scale.ordinal()
+                .domain([
+                    "pr0", "pr1", "pr2", "pr3",
+                    "pr4", "pr5", "pr6", "pr7",
+                    "pr8", "pr9", "pr10", "pr11",
+                    "pr12", "pr13", "pr14", "pr15",
+                    "pr16", "pr17", "pr18", "pr19"
+                ])
+                .rangePoints([0, 720-2*50]);
+            return axisScale;
+        },
         body: function () {
             var w = 720,
                 h = 350,
@@ -56,10 +75,7 @@ define(function () {
                     {"x":19, "y":47.72}
                 ];
 
-            var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", '100%')
-                .attr("height", '100%')
-                .attr("viewBox", "0 0 "+w+" "+h);
+            //var svg = createSvgContainer(); 
 
             var maxValue = Math.max ( 
                 Math.max.apply(Math,sizeData.map(function(o){return o.y;})),
@@ -67,7 +83,7 @@ define(function () {
 
             var xSizeScale = d3.scale.linear().domain([0,sizeData.length]).range([pad,w-17]),
             ySizeScale = d3.scale.linear().domain([maxValue,0]).range([padTop, h-padBottom]).nice();
-
+/*
             var xAxisScale = d3.scale.ordinal()
                 .domain([
                     "pr0", "pr1", "pr2", "pr3",
@@ -78,29 +94,12 @@ define(function () {
                 ])
                 .rangePoints([0, w-2*pad]);
 
-            //http://stackoverflow.com/questions/11189284/d3-axis-labeling
-            var xAxis = d3.svg.axis()
-                .scale(xAxisScale)
-                .orient("bottom")
-                .tickSize(-h+padBottom+padTop);
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
-                .attr("class","noAxis visibleTicks").call(xAxis)
-                .selectAll("text")
-                    .attr("y", 0)
-                    .attr("x", 9)
-                    .attr("dy", ".35em")
-                    .attr("transform", "rotate(65)")
-                    .style("text-anchor", "start");
+            addAxis(svg, xAxisScale, "bottom", -h+padBottom+padTop, 65, pad, h-padBottom);
 
             var yScale = d3.scale.linear().domain([0,maxValue]).range([h-padBottom-padTop,0]).nice();
 
-            var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(6).tickSize(-w+2*pad);
 
-            svg.append("g")
-                .attr("transform", "translate("+pad+","+padTop+")")
-                .attr("class","noAxis visibleTicks").call(yAxis);
+            addAxis(svg, yScale, "left", -w+2*pad, 0, pad, padTop);
 
             svg.append("line")
                 .attr("x1",pad)
@@ -124,7 +123,19 @@ define(function () {
                 .attr("d",area(sizeData2,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale))
                 .attr("style","stroke: rgb(51, 125, 212);fill: rgba(51, 125, 212,0.5);stroke-width: 2px;");    
 
-            return svg[0];
+            return svg[0];*/
+
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"))
+
+            g.append("path")
+                .attr("d",area(sizeData,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale))
+                .attr("style","stroke:rgb(212, 51, 51);fill:rgba(212, 51, 51,0.5);stroke-width: 2px;");
+
+            g.append("path")
+                .attr("d",area(sizeData2,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale))
+                .attr("style","stroke: rgb(51, 125, 212);fill: rgba(51, 125, 212,0.5);stroke-width: 2px;");    
+
+            return g;
         }
     };
 });

@@ -2,6 +2,16 @@
 /*jshint esnext: true */
 //Global modules list for if the module objects are needed elsewhere.
 var modules = [];
+var defaultModule;
+
+function getSafeModuleValue(module,fieldname) {
+	var moduleValue = module[fieldname];
+	if(moduleValue === undefined) {
+		return defaultModule[fieldname];
+	} else {
+		return moduleValue;
+	}
+}
 
 /**	svg line creator
 * data - The data in JSON with defined x and y fields

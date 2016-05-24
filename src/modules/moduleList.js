@@ -16,17 +16,19 @@ define([], function () {
 	    'services/GithubService',
         'services/BitbucketAPI',
 	    'services/BitBucketService',
-	    'example-services'
+	    'example-services',
+        'svgCreator'
 	    ],
+        'modules/default-module-values',
 	    [// Array of visualisation modules
-    	'modules/scatter',
-    	'modules/pull-requests',
-    	'modules/time-and-pr-size',
-    	'modules/time',
-    	'modules/pr-size',
-    	'modules/average-comment-size-compared',
-    	'modules/average-comment-size-yours',
-    	'modules/average-comment-size-total'
+    	//'modules/scatter',
+    	//'modules/pull-requests',
+    	//'modules/time-and-pr-size',
+    	//'modules/time',
+    	//'modules/pr-size',
+    	'modules/average-comment-size-compared'//,
+    	//'modules/average-comment-size-yours',
+    	//'modules/average-comment-size-total'
     	]
     ]; 
 });
