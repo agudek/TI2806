@@ -26,7 +26,8 @@ define([], function () {
     	'modules/pr-size',
     	'modules/average-comment-size-compared',
     	'modules/average-comment-size-yours',
-    	'modules/average-comment-size-total'
+    	'modules/average-comment-size-total',
+        'modules/graph1.js'
     	]
     ]; 
 });
