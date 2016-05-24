@@ -10,8 +10,15 @@ define(function () {
             "onFailure": function() {console.log("octopeerService.getUsers().onFailure()")},
             "onComplete": function() {console.log("octopeerService.getUsers().onComplete()")},
             "required": true
+        },
+        {
+            "serviceCall": function() {return octopeerService.getSessions()},
+            "onSuccess": function() {console.log("octopeerService.getSessions().onSucces()")},
+            "onFailure": function() {console.log("octopeerService.getSessions().onFailure()")},
+            "onComplete": function() {console.log("octopeerService.getSessions().onComplete()")},
+            "required": false
         }],
-        body: function () {
+        body: function (objects) {
             var w = 720,
                 h = 350;
 
@@ -23,7 +30,14 @@ define(function () {
             svg.append('text')
                 .attr("x",0)
                 .attr("y",50)
-                .text("Demo module to test data retreival. See console!");
+                .text("Demo module to test data retreival. Users:");
+
+            for (var i = objects[0].count - 1; i >= 0; i--) {
+                svg.append("text")
+                .attr("x",0)
+                .attr("y",90+(280/objects[0].count)*i)
+                .text(objects[0].results[i].username);
+            }
 
             return svg[0];
         }

@@ -13,7 +13,7 @@ define(['modules/moduleList'], function (dynModules) {
         //http://stackoverflow.com/questions/5627284/pass-in-an-array-of-deferreds-to-when
         //Define function when.all() with which multiple deferreds can be passed to when() in an 
         //array and can be retreived again in then()
-        if (jQuery.when.all === undefined) {
+       /* if (jQuery.when.all === undefined) {
             jQuery.when.all = function (deferreds) {
                 var deferred = new jQuery.Deferred();
                 $.when.apply(jQuery, deferreds).then(
@@ -26,7 +26,7 @@ define(['modules/moduleList'], function (dynModules) {
 
                 return deferred;
             };
-        }
+        }*/
 
        /* //Make an array of Ajax objects with the parameters retreived from the module 'ajax' field
         function generateAjaxArray(json) {
@@ -83,11 +83,8 @@ define(['modules/moduleList'], function (dynModules) {
                 promise.onSuccess = data[i].onSuccess;
                 promises.push(promise);
             }
-            $.when.all(promises).then(function (objects) {
-                for(var i = 0 ; i < data.length ; i++){
-                    console.log(objects[i][1]);
-                }
-                $(module.body()).appendTo(outerdiv);
+            RSVP.all(promises).then(function (objects) {
+                $(module.body(objects)).appendTo(outerdiv);
                 /*if (singleFail(objects) && module.failBody) {
                     $(module.failBody()).appendTo(outerdiv);
                 }
