@@ -1,21 +1,21 @@
-/* globals define */
+/* globals define, octopeerService */
 define(function () {
     return {
     	name: "time",
     	size: 1,
         parentSelector: "#bodyrow",
         data: [{
-            "serviceCall": function() {return octopeerService.getUsers()},
-            "onSuccess": function() {console.log("octopeerService.getUsers().onSucces()")},
-            "onFailure": function() {console.log("octopeerService.getUsers().onFailure()")},
-            "onComplete": function() {console.log("octopeerService.getUsers().onComplete()")},
+            "serviceCall": function() {return octopeerService.getUsers();},
+            "onSuccess": function() {console.log("octopeerService.getUsers().onSucces()");},
+            "onFailure": function() {console.log("octopeerService.getUsers().onFailure()");},
+            "onComplete": function() {console.log("octopeerService.getUsers().onComplete()");},
             "required": true
         },
         {
-            "serviceCall": function() {return octopeerService.getSessions()},
-            "onSuccess": function() {console.log("octopeerService.getSessions().onSucces()")},
-            "onFailure": function() {console.log("octopeerService.getSessions().onFailure()")},
-            "onComplete": function() {console.log("octopeerService.getSessions().onComplete()")},
+            "serviceCall": function() {return octopeerService.getSessions();},
+            "onSuccess": function() {console.log("octopeerService.getSessions().onSucces()");},
+            "onFailure": function() {console.log("octopeerService.getSessions().onFailure()");},
+            "onComplete": function() {console.log("octopeerService.getSessions().onComplete()");},
             "required": false
         }],
         body: function (objects) {
