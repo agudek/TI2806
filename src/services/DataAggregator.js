@@ -1,5 +1,6 @@
 /*exported DataAggregator*/
 /*globals OctopeerService, GithubService, BitBucketService, RSVP, console*/
+//https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 function DataAggregator() {
     "use strict";
     var opService, ghService, bbService;
@@ -118,6 +119,7 @@ function DataAggregator() {
     */
     this.graphCommentAmountPerPullRequests = function (userName) {
         var promise;
+        userName = "";
         promise = new RSVP.Promise(function (fulfill) {
             opService.getSessions()
             //opService.getSessionsFromUser(userName)
@@ -137,6 +139,7 @@ function DataAggregator() {
     */
     this.graphPrDividedInSessions = function (userName, amountOfPr) {
         var promise;
+        userName = "";
         promise = new RSVP.Promise(function (fulfill) {
             opService.getSessions()
                 .then(resolvePullrequestSessions)
