@@ -2,7 +2,7 @@
 define(function () {
     return {
         name: 'graph2',
-        title: 'Session duration per pull-request',
+        title: 'Session durations per pull-request',
         size: 1,
         parentSelector: '#bodyrow',
         body: function () {
@@ -15,7 +15,12 @@ define(function () {
                     { 'x': 1, 'y': 6 },
                     { 'x': 2, 'y': 5 },
                     { 'x': 4, 'y': 5 }
-                ];
+                ],
+                n = 4,
+                stack = d3.layout.stack,
+                layers = stack(d3.range(n).map(function () { return 0; }))
+                yMax = d3.max(layers, function (layer) { return d3.max(layer, function (d) { return d.y0 + d.y; }); }),
+                domain = ['1', '2', '3', '4', '5', '6'];
 
             var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", '100%')
@@ -79,12 +84,12 @@ define(function () {
 
             svg.append("text")
                 .attr("text-anchor", "end")
-                .attr("x", (w + 2 * pad) / 2).attr("y", h).text("Number of comments");
+                .attr("x", (w + 2 * pad) / 2).attr("y", h).text("Pull-requests");
             svg.append("text")
                 .attr("text-anchor", "begin")
                 .attr("x", -(h + padBottom + padTop) / 2).attr("y", 0)
                 .attr("transform", "rotate(270)")
-                .text("Number of pull-requests");
+                .text("Session duration");
 
             svg.selectAll("rect").data(sizeData).enter()
                 .append("rect")
