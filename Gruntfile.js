@@ -35,7 +35,19 @@ module.exports = function(grunt) {
       },
     },
     qunit: {
-      files: ['test/TI2806.html']
+      files: ['test/TI2806.html'],
+      options: {
+        timeout: 30000,
+        "--web-security": "no",
+        coverage: {
+            src: [ "src/*.js" ],
+            instrumentedFiles: "temp/",
+            coberturaReport: "report/",
+            htmlReport: "build/report/coverage",
+            lcovReport: "build/report/lcov",
+            linesThresholdPct: 70
+        }
+      }
     },
     jshint: {
       options: {
@@ -64,14 +76,6 @@ module.exports = function(grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       },
-    },
-    mocha: {
-      all: {
-        src: ['test/mocha.html'],
-      },
-      options: {
-        run: true
-      }
     }
   });
 
@@ -85,7 +89,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha');
 
   // Default task.=
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'mocha']);
-  grunt.registerTask('travis', ['qunit', 'jshint', 'mocha']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('test', ['qunit'])
+  grunt.registerTask('travis', ['qunit', 'jshint']);
 
 };
