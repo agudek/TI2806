@@ -36,7 +36,7 @@ function createLeftYAxis(module) {
 
     var axisContainer = g.append("g")
         .attr("transform", "translate("+50+"," + 10 + ")")
-        .attr("class","noAxis visibleTicks").call(axis);
+        .attr("class","yAxis noAxis visibleTicks").call(axis);
 
     var degrees;
     if((degrees = octopeerHelper.getSafeModuleValue(module,"yAxisLabelRotation")) > 0) {
@@ -75,7 +75,7 @@ function createRightYAxis(module) {
 
     var axisContainer = g.append("g")
         .attr("transform", "translate("+(720-50)+"," + 10 + ")")
-        .attr("class","noAxis visibleTicks").call(axis);
+        .attr("class","yRightAxis noAxis visibleTicks").call(axis);
 
     var degrees;
     if((degrees = octopeerHelper.getSafeModuleValue(module,"yRightAxisLabelRotation")) > 0) {
@@ -113,7 +113,7 @@ function createXAxis(module) {
 
     var axisContainer = g.append("g")
         .attr("transform", "translate("+50+"," + 300 + ")")
-        .attr("class","noAxis visibleTicks").call(axis);
+        .attr("class","xAxis noAxis visibleTicks").call(axis);
 
     var degrees;
     if((degrees = octopeerHelper.getSafeModuleValue(module,"xAxisLabelRotation")) > 0) {

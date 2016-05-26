@@ -185,3 +185,7 @@ main > div.tab-pane > div.row {
 .card .card-title {
 	text-align: center;
 }
+
+.card {
+    overflow: hidden;
+}

@@ -20,12 +20,15 @@ define(function () {
         xAxisScale: function() { return "fit"; },
         yAxisScale: function() { return "fit"; },
         yRightAxisScale: function() { return "fit"; },
+        xAxisFitFunction: function() { return [0,100]; },
+        yAxisFitFunction: function() { return [0,100]; },
+        yRightAxisFitFunction: function() { return this.yAxisFitFunction; },
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
         data: [],
-        body: document.createElement('g'),
-        failBody: document.createElement('g'),
+        body: function () { return document.createElement('g'); },
+        failBody: function () { return document.createElement('g'); },
         customContainer: false
     };
 });

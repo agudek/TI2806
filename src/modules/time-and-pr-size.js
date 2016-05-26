@@ -23,6 +23,56 @@ define(function () {
                 .rangePoints([0.35*50, 720-2.3*50]);
             return axisScale;
         },
+        yAxisFitFunction: function() {
+            var timeData = [
+                    {"x":0, "y":35},
+                    {"x":1, "y":5},
+                    {"x":2, "y":17},
+                    {"x":3, "y":28},
+                    {"x":4, "y":122},
+                    {"x":5, "y":2},
+                    {"x":6, "y":3},
+                    {"x":7, "y":75},
+                    {"x":8, "y":40},
+                    {"x":9, "y":34},
+                    {"x":10, "y":72},
+                    {"x":11, "y":24},
+                    {"x":12, "y":41},
+                    {"x":13, "y":34},
+                    {"x":14, "y":72},
+                    {"x":15, "y":27},
+                    {"x":16, "y":42},
+                    {"x":17, "y":137},
+                    {"x":18, "y":57},
+                    {"x":19, "y":90}
+                ];
+            return [0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))];
+        },
+        yRightAxisFitFunction: function() {
+            var sizeData = [
+                    {"x":0, "y":461},
+                    {"x":1, "y":3},
+                    {"x":2, "y":43},
+                    {"x":3, "y":342},
+                    {"x":4, "y":6452},
+                    {"x":5, "y":5},
+                    {"x":6, "y":64},
+                    {"x":7, "y":412},
+                    {"x":8, "y":762},
+                    {"x":9, "y":342},
+                    {"x":10, "y":1521},
+                    {"x":11, "y":312},
+                    {"x":12, "y":454},
+                    {"x":13, "y":642},
+                    {"x":14, "y":1542},
+                    {"x":15, "y":1752},
+                    {"x":16, "y":242},
+                    {"x":17, "y":142},
+                    {"x":18, "y":717},
+                    {"x":19, "y":4772}
+                ];
+            return [0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))];
+        },
         body: function () {
             var w = 720,
                 h = 350,

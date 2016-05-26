@@ -24,6 +24,31 @@ define(function () {
                 .rangePoints([0.35*50, 720-2.3*50]);
             return axisScale;
         },
+        yAxisFitFunction: function() {
+            var sizeData = [
+                    {"x":0, "y":461},
+                    {"x":1, "y":3},
+                    {"x":2, "y":43},
+                    {"x":3, "y":342},
+                    {"x":4, "y":6452},
+                    {"x":5, "y":5},
+                    {"x":6, "y":64},
+                    {"x":7, "y":412},
+                    {"x":8, "y":762},
+                    {"x":9, "y":342},
+                    {"x":10, "y":1521},
+                    {"x":11, "y":312},
+                    {"x":12, "y":454},
+                    {"x":13, "y":642},
+                    {"x":14, "y":1542},
+                    {"x":15, "y":1752},
+                    {"x":16, "y":242},
+                    {"x":17, "y":142},
+                    {"x":18, "y":717},
+                    {"x":19, "y":4772}
+                ];
+            return [0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))];
+        },
         body: function () {
             var w = 720,
                 h = 350,
