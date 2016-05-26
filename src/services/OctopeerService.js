@@ -7,6 +7,7 @@
  * @constructor
  * @this {OctopeerService}
  */
+/*jshint unused: vars*/
 function OctopeerService() {
     "use strict";
     var settings, api;
@@ -46,6 +47,19 @@ function OctopeerService() {
         promise = new RSVP.Promise(function (fulfill) {
             getJSON(url, function (pullRequests) {
                 fulfill(objectResolver.resolveArray(pullRequests));
+            });
+        });
+        return promise;
+    };
+    
+    this.getPullRequestsFromUser = function (username) {
+        var url, objectResolver, promise;
+        objectResolver = new ObjectResolver(["session"]);
+        url = api.urlBuilder(api.endpoints.pullRequests, {});
+
+        promise = new RSVP.Promise(function (fulfill) {
+            getJSON(url, function (pullRequests) {
+                fulfill(objectResolver.resolveArray(pullRequests.results));
             });
         });
         return promise;
