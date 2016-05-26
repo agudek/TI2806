@@ -1,4 +1,3 @@
-/* globals define, area */
 define(function () {
     return {
         name: 'graph1',
