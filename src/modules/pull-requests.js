@@ -8,13 +8,31 @@ define(function () {
         title: "Pull requests",
         size: 1,
         parentSelector: "#bodyrow",
+        xAxisLabel: "Date",
+        yAxisLabel: "",
+        yAxis: false,
+        xAxisTicks: false,
+        xAxisLine: true,
+        xAxisScale: function() { 
+            var data2 = [];
+            var today = new Date();
+            var month = today.getMonth();
+            // Because months are 0-11 this will get the previous month.
+            data2.push(new Date().setMonth((month + 11) % 12));
+            data2.push(today);
+
+            var format = d3.time.format("%d/%m");
+            var xScale = d3.time.scale().domain(data2).range([0, 720 - 50 - 50]).nice();
+            return xScale;
+        },
+        xAxisLabelRotation: 65,
         body: function () {
 
             function processPRs(prs) {
                 for (var i = 0; i < prs.length; i++) {
                     arr.push(prs[i]);
                 }
-                svgContainer.selectAll("circle")
+                g.selectAll("circle")
                 .data(arr)
                 .enter()
                 .append("circle")
@@ -49,13 +67,13 @@ define(function () {
 
             var format = d3.time.format("%d/%m");
             var xScale = d3.time.scale().domain(data2).range([0, w - leftPad]);
-            var xAxis = d3.svg.axis().scale(xScale).tickFormat(format).ticks(30).orient("bottom");
-            var svgContainer = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+           //var xAxis = d3.svg.axis().scale(xScale).tickFormat(format).ticks(30).orient("bottom");
+            /*var svgContainer = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", "100%")
                 .attr("height", "100%")
-                .attr("viewBox", "0 0 " + w + " " + h);
-            var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 35]);
-            var yAxis = d3.svg
+                .attr("viewBox", "0 0 " + w + " " + h);*/
+            var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 50]);
+            /*var yAxis = d3.svg
                 .axis()
                 .scale(yScale)
                 .orient("left");
@@ -68,16 +86,18 @@ define(function () {
                 .style("text-anchor", "end")
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
-                .attr("transform", "rotate(-65)");
-            var yAxisGroup = svgContainer // jshint ignore:line
+                .attr("transform", "rotate(-65)");*/
+            /*var yAxisGroup = svgContainer // jshint ignore:line
                 .append("g")
                 .attr("transform", "translate(" + leftPad + "," + 0 + ")")
-                .call(yAxis);
+                .call(yAxis);*/
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
             githubService.getPullRequests("mboom", "TI2806", processPRs);
 
-            return svgContainer[0];
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
+
+            return g;
         }
     };
 });

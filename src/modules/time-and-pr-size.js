@@ -5,6 +5,24 @@ define(function () {
         title: "Time spent + size pr",
     	size: 1,
         parentSelector: "#bodyrow",
+        yRightAxis: true,
+        xAxisLabel: "Number of lines changed",
+        yAxisLabel: "Pull request",
+        yRightAxisLabel: "Time spent on pr",
+        xAxisTicks: false,
+        xAxisLabelRotation: 65,
+        xAxisScale: function() { 
+            var axisScale = d3.scale.ordinal()
+                .domain([
+                    "pr0", "pr1", "pr2", "pr3",
+                    "pr4", "pr5", "pr6", "pr7",
+                    "pr8", "pr9", "pr10", "pr11",
+                    "pr12", "pr13", "pr14", "pr15",
+                    "pr16", "pr17", "pr18", "pr19"
+                ])
+                .rangePoints([0, 720-2*50]);
+            return axisScale;
+        },
         body: function () {
             var w = 720,
                 h = 350,
@@ -56,10 +74,10 @@ define(function () {
                     {"x":19, "y":4772}
                 ];
 
-            var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+           /* var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", '100%')
                 .attr("height", '100%')
-                .attr("viewBox", "0 0 "+w+" "+h);
+                .attr("viewBox", "0 0 "+w+" "+h);*/
 
             var xTimeScale = d3.scale.linear()
                 .domain([0,timeData.length])
@@ -75,7 +93,7 @@ define(function () {
                 .domain([Math.max.apply(Math,sizeData.map(function(o){return o.y;})),0])
                 .range([padTop, h-padBottom])
                 .nice();
-
+/*
             var xAxisScale = d3.scale.ordinal()
                 .domain([
                     "pr0", "pr1", "pr2", "pr3",
@@ -180,7 +198,40 @@ define(function () {
                 .attr("r",3)
                 .attr("style","fill:rgb(212, 51, 51);stroke-width: 3px;");
 
-            return svg[0];
+            return svg[0];*/
+
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
+
+            g.selectAll("rect").data(timeData).enter()
+                .append("rect")
+                .attr("x",function (d) {return xTimeScale(d.x)+9;})
+                .attr("y",h-padBottom)
+                .attr("width",function () {return (w/(timeData.length-1))-20;})
+                .attr("height",function (d) {return yTimeScale(d.y);})
+                .attr("style", "fill:rgb(77, 136, 255);")
+                    .transition()
+                    .attr("y",function (d) {return h-padBottom-yTimeScale(d.y);});
+
+            var tempSizeData = [{"x":-0.5, "y":0}]
+                .concat(sizeData)
+                .concat([{"x":sizeData.length-0.5, "y":0}]);
+
+            g.append("path")
+                .attr("d",
+                    octopeerHelper.line(
+                        tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5);},ySizeScale
+                        )
+                    )
+                .attr("style","stroke:rgb(212, 51, 51);fill:none;stroke-width: 3px;");
+
+            g.selectAll("circle").data(sizeData).enter()
+                .append("circle")
+                .attr("cx",function (d) {return xSizeScale(d.x+0.5);})
+                .attr("cy",function (d) {return ySizeScale(d.y);})
+                .attr("r",3)
+                .attr("style","fill:rgb(212, 51, 51);stroke-width: 3px;");
+
+            return g;
         }
     };
 });

@@ -26,14 +26,13 @@ define([], function () {
         //so that they can be used in the visualistaion modules without problems
         ['modules/default-module-values'],
 	    [// Array of visualisation modules
-    	//'modules/scatter',
-    	//'modules/pull-requests',
-    	//'modules/time-and-pr-size',
-    	//'modules/time',
-    	//'modules/pr-size',
-    	'modules/average-comment-size-compared'//,
-    	//'modules/average-comment-size-yours',
-    	//'modules/average-comment-size-total'
+    	'modules/pull-requests',
+    	'modules/time-and-pr-size',
+    	'modules/time',
+    	'modules/pr-size',
+    	'modules/average-comment-size-compared',
+    	'modules/average-comment-size-yours',
+    	'modules/average-comment-size-total'
     	]
     ]; 
 });

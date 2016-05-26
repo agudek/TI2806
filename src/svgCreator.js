@@ -1,6 +1,7 @@
 /* exported createSVG */
 /*globals octopeerHelper*/
 /*jshint esnext: true */
+/* jshint unused : vars */
 
 function createSvgContainer(w = 720, h = 350) {
 	var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
@@ -73,7 +74,7 @@ function createRightYAxis(module) {
     var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
     var axisContainer = g.append("g")
-        .attr("transform", "translate("+50+"," + 10 + ")")
+        .attr("transform", "translate("+(720-50)+"," + 10 + ")")
         .attr("class","noAxis visibleTicks").call(axis);
 
     var degrees;
@@ -88,7 +89,7 @@ function createRightYAxis(module) {
 
     if(octopeerHelper.getSafeModuleValue(module,"yRightAxisLine")) {
     	axisContainer.append("line")
-            .attr("y1",350-50)
+            .attr("y1",350-50-10)
             .attr("y2",0)
             .attr("style","stroke-width:1px;stroke:black");
     }
@@ -124,24 +125,17 @@ function createXAxis(module) {
             .style("text-anchor", "start");
     }
 
-    if(octopeerHelper.getSafeModuleValue(module,"xAxisTicks")) {
-    	g.append("line")
-    		.attr("x1",50)
-            .attr("x2",720-50)
-            .attr("y1",350-50)
-            .attr("y2",350-50)
+    if(octopeerHelper.getSafeModuleValue(module,"xAxisLine")) {
+    	axisContainer.append("line")
+    		.attr("x1",0)
+            .attr("x2",720-50-50)
             .attr("style","stroke-width:1px;stroke:black");
     }
     return g;
 }
 
 function createAxisLabels(svg, module){
-    console.log(
-        "Adding axis labels to svg " +
-        svg +
-        " of module " +
-        module
-    );
+    // TODO draw axis labels defined in module on the svg
 }
 
 function createAxes(svg, module) {

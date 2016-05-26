@@ -5,6 +5,25 @@ define(function () {
         title: "Total average comment size",
     	size: 1,
         parentSelector: "#bodyrow",
+        xAxisLabel: "Average comment size (size/count)",
+        yAxisLabel: "Pull request",
+        xAxisLine: true,
+        yAxisLine: true,
+        xAxisTicks: true,
+        yAxisTicks: true,
+        xAxisLabelRotation: 65,
+        xAxisScale: function() { 
+            var axisScale = d3.scale.ordinal()
+                .domain([
+                    "pr0", "pr1", "pr2", "pr3",
+                    "pr4", "pr5", "pr6", "pr7",
+                    "pr8", "pr9", "pr10", "pr11",
+                    "pr12", "pr13", "pr14", "pr15",
+                    "pr16", "pr17", "pr18", "pr19"
+                ])
+                .rangePoints([0, 720-2*50]);
+            return axisScale;
+        },
         body: function () {
             var w = 720,
                 h = 350,
@@ -34,17 +53,17 @@ define(function () {
                     {"x":19, "y":47.72}
                 ];
 
-            var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+            /*var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", '100%')
                 .attr("height", '100%')
-                .attr("viewBox", "0 0 "+w+" "+h);
+                .attr("viewBox", "0 0 "+w+" "+h);*/
 
             var maxValue = Math.max.apply(Math,sizeData2.map(function(o){return o.y;}));
 
             var xSizeScale = d3.scale.linear().domain([0,sizeData2.length]).range([pad,w-17]),
             ySizeScale = d3.scale.linear().domain([maxValue,0]).range([padTop, h-padBottom]).nice();
 
-            var xAxisScale = d3.scale.ordinal()
+           /* var xAxisScale = d3.scale.ordinal()
                 .domain([
                     "pr0", "pr1", "pr2", "pr3",
                     "pr4", "pr5", "pr6", "pr7",
@@ -100,7 +119,20 @@ define(function () {
                     )
                 .attr("style","stroke: rgb(51, 125, 212);fill: rgba(51, 125, 212,0.5);stroke-width: 2px;");    
 
-            return svg[0];
+            return svg[0];*/
+
+
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
+
+            g.append("path")
+                .attr("d",
+                    octopeerHelper.area(
+                        sizeData2,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale
+                        )
+                    )
+                .attr("style","stroke: rgb(51, 125, 212);fill: rgba(51, 125, 212,0.5);stroke-width: 2px;"); 
+
+            return g;
         }
     };
 });
