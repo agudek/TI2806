@@ -1,7 +1,7 @@
 /*globals DataAggregator, console*/
 
 var data = new DataAggregator();
-data.graphCommentAmountPerPullRequests("borek2").then(function (result) {
+data.graphPrDividedInSessions("borek2", 5).then(function (result) {
     console.log(result);
 });
 
