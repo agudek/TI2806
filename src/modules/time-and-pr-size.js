@@ -20,7 +20,7 @@ define(function () {
                     "pr12", "pr13", "pr14", "pr15",
                     "pr16", "pr17", "pr18", "pr19"
                 ])
-                .rangePoints([0, 720-2*50]);
+                .rangePoints([0.35*50, 720-2.3*50]);
             return axisScale;
         },
         body: function () {
@@ -74,11 +74,6 @@ define(function () {
                     {"x":19, "y":4772}
                 ];
 
-           /* var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", '100%')
-                .attr("height", '100%')
-                .attr("viewBox", "0 0 "+w+" "+h);*/
-
             var xTimeScale = d3.scale.linear()
                 .domain([0,timeData.length])
                 .range([pad,w-pad]),
@@ -94,21 +89,6 @@ define(function () {
                 .range([padTop, h-padBottom])
                 .nice();
 /*
-            
-            //http://stackoverflow.com/questions/11189284/d3-axis-labeling
-            var xAxis = d3.svg.axis()
-                .scale(xAxisScale)
-                .orient("bottom");
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
-                .attr("class","noAxis").call(xAxis)
-                .selectAll("text")
-                    .attr("y", 0)
-                    .attr("x", 9)
-                    .attr("dy", ".35em")
-                    .attr("transform", "rotate(65)")
-                    .style("text-anchor", "start");
 
             var yTimeAxisScale = d3.scale.linear()
                 .domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))])
@@ -129,15 +109,6 @@ define(function () {
                     .orient("right")
                     .ticks(6)
                     .tickSize(-w+2*pad);
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+","+padTop+")")
-                .attr("class","noAxis visibleTicks")
-                .call(yLeftAxis); 
-            svg.append("g")
-                .attr("transform", "translate("+(w-pad)+","+padTop+")")
-                .attr("class","noAxis")
-                .call(yRightAxis); 
 */
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));

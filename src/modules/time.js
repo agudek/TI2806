@@ -21,7 +21,7 @@ define(function () {
                     "pr12", "pr13", "pr14", "pr15",
                     "pr16", "pr17", "pr18", "pr19"
                 ])
-                .rangePoints([0, 720-2*50]);
+                .rangePoints([0.35*50, 720-2.3*50]);
             return axisScale;
         },
         body: function () {

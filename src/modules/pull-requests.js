@@ -63,19 +63,8 @@ define(function () {
             data2.push(new Date().setMonth((month + 11) % 12));
             data2.push(today);
 
-            //var format = d3.time.format("%d/%m");
             var xScale = d3.time.scale().domain(data2).range([0, w - leftPad]);
             var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 50]);
-            /*var xAxisGroup = svgContainer // jshint ignore:line
-                .append("g")
-                .attr("transform", "translate(" + leftPad + "," + (h - bottomPad) + ")")
-                .call(xAxis)
-                .selectAll("text")
-            // from http://www.d3noob.org/2013/01/how-to-rotate-text-labels-for-x-axis-of.html
-                .style("text-anchor", "end")
-                .attr("dx", "-.8em")
-                .attr("dy", ".15em")
-                .attr("transform", "rotate(-65)");*/
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
             githubService.getPullRequests("mboom", "TI2806", processPRs);
