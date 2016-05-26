@@ -100,7 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-coveralls");
 
   // Default task.=
-  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'qunit']);
   grunt.registerTask('test', ['qunit']);
   grunt.registerTask('travis', ['qunit', 'jshint']);
 
