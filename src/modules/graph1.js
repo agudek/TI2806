@@ -22,26 +22,23 @@ define(function () {
                 buckets.push(0);
             }
 
-            function map(x) {
+            function devide(x) {
                 switch (true) {
-                    case (x > 10): return 3; break; // > 10
-                    case (x >= 6 && x <= 10): return 2; break; // 6 - 10
-                    case (x >= 3 && x <= 5): return 1; break; // 3 - 5
-                    case (x >= 0 && x <= 2): return 0; break; //0 - 2
-                    default: return 0; break;
+                    case (x > 10): return 3; // > 10
+                    case (x >= 6 && x <= 10): return 2; // 6 - 10
+                    case (x >= 3 && x <= 5): return 1; // 3 - 5
+                    case (x >= 0 && x <= 2): return 0; //0 - 2
+                    default: return 0;
                 }
             }
-            for (var i = 0; i < sizeData.length; ++i) {
+            for (i = 0; i < sizeData.length; ++i) {
                 var item = sizeData[i];
-                buckets[map(item.x)] += item.y;
-                console.log("x: " + map(item.x));
-                console.log("b: " + buckets[map(item.x)]);
+                buckets[devide(item.x)] += item.y;
             }
             sizeData = [];
-            for (var i = 0; i < buckets.length; ++i) {
+            for (i = 0; i < buckets.length; ++i) {
                 sizeData.push({ 'x': i, 'y': buckets[i] });
             }
-            console.log(sizeData);
 
             var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", '100%')
@@ -112,7 +109,6 @@ define(function () {
                 .attr("transform", "rotate(270)")
                 .text("Number of pull-requests");
 
-            console.log(w / domain.length);
             svg.selectAll("rect").data(sizeData).enter()
                 .append("rect")
                 .attr("x", function (d) { return xSizeScale(d.x); })
