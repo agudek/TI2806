@@ -5,6 +5,42 @@ define(function () {
         title: 'Number of pull-request per number of comments',
         size: 1,
         parentSelector: '#bodyrow',
+        xAxisLabel: "Number of comments",
+        yAxisLabel: "Number of pull-requests",
+        yRightAxisLabel: "",
+        xAxisLine: true,
+        yAxisLine: true,
+        yRightAxisLine: true,
+        xAxisTicks: true,
+        yAxisTicks: true,
+        yRightAxisTicks: false,
+        xAxisLabelRotation: 0,
+        yAxisLabelRotation: 0,
+        yRightAxisLabelRotation: 0,
+        yAxisScale: function() { return "fit"; },
+        xAxisScale: function() { 
+            var domain = ['0-2', '3-5', '5-10', '<10'],
+            scale = d3.scale.ordinal()
+                .domain(domain)
+                .rangePoints(
+                    [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
+                );
+            return scale;
+        },
+        yAxisFitFunction: function() { 
+            var sizeData = [
+                { 'x': 1, 'y': 6 },
+                { 'x': 2, 'y': 5 },
+                { 'x': 4, 'y': 5 }
+            ];
+
+            var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
+
+            return [0, maxValue];            
+         },
+        xAxis: true,
+        yAxis: true,
+        yRightAxis: false,
         body: function () {
             var w = 720,
                 h = 350,
@@ -54,62 +90,9 @@ define(function () {
                     .domain([0, maxValue])
                     .range([padTop, h - padBottom]).nice();
 
-            var xAxisScale = d3.scale.ordinal()
-                .domain(domain)
-                .rangePoints([0.5 * (w / domain.length - 40), w - 2 * pad - 0.5 * (w / domain.length - 40)]);
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
-            //http://stackoverflow.com/questions/11189284/d3-axis-labeling
-            var xAxis = d3.svg.axis()
-                .scale(xAxisScale)
-                .orient("bottom");
-
-            svg.append("g")
-                .attr("transform", "translate(" + pad + "," + (h - padBottom) + ")")
-                .attr("class", "noAxis visibleTicks").call(xAxis)
-                .selectAll("text")
-                    .attr("y", 0)
-                    .attr("x", 9)
-                    .attr("dy", ".35em")
-                    .attr("transform", "rotate(65)")
-                    .style("text-anchor", "start");
-
-            var yScale = d3.scale.linear()
-                .domain([0, maxValue])
-                .range([h - padBottom - padTop, 0]).nice();
-
-            var yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient("left")
-                .ticks(6);
-
-            svg.append("g")
-                .attr("transform", "translate(" + pad + "," + padTop + ")")
-                .attr("class", "noAxis visibleTicks").call(yAxis);
-
-            svg.append("line")
-                .attr("x1", pad)
-                .attr("x2", w - pad)
-                .attr("y1", h - padBottom)
-                .attr("y2", h - padBottom)
-                .attr("style", "stroke-width:1px;stroke:black");
-
-            svg.append("line")
-                .attr("x1", pad)
-                .attr("x2", pad)
-                .attr("y1", h - padBottom)
-                .attr("y2", 0)
-                .attr("style", "stroke-width:1px;stroke:black");
-
-            svg.append("text")
-                .attr("text-anchor", "end")
-                .attr("x", (w + 2 * pad) / 2).attr("y", h).text("Number of comments");
-            svg.append("text")
-                .attr("text-anchor", "begin")
-                .attr("x", -(h + padBottom + padTop) / 2).attr("y", 0)
-                .attr("transform", "rotate(270)")
-                .text("Number of pull-requests");
-
-            svg.selectAll("rect").data(sizeData).enter()
+            g.selectAll("rect").data(sizeData).enter()
                 .append("rect")
                 .attr("x", function (d) { return xSizeScale(d.x); })
                 .attr("y", h - padBottom)
@@ -119,7 +102,7 @@ define(function () {
                 .transition()
                 .attr("y", function (d) { return h - padBottom - ySizeScale(d.y); });
 
-            return svg[0];
+            return g;
         }
     };
 });
