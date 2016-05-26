@@ -16,6 +16,7 @@ define([], function () {
 	    'services/GithubService',
         'services/BitbucketAPI',
 	    'services/BitBucketService',
+        'services/DataAggregator',
 	    'example-services'
 	    ],
 	    [// Array of visualisation modules
