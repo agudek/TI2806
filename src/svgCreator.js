@@ -14,7 +14,7 @@ function createSvgContainer(w = 720, h = 350) {
 //https://groups.google.com/forum/#!topic/d3-js/AsbOTQskipU
 function d3append(parent, child) {
 	parent.select(function() {
-		return this.appendChild(child[0][0]);
+		return this.appendChild(child.node());
 	});
 }
 
@@ -134,8 +134,75 @@ function createXAxis(module) {
     return g;
 }
 
+function createXAxisLabel(svg, module) {
+    var label = "";
+    if((label = octopeerHelper.getSafeModuleValue(module,"xAxisLabel")) !== "") {
+    var g = svg.append("g");
+        
+        //var rect = g.append("rect");
+
+        var text = g.append("text")
+            .attr("x",720/2)
+            .attr("y",360)
+            .attr("text-anchor", "middle")
+            .text(label);
+/*
+        var bbox = text.node().getBBox();
+        console.log(text);
+        console.log(text.node());
+        console.log(bbox);
+
+        rect.attr("x",(720/2)-(bbox.width/2)-10)
+            .attr("y",350-5)
+            .attr("height",bbox.height+10)
+            .attr("width",bbox.width+20)
+            .attr("style", "stroke:none; fill:rgba(255,255,255,0.3)");
+            */
+
+    }
+
+}
+
+function createLeftYAxisLabel(svg, module) {
+    var label = "";
+    if((label = octopeerHelper.getSafeModuleValue(module,"yAxisLabel")) !== "") {
+    var g = svg.append("g");
+    
+
+        var text = g.append("text")
+            .attr("y",0)
+            .attr("x",-(350-50)/2)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text(label);
+
+    }
+}
+
+function createRightYAxisLabel(svg, module) {
+    var label = "";
+    if((label = octopeerHelper.getSafeModuleValue(module,"yRightAxisLabel")) !== "") {
+    var g = svg.append("g");
+
+        var text = g.append("text")
+            .attr("y",-720)
+            .attr("x",(350-50)/2)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(90)")
+            .text(label);
+    }
+}
+
 function createAxisLabels(svg, module){
-    // TODO draw axis labels defined in module on the svg
+    if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
+        createXAxisLabel(svg, module);
+    }
+    if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
+        svg,createLeftYAxisLabel(svg, module);
+    }
+    if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
+        svg,createRightYAxisLabel(svg, module);
+    }
 }
 
 function createAxes(svg, module) {
@@ -143,10 +210,10 @@ function createAxes(svg, module) {
         d3append(svg,createXAxis(module));
     }
     if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
-        d3append(svg,createLeftYAxis(module));
+        d3append(svg, createLeftYAxis(module));
     }
     if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
-        d3append(svg,createRightYAxis(module));
+        d3append(svg, createRightYAxis(module));
     }
 }
 
