@@ -1,9 +1,6 @@
-function createSVG(module) {
-	var svg = createSvgContainer();
-	createAxes(svg, module);
-	createAxisLabels(svg, module);
-	return svg;
-}
+/* exported createSVG */
+/*globals octopeerHelper*/
+/*jshint esnext: true */
 
 function createSvgContainer(w = 720, h = 350) {
 	var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
@@ -13,27 +10,11 @@ function createSvgContainer(w = 720, h = 350) {
 	return svg;
 }
 
-function createAxisLabels(svg, module){
-
-}
-
 //https://groups.google.com/forum/#!topic/d3-js/AsbOTQskipU
 function d3append(parent, child) {
 	parent.select(function() {
-		return this.appendChild(child[0][0])
+		return this.appendChild(child[0][0]);
 	});
-}
-
-function createAxes(svg, module) {
-	if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
-		d3append(svg,createXAxis(module));
-	}
-	if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
-		d3append(svg,createLeftYAxis(module));
-	}
-	if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
-		d3append(svg,createRightYAxis(module));
-	}
 }
 
 function createLeftYAxis(module) {
@@ -152,4 +133,32 @@ function createXAxis(module) {
             .attr("style","stroke-width:1px;stroke:black");
     }
     return g;
+}
+
+function createAxisLabels(svg, module){
+    console.log(
+        "Adding axis labels to svg " +
+        svg +
+        " of module " +
+        module
+    );
+}
+
+function createAxes(svg, module) {
+    if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
+        d3append(svg,createXAxis(module));
+    }
+    if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
+        d3append(svg,createLeftYAxis(module));
+    }
+    if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
+        d3append(svg,createRightYAxis(module));
+    }
+}
+
+function createSVG(module) {
+    var svg = createSvgContainer();
+    createAxes(svg, module);
+    createAxisLabels(svg, module);
+    return svg;
 }

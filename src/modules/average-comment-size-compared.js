@@ -133,7 +133,7 @@ define(function () {
 
             return svg[0];*/
 
-            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"))
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
             g.append("path")
                 .attr("d",
