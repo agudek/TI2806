@@ -1,8 +1,10 @@
 /* globals OctopeerHelper, OctopeerService, GithubService, BitBucketService */
-/* exported modules, line, area, octopeerService, githubService, bitbucketService */
-/*jshint esnext: true */
+/* exported modules, octopeerHelper, octopeerService, githubService, bitbucketService */
+
 //Global modules list for if the module objects are needed elsewhere.
 var modules = [];
+
+//Global helper objects
 var octopeerHelper = new OctopeerHelper();
 var octopeerService = new OctopeerService();
 var githubService = new GithubService();

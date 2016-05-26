@@ -41,11 +41,29 @@ define(['modules/moduleList'], function (dynModules) {
             if (!arguments[i].customContainer) {
                 outerdiv.addClass('col s12 m6');
                 outerdiv = $(document.createElement('div'))
-                    .addClass('card-panel')
+	        		.addClass('card')
                     .addClass("hoverable")
                     //The 'relative' class allow us to place absolute elements inside the card
-                    //This will probably be more important in the coming sprints.
                     .addClass("relative")
+	        		.appendTo(outerdiv);
+                outerdiv = $(document.createElement('div'))
+                    .addClass('card-content')
+                    .appendTo(outerdiv);
+                $(document.createElement('span'))
+                    .addClass("card-title")
+                    .addClass("truncate")
+                    .addClass("flow-text")
+                    .html(arguments[i].title)
+                    .appendTo(outerdiv);
+                $(document.createElement('li'))
+                    .addClass("material-icons")
+                    .addClass("warningBadge")
+                    .html("warning")
+                    .appendTo(outerdiv);
+                $(document.createElement('li'))
+                    .addClass("material-icons")
+                    .addClass("errorBadge")
+                    .html("error")
                     .appendTo(outerdiv);
             }
             if(arguments[i].data) {

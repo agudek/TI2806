@@ -5,6 +5,7 @@
 define(function () {
     return {
         name: "pull-requests",
+        title: "Pull requests",
         size: 1,
         parentSelector: "#bodyrow",
         body: function () {

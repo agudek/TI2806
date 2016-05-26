@@ -1,4 +1,3 @@
-/* globals */
 /* exported OctopeerHelper */
 /*jshint esnext: true */
 
@@ -32,7 +31,7 @@ function OctopeerHelper() {
 			.interpolate(interpolationType);
 
 		return lineFunction(data);
-	}
+	};
 
 	/**	svg area creator
 	* data - The data in JSON with defined x and y fields
@@ -63,6 +62,6 @@ function OctopeerHelper() {
 			.interpolate(interpolationType);
 
 		return areaFunction(data);
-	}
+	};
 
 }
