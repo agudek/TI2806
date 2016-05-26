@@ -141,7 +141,8 @@ function createXAxisLabel(svg, module) {
         
         //var rect = g.append("rect");
 
-        var text = g.append("text")
+        //var text = 
+        g.append("text")
             .attr("x",720/2)
             .attr("y",360)
             .attr("text-anchor", "middle")
@@ -168,8 +169,7 @@ function createLeftYAxisLabel(svg, module) {
     if((label = octopeerHelper.getSafeModuleValue(module,"yAxisLabel")) !== "") {
     var g = svg.append("g");
     
-
-        var text = g.append("text")
+        g.append("text")
             .attr("y",0)
             .attr("x",-(350-50)/2)
             .attr("text-anchor", "middle")
@@ -184,7 +184,7 @@ function createRightYAxisLabel(svg, module) {
     if((label = octopeerHelper.getSafeModuleValue(module,"yRightAxisLabel")) !== "") {
     var g = svg.append("g");
 
-        var text = g.append("text")
+        g.append("text")
             .attr("y",-720)
             .attr("x",(350-50)/2)
             .attr("text-anchor", "middle")
@@ -198,10 +198,10 @@ function createAxisLabels(svg, module){
         createXAxisLabel(svg, module);
     }
     if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
-        svg,createLeftYAxisLabel(svg, module);
+        createLeftYAxisLabel(svg, module);
     }
     if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
-        svg,createRightYAxisLabel(svg, module);
+        createRightYAxisLabel(svg, module);
     }
 }
 
