@@ -21,7 +21,6 @@ define(function () {
             data2.push(new Date().setMonth((month + 11) % 12));
             data2.push(today);
 
-            var format = d3.time.format("%d/%m");
             var xScale = d3.time.scale().domain(data2).range([0, 720 - 50 - 50]).nice();
             return xScale;
         },
@@ -54,7 +53,6 @@ define(function () {
 
             var REPO_NAME = "TI2806";
             var OWNER = "mboom";
-            var bottomPad = 40;
             var leftPad = 50;
             var w = 720;
             var h = 350;
@@ -65,14 +63,10 @@ define(function () {
             data2.push(new Date().setMonth((month + 11) % 12));
             data2.push(today);
 
-            var format = d3.time.format("%d/%m");
+            //var format = d3.time.format("%d/%m");
             var xScale = d3.time.scale().domain(data2).range([0, w - leftPad]);
             var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 50]);
-            /*var yAxis = d3.svg
-                .axis()
-                .scale(yScale)
-                .orient("left");
-            var xAxisGroup = svgContainer // jshint ignore:line
+            /*var xAxisGroup = svgContainer // jshint ignore:line
                 .append("g")
                 .attr("transform", "translate(" + leftPad + "," + (h - bottomPad) + ")")
                 .call(xAxis)
@@ -82,10 +76,6 @@ define(function () {
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
                 .attr("transform", "rotate(-65)");*/
-            /*var yAxisGroup = svgContainer // jshint ignore:line
-                .append("g")
-                .attr("transform", "translate(" + leftPad + "," + 0 + ")")
-                .call(yAxis);*/
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
             githubService.getPullRequests("mboom", "TI2806", processPRs);

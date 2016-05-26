@@ -76,7 +76,7 @@ define(function () {
                     .attr("x", 9)
                     .attr("dy", ".35em")
                     .attr("transform", "rotate(65)")
-                    .style("text-anchor", "start");
+                    .style("text-anchor", "start");*/
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
