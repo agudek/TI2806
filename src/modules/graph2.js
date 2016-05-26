@@ -1,8 +1,8 @@
 /* globals define, area */
 define(function () {
     return {
-        name: 'graph1',
-        title: 'Number of pull-request per number of comments',
+        name: 'graph2',
+        title: 'Session duration per pull-request',
         size: 1,
         parentSelector: '#bodyrow',
         body: function () {
@@ -15,33 +15,7 @@ define(function () {
                     { 'x': 1, 'y': 6 },
                     { 'x': 2, 'y': 5 },
                     { 'x': 4, 'y': 5 }
-                ],
-                domain = ['0-2', '3-5', '5-10', '<10'],
-                buckets = [];
-            for (var i = 0; i < domain.length; ++i) {
-                buckets.push(0);
-            }
-
-            function map(x) {
-                switch (true) {
-                    case (x > 10): return 3; break; // > 10
-                    case (x >= 6 && x <= 10): return 2; break; // 6 - 10
-                    case (x >= 3 && x <= 5): return 1; break; // 3 - 5
-                    case (x >= 0 && x <= 2): return 0; break; //0 - 2
-                    default: return 0; break;
-                }
-            }
-            for (var i = 0; i < sizeData.length; ++i) {
-                var item = sizeData[i];
-                buckets[map(item.x)] += item.y;
-                console.log("x: " + map(item.x));
-                console.log("b: " + buckets[map(item.x)]);
-            }
-            sizeData = [];
-            for (var i = 0; i < buckets.length; ++i) {
-                sizeData.push({ 'x': i, 'y': buckets[i] });
-            }
-            console.log(sizeData);
+                ];
 
             var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
                 .attr("width", '100%')
@@ -112,7 +86,6 @@ define(function () {
                 .attr("transform", "rotate(270)")
                 .text("Number of pull-requests");
 
-            console.log(w / domain.length);
             svg.selectAll("rect").data(sizeData).enter()
                 .append("rect")
                 .attr("x", function (d) { return xSizeScale(d.x); })
