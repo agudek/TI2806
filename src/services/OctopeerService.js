@@ -50,6 +50,19 @@ function OctopeerService() {
         });
         return promise;
     };
+    
+    this.getPullRequestsFromUser = function (username) {
+        var url, objectResolver, promise;
+        objectResolver = new ObjectResolver(["session"]);
+        url = api.urlBuilder(api.endpoints.pullRequests, {});
+
+        promise = new RSVP.Promise(function (fulfill) {
+            getJSON(url, function (pullRequests) {
+                fulfill(objectResolver.resolveArray(pullRequests.results));
+            });
+        });
+        return promise;
+    };
 
     this.getSemanticEvents = function () {
         var url, objectResolver, promise;

@@ -24,7 +24,7 @@ function ObjectResolver(attributes) {
     * @param {Object} object The containing object
     */
     function resolveAttributeFromObject(object, attr) {
-        if (!isUrl(object[attr]) || object[attr] === undefined) {
+        if (!object.hasOwnProperty(attr) || !isUrl(object[attr])) {
             return object[attr];
         }
         get(object[attr], function (obj) {
