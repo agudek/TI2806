@@ -9,6 +9,7 @@ define([], function () {
         'cache',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'OctopeerHelper',
         'resolvers/objectResolver',
 	    'services/OctopeerAPI',
 	    'services/OctopeerService',
@@ -16,10 +17,14 @@ define([], function () {
 	    'services/GithubService',
         'services/BitbucketAPI',
 	    'services/BitBucketService',
-	    'example-services',
-        'svgCreator'
+        'svgCreator',
+        'services/DataAggregator',
+        'example-services',
+        'globals'
 	    ],
-        'modules/default-module-values',
+        //Module with default values. Needs to be loaded in seperately 
+        //so that they can be used in the visualistaion modules without problems
+        ['modules/default-module-values'],
 	    [// Array of visualisation modules
     	//'modules/scatter',
     	//'modules/pull-requests',

@@ -25,20 +25,20 @@ function d3append(parent, child) {
 }
 
 function createAxes(svg, module) {
-	if(getSafeModuleValue(module,"xAxis")) {
+	if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
 		d3append(svg,createXAxis(module));
 	}
-	if(getSafeModuleValue(module,"yAxis")) {
+	if(octopeerHelper.getSafeModuleValue(module,"yAxis")) {
 		d3append(svg,createLeftYAxis(module));
 	}
-	if(getSafeModuleValue(module,"yRightAxis")) {
+	if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
 		d3append(svg,createRightYAxis(module));
 	}
 }
 
 function createLeftYAxis(module) {
 	var scale;
-	if ((scale = getSafeModuleValue(module,"yAxisScale")()) === "fit") {
+	if ((scale = octopeerHelper.getSafeModuleValue(module,"yAxisScale")()) === "fit") {
 		scale = d3.scale.linear().domain([0,100]).range([350-50-10,0]).nice();
 	}
 
@@ -46,7 +46,7 @@ function createLeftYAxis(module) {
         .scale(scale)
         .orient("left");
 
-    if(getSafeModuleValue(module,"yAxisTicks")) {
+    if(octopeerHelper.getSafeModuleValue(module,"yAxisTicks")) {
         axis.tickSize(-720+50+50);
     }
 
@@ -57,7 +57,7 @@ function createLeftYAxis(module) {
         .attr("class","noAxis visibleTicks").call(axis);
 
     var degrees;
-    if((degrees = getSafeModuleValue(module,"yAxisLabelRotation")) > 0) {
+    if((degrees = octopeerHelper.getSafeModuleValue(module,"yAxisLabelRotation")) > 0) {
         axisContainer.selectAll("text")
             .attr("y", 0)
             .attr("x", 9)
@@ -66,7 +66,7 @@ function createLeftYAxis(module) {
             .style("text-anchor", "start");
     }
 
-    if(getSafeModuleValue(module,"yAxisLine")) {
+    if(octopeerHelper.getSafeModuleValue(module,"yAxisLine")) {
     	axisContainer.append("line")
             .attr("y1",350-50-10)
             .attr("y2",0)
@@ -77,7 +77,7 @@ function createLeftYAxis(module) {
 
 function createRightYAxis(module) {
 	var scale;
-	if ((scale = getSafeModuleValue(module,"yRightAxisScale")()) === "fit") {
+	if ((scale = octopeerHelper.getSafeModuleValue(module,"yRightAxisScale")()) === "fit") {
 		scale = d3.scale.linear().domain([0,100]).range([350-50-10,0]).nice();
 	}
 
@@ -85,7 +85,7 @@ function createRightYAxis(module) {
         .scale(scale)
         .orient("right");
 
-    if(getSafeModuleValue(module,"yRightAxisTicks")) {
+    if(octopeerHelper.getSafeModuleValue(module,"yRightAxisTicks")) {
         axis.tickSize(720-50-10);
     }
 
@@ -96,7 +96,7 @@ function createRightYAxis(module) {
         .attr("class","noAxis visibleTicks").call(axis);
 
     var degrees;
-    if((degrees = getSafeModuleValue(module,"yRightAxisLabelRotation")) > 0) {
+    if((degrees = octopeerHelper.getSafeModuleValue(module,"yRightAxisLabelRotation")) > 0) {
         axisContainer.selectAll("text")
             .attr("y", 0)
             .attr("x", 9)
@@ -105,7 +105,7 @@ function createRightYAxis(module) {
             .style("text-anchor", "start");
     }
 
-    if(getSafeModuleValue(module,"yRightAxisLine")) {
+    if(octopeerHelper.getSafeModuleValue(module,"yRightAxisLine")) {
     	axisContainer.append("line")
             .attr("y1",350-50)
             .attr("y2",0)
@@ -116,14 +116,14 @@ function createRightYAxis(module) {
 
 function createXAxis(module) {
 	var scale;
-	if ((scale = getSafeModuleValue(module,"xAxisScale")()) === "fit") {
+	if ((scale = octopeerHelper.getSafeModuleValue(module,"xAxisScale")()) === "fit") {
 		scale = d3.scale.linear().domain([0,100]).range([0,720-50-50]).nice();
 	}
 	var axis = d3.svg.axis()
         .scale(scale)
         .orient("bottom");
 
-    if(getSafeModuleValue(module,"xAxisTicks")) {
+    if(octopeerHelper.getSafeModuleValue(module,"xAxisTicks")) {
         axis.tickSize(-350+50+10);
     }
 
@@ -134,7 +134,7 @@ function createXAxis(module) {
         .attr("class","noAxis visibleTicks").call(axis);
 
     var degrees;
-    if((degrees = getSafeModuleValue(module,"xAxisLabelRotation")) > 0) {
+    if((degrees = octopeerHelper.getSafeModuleValue(module,"xAxisLabelRotation")) > 0) {
         axisContainer.selectAll("text")
             .attr("y", 0)
             .attr("x", 9)
@@ -143,7 +143,7 @@ function createXAxis(module) {
             .style("text-anchor", "start");
     }
 
-    if(getSafeModuleValue(module,"xAxisTicks")) {
+    if(octopeerHelper.getSafeModuleValue(module,"xAxisTicks")) {
     	g.append("line")
     		.attr("x1",50)
             .attr("x2",720-50)
@@ -153,27 +153,3 @@ function createXAxis(module) {
     }
     return g;
 }
-
-
-/*function addAxis(svg, scale, orientation, tickSize = 0, labelRotation = 0, x = 50, y = 300) {
-	var xAxis = d3.svg.axis()
-        .scale(scale)
-        .orient(orientation);
-
-    if(tickSize != 0) {
-        xAxis.tickSize(tickSize);
-    }
-
-    var axis = svg.append("g")
-        .attr("transform", "translate("+x+"," + y + ")")
-        .attr("class","noAxis visibleTicks").call(xAxis);
-
-    if(labelRotation) {
-        axis.selectAll("text")
-            .attr("y", 0)
-            .attr("x", 9)
-            .attr("dy", ".35em")
-            .attr("transform", "rotate("+labelRotation+")")
-            .style("text-anchor", "start");
-    }
-}*/
