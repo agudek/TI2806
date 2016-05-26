@@ -5,8 +5,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test",
-    "ci": "grunt && grunt coveralls"
+    "test": "grunt travis --verbose"
   },
   "devDependencies": {
     "chai": "3.5.0",
