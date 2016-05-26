@@ -133,12 +133,6 @@ define(function () {
 
             var xSizeScale = d3.scale.linear().domain([0,sizeData.length]).range([pad,w-17]),
             ySizeScale = d3.scale.linear().domain([maxValue,0]).range([padTop, h-padBottom]).nice();
-/*
-            var yScale = d3.scale.linear().domain([0,maxValue]).range([h-padBottom-padTop,0]).nice();
-
-            addAxis(svg, yScale, "left", -w+2*pad, 0, pad, padTop);
-*/
-
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
             g.append("path")

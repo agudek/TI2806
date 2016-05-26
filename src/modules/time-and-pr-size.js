@@ -138,28 +138,6 @@ define(function () {
                 .domain([Math.max.apply(Math,sizeData.map(function(o){return o.y;})),0])
                 .range([padTop, h-padBottom])
                 .nice();
-/*
-
-            var yTimeAxisScale = d3.scale.linear()
-                .domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))])
-                .range([h-padBottom-padTop,0])
-                .nice(),
-                ySizeAxisScale = d3.scale.linear()
-                    .domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))])
-                    .range([h-padBottom-padTop,0])
-                    .nice();
-
-            var yLeftAxis = d3.svg.axis()
-                    .scale(yTimeAxisScale)
-                    .orient("left")
-                    .ticks(6)
-                    .tickSize(-w+2*pad),
-                yRightAxis = d3.svg.axis()
-                    .scale(ySizeAxisScale)
-                    .orient("right")
-                    .ticks(6)
-                    .tickSize(-w+2*pad);
-*/
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 

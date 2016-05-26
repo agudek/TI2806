@@ -85,32 +85,6 @@ define(function () {
                 .domain([Math.max.apply(Math,sizeData.map(function(o){return o.y;})),0])
                 .range([padTop, h-padBottom]).nice();
 
-            /*
-            //http://stackoverflow.com/questions/11189284/d3-axis-labeling
-            var xAxis = d3.svg.axis()
-                .scale(xAxisScale)
-                .orient("bottom");
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+"," + (h - padBottom) + ")")
-                .attr("class","noAxis").call(xAxis)
-                .selectAll("text")
-                    .attr("y", 0)
-                    .attr("x", 9)
-                    .attr("dy", ".35em")
-                    .attr("transform", "rotate(65)")
-                    .style("text-anchor", "start");
-
-            var yScale = d3.scale.linear()
-                .domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))])
-                .range([h-padBottom-padTop,0]).nice();
-
-            var yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient("left")
-                .ticks(6)
-                .tickSize(-w+2*pad); */
-
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
             var tempSizeData = [{"x":-0.5, "y":0}]

@@ -83,16 +83,6 @@ define(function () {
             var xSizeScale = d3.scale.linear().domain([0,sizeData2.length]).range([pad,w-17]),
             ySizeScale = d3.scale.linear().domain([maxValue,0]).range([padTop, h-padBottom]).nice();
 
-           /*
-            var yScale = d3.scale.linear().domain([0,maxValue]).range([h-padBottom-padTop,0]).nice();
-
-            var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(6).tickSize(-w+2*pad);
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+","+padTop+")")
-                .attr("class","noAxis visibleTicks").call(yAxis);*/
-
-
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
             g.append("path")
