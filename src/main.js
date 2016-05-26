@@ -4,8 +4,9 @@
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
 define(['modules/moduleList'], function (dynModules) {
 
-    require(dynModules[0]);
-    require(dynModules[1], function () {
+    require(dynModules[0], function () {
+
+        require(dynModules[1], function () {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
 
@@ -40,12 +41,12 @@ define(['modules/moduleList'], function (dynModules) {
             if (!arguments[i].customContainer) {
                 outerdiv.addClass('col s12 m6');
                 outerdiv = $(document.createElement('div'))
-	        		.addClass('card-panel')
+                    .addClass('card-panel')
                     .addClass("hoverable")
                     //The 'relative' class allow us to place absolute elements inside the card
                     //This will probably be more important in the coming sprints.
                     .addClass("relative")
-	        		.appendTo(outerdiv);
+                    .appendTo(outerdiv);
             }
             if(arguments[i].data) {
                 performDataRequests(arguments[i].data, arguments[i], outerdiv);
@@ -53,6 +54,8 @@ define(['modules/moduleList'], function (dynModules) {
                 $(arguments[i].body()).appendTo(outerdiv);
             }
         }
+
+    });
 
     });
 

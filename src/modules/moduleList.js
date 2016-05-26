@@ -9,6 +9,7 @@ define([], function () {
         'cache',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'OctopeerHelper',
         'resolvers/objectResolver',
 	    'services/OctopeerAPI',
 	    'services/OctopeerService',
@@ -18,7 +19,7 @@ define([], function () {
 	    'services/BitBucketService',
         'services/DataAggregator',
 	    'example-services',
-        'script.TI2806.js'
+        'globals'
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
