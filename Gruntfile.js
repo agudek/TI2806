@@ -98,7 +98,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-coveralls");
-  grunt.loadNpmTasks("grunt-qunit-istanbul");
 
   // Default task.=
   grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
