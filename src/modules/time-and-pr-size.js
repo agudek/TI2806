@@ -1,4 +1,4 @@
-/* globals define, line */
+/* globals define, octopeerHelper */
 define(function () {
     return {
     	name: "time-and-pr-size",
@@ -166,7 +166,11 @@ define(function () {
                 .concat([{"x":sizeData.length-0.5, "y":0}]);
 
             svg.append("path")
-                .attr("d",line(tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5);},ySizeScale))
+                .attr("d",
+                    octopeerHelper.line(
+                        tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5);},ySizeScale
+                        )
+                    )
                 .attr("style","stroke:rgb(212, 51, 51);fill:none;stroke-width: 3px;");
 
             svg.selectAll("circle").data(sizeData).enter()

@@ -9,6 +9,7 @@ define([], function () {
         'cache',
 	    'apicallers',
 	    'pullrequestTransformer',
+        'OctopeerHelper',
         'resolvers/objectResolver',
 	    'services/OctopeerAPI',
 	    'services/OctopeerService',
@@ -17,7 +18,8 @@ define([], function () {
         'services/BitbucketAPI',
 	    'services/BitBucketService',
         'services/DataAggregator',
-	    'example-services'
+	    'example-services',
+        'globals'
 	    ],
 	    [// Array of visualisation modules
     	'modules/scatter',
@@ -27,7 +29,8 @@ define([], function () {
     	'modules/pr-size',
     	'modules/average-comment-size-compared',
     	'modules/average-comment-size-yours',
-    	'modules/average-comment-size-total'
+    	'modules/average-comment-size-total',
+        'modules/users'
     	]
     ]; 
 });

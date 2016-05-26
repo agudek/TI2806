@@ -1,4 +1,4 @@
-/* globals define, area */
+/* globals define, octopeerHelper */
 define(function () {
     return {
     	name: "average-comment-size-yours",
@@ -93,7 +93,11 @@ define(function () {
                 .attr("style","stroke-width:1px;stroke:black");
 
             svg.append("path")
-                .attr("d",area(sizeData,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale))
+                .attr("d",
+                    octopeerHelper.area(
+                        sizeData,h-padBottom,"linear",function(x){return xSizeScale(x);},ySizeScale
+                        )
+                    )
                 .attr("style","stroke:rgb(212, 51, 51);fill:rgba(212, 51, 51,0.5);stroke-width: 2px;");  
 
             return svg[0];
