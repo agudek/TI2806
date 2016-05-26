@@ -67,11 +67,6 @@ define(function () {
 
             var format = d3.time.format("%d/%m");
             var xScale = d3.time.scale().domain(data2).range([0, w - leftPad]);
-           //var xAxis = d3.svg.axis().scale(xScale).tickFormat(format).ticks(30).orient("bottom");
-            /*var svgContainer = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", "100%")
-                .attr("height", "100%")
-                .attr("viewBox", "0 0 " + w + " " + h);*/
             var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 50]);
             /*var yAxis = d3.svg
                 .axis()

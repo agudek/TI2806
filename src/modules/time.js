@@ -53,11 +53,6 @@ define(function () {
                     {"x":19, "y":90}
                 ];
 
-           /* var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", '100%')
-                .attr("height", '100%')
-                .attr("viewBox", "0 0 "+w+" "+h);*/
-
             var xTimeScale = d3.scale.linear()
                 .domain([0,timeData.length])
                 .range([pad,w-pad]),
@@ -66,15 +61,6 @@ define(function () {
                     .range([0, h-padBottom-padTop])
                     .nice();
 /*
-            var xAxisScale = d3.scale.ordinal()
-                .domain([
-                    "pr0", "pr1", "pr2", "pr3",
-                    "pr4", "pr5", "pr6", "pr7",
-                    "pr8", "pr9", "pr10", "pr11",
-                    "pr12", "pr13", "pr14", "pr15",
-                    "pr16", "pr17", "pr18", "pr19"
-                ])
-                .rangePoints([0.35*pad, w-2.3*pad]);
 
             //http://stackoverflow.com/questions/11189284/d3-axis-labeling
             var xAxis = d3.svg.axis()
@@ -91,48 +77,6 @@ define(function () {
                     .attr("dy", ".35em")
                     .attr("transform", "rotate(65)")
                     .style("text-anchor", "start");
-
-            var yAxisScale = d3.scale.linear()
-                .domain([0,Math.max.apply(Math,timeData.map(function(o){return o.y;}))])
-                .range([h-padBottom-padTop,0])
-                .nice();
-
-            var yAxis = d3.svg.axis()
-                .scale(yAxisScale)
-                .orient("left")
-                .ticks(6)
-                .tickSize(-w+2*pad);
-
-            svg.append("g")
-                .attr("transform", "translate("+pad+","+padTop+")")
-                .attr("class","noAxis visibleTicks")
-                .call(yAxis);
-
-            svg.append("line")
-                .attr("x1",pad)
-                .attr("x2",w-pad)
-                .attr("y1",h-padBottom)
-                .attr("y2",h-padBottom)
-                .attr("style","stroke-width:1px;stroke:black");
-
-            svg.append("line")
-                .attr("x1",pad)
-                .attr("x2",pad)
-                .attr("y1",h-padBottom)
-                .attr("y2",0)
-                .attr("style","stroke-width:1px;stroke:black");
-
-            svg.selectAll("rect").data(timeData).enter()
-                .append("rect")
-                .attr("x",function (d) {return xTimeScale(d.x)+9;})
-                .attr("y",h-padBottom)
-                .attr("width",function () {return (w/(timeData.length-1))-20;})
-                .attr("height",function (d) {return yTimeScale(d.y);})
-                .attr("style", "fill:rgb(77, 136, 255);")
-                    .transition()
-                    .attr("y",function (d) {return h-padBottom-yTimeScale(d.y);});
-
-            return svg[0];*/
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 

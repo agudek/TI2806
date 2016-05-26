@@ -94,16 +94,7 @@ define(function () {
                 .range([padTop, h-padBottom])
                 .nice();
 /*
-            var xAxisScale = d3.scale.ordinal()
-                .domain([
-                    "pr0", "pr1", "pr2", "pr3",
-                    "pr4", "pr5", "pr6", "pr7",
-                    "pr8", "pr9", "pr10", "pr11",
-                    "pr12", "pr13", "pr14", "pr15",
-                    "pr16", "pr17", "pr18", "pr19"
-                ])
-                .rangePoints([0.35*pad, w-2.3*pad]);
-
+            
             //http://stackoverflow.com/questions/11189284/d3-axis-labeling
             var xAxis = d3.svg.axis()
                 .scale(xAxisScale)
@@ -147,58 +138,7 @@ define(function () {
                 .attr("transform", "translate("+(w-pad)+","+padTop+")")
                 .attr("class","noAxis")
                 .call(yRightAxis); 
-
-            svg.append("line")
-                .attr("x1",pad)
-                .attr("x2",w-pad)
-                .attr("y1",h-padBottom)
-                .attr("y2",h-padBottom)
-                .attr("style","stroke-width:1px;stroke:black");
-
-            svg.append("line")
-                .attr("x1",pad)
-                .attr("x2",pad)
-                .attr("y1",h-padBottom)
-                .attr("y2",0)
-                .attr("style","stroke-width:1px;stroke:black");
-
-            svg.append("line")
-                .attr("x1",w-pad)
-                .attr("x2",w-pad)
-                .attr("y1",h-padBottom)
-                .attr("y2",0)
-                .attr("style","stroke-width:1px;stroke:black");
-
-            svg.selectAll("rect").data(timeData).enter()
-                .append("rect")
-                .attr("x",function (d) {return xTimeScale(d.x)+9;})
-                .attr("y",h-padBottom)
-                .attr("width",function () {return (w/(timeData.length-1))-20;})
-                .attr("height",function (d) {return yTimeScale(d.y);})
-                .attr("style", "fill:rgb(77, 136, 255);")
-                    .transition()
-                    .attr("y",function (d) {return h-padBottom-yTimeScale(d.y);});
-
-            var tempSizeData = [{"x":-0.5, "y":0}]
-                .concat(sizeData)
-                .concat([{"x":sizeData.length-0.5, "y":0}]);
-
-            svg.append("path")
-                .attr("d",
-                    octopeerHelper.line(
-                        tempSizeData,"cardinal-open",function(x){return xSizeScale(x+0.5);},ySizeScale
-                        )
-                    )
-                .attr("style","stroke:rgb(212, 51, 51);fill:none;stroke-width: 3px;");
-
-            svg.selectAll("circle").data(sizeData).enter()
-                .append("circle")
-                .attr("cx",function (d) {return xSizeScale(d.x+0.5);})
-                .attr("cy",function (d) {return ySizeScale(d.y);})
-                .attr("r",3)
-                .attr("style","fill:rgb(212, 51, 51);stroke-width: 3px;");
-
-            return svg[0];*/
+*/
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 
