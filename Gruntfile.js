@@ -76,7 +76,18 @@ module.exports = function(grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       },
-    }
+    },
+    coveralls: {
+      options: {
+        
+
+        // dont fail if coveralls fails
+        force: true
+      },
+      main_target: {
+        src: "build/report/lcov/lcov.info"
+      }
+    },
   });
 
   // These plugins provide necessary tasks.
@@ -86,11 +97,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks("grunt-coveralls");
+  grunt.loadNpmTasks("grunt-qunit-istanbul");
 
   // Default task.=
   grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
-  grunt.registerTask('test', ['qunit'])
+  grunt.registerTask('test', ['qunit']);
   grunt.registerTask('travis', ['qunit', 'jshint']);
 
 };
