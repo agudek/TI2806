@@ -10,13 +10,9 @@ define(function () {
         yRightAxisLabel: "",
         xAxisLine: true,
         yAxisLine: true,
-        yRightAxisLine: true,
-        xAxisTicks: true,
-        yAxisTicks: true,
-        yRightAxisTicks: false,
-        xAxisLabelRotation: 0,
-        yAxisLabelRotation: 0,
-        yRightAxisLabelRotation: 0,
+        xAxisTicks: false,
+        yAxisTicks: false,
+        xAxisLabelRotation: 65,
         yAxisScale: function() { return "fit"; },
         xAxisScale: function() { 
             var domain = ['0-2', '3-5', '5-10', '<10'],
@@ -32,7 +28,30 @@ define(function () {
                 { 'x': 1, 'y': 6 },
                 { 'x': 2, 'y': 5 },
                 { 'x': 4, 'y': 5 }
-            ];
+            ],
+            domain = ['0-2', '3-5', '5-10', '<10'],
+            buckets = [];
+            for (var i = 0; i < domain.length; ++i) {
+                buckets.push(0);
+            }
+
+            function devide(x) {
+                switch (true) {
+                    case (x > 10): return 3; // > 10
+                    case (x >= 6 && x <= 10): return 2; // 6 - 10
+                    case (x >= 3 && x <= 5): return 1; // 3 - 5
+                    case (x >= 0 && x <= 2): return 0; //0 - 2
+                    default: return 0;
+                }
+            }
+            for (i = 0; i < sizeData.length; ++i) {
+                var item = sizeData[i];
+                buckets[devide(item.x)] += item.y;
+            }
+            sizeData = [];
+            for (i = 0; i < buckets.length; ++i) {
+                sizeData.push({ 'x': i, 'y': buckets[i] });
+            }
 
             var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
 
@@ -75,11 +94,6 @@ define(function () {
             for (i = 0; i < buckets.length; ++i) {
                 sizeData.push({ 'x': i, 'y': buckets[i] });
             }
-
-            var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
-                .attr("width", '100%')
-                .attr("height", '100%')
-                .attr("viewBox", "0 0 " + w + " " + h);
 
             var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
 
