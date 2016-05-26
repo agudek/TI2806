@@ -7,6 +7,7 @@
  * @constructor
  * @this {OctopeerService}
  */
+/*jshint unused: vars*/
 function OctopeerService() {
     "use strict";
     var settings, api;
