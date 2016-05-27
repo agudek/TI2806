@@ -61,6 +61,22 @@ function DataAggregator() {
         return pullRequests;
     }
     
+    function convertGraph1ToXY(pullRequests) {
+        var xy = [], i, j;
+        for (i = 0; i < 5; i += 1) {
+            xy.push({
+                "x": i,
+                "y": 2
+            });
+            for (j = 0; j < pullRequests.length; j += 1) {
+                if (pullRequests[j].commentCount === i) {
+                    xy[i].y += 1;
+                }
+            }
+        }
+        return xy;
+    }
+    
     /**
         Helper functions graph 2
     */
@@ -126,9 +142,8 @@ function DataAggregator() {
                 .then(setSemanticEvents)
                 .then(filterSessionsForComments)
                 .then(pullRequestCommentObject)
-                .then(function (pullRequests) {
-                    fulfill(pullRequests);
-                });
+                .then(convertGraph1ToXY)
+                .then(fulfill);
         });
         
         return promise;
