@@ -1,4 +1,4 @@
-/* globals define, RSVP, modules : true, ajax */
+/* globals define, octopeerHelper, createSVG, RSVP, modules : true, ajax */
 /* exported ajax */
 
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
@@ -6,9 +6,57 @@ define(['modules/moduleList'], function (dynModules) {
 
     require(dynModules[0], function () {
 
-        require(dynModules[1], function () {
+        require(dynModules[1], function(module) {
+            octopeerHelper.defaultModule = module;
+        });
+
+        require(dynModules[2], function () {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
+
+        function scaleAxis(module, object, axisname) {
+            /*jshint maxcomplexity:7 */
+            if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
+                var Scale = d3.scale.linear()
+                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")())
+                    .range([350-50-10,0])
+                    .nice();
+                var Axis = d3.svg.axis().scale(Scale);
+                if(axisname === "x") {
+                    Axis.orient("bottom");
+                    if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
+                        Axis.tickSize(-350+50+10);
+                    }
+                } else if (axisname === "y") {
+                    Axis.orient("left");
+                    if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
+                        Axis.tickSize(-720+50+50);
+                    }
+                } else {
+                    Axis.orient("right");
+                    if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
+                        Axis.tickSize(720-50-50);
+                    }
+                }
+                d3.select(module.svg).select("."+axisname+"Axis")
+                    .transition()
+                    .duration(500)
+                    .ease("sin-in-out")
+                    .call(Axis);
+            }
+        }
+
+        function scaleAxes(module, objects) {
+            if(octopeerHelper.getSafeModuleValue(module,"xAxis")){
+                scaleAxis(module, objects, "x");
+            }
+            if(octopeerHelper.getSafeModuleValue(module,"yAxis")){
+                scaleAxis(module, objects, "y");
+            }
+            if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")){
+                scaleAxis(module, objects, "yRight");
+            }
+        }
 
         function performDataRequests(data, module, outerdiv) {
             var promises = [];
@@ -19,6 +67,7 @@ define(['modules/moduleList'], function (dynModules) {
             }
             RSVP.all(promises).then(function (objects) {
                 $(module.body(objects)).appendTo(outerdiv);
+                scaleAxes(module, objects);
                 /* TODO if (singleFail(objects) && module.failBody) {
                     $(module.failBody()).appendTo(outerdiv);
                 }
@@ -66,10 +115,14 @@ define(['modules/moduleList'], function (dynModules) {
                     .html("error")
                     .appendTo(outerdiv);
             }
+            arguments[i].svg = createSVG(arguments[i])[0][0];
+            $(arguments[i].svg).appendTo(outerdiv);
             if(arguments[i].data) {
                 performDataRequests(arguments[i].data, arguments[i], outerdiv);
             } else {
-                $(arguments[i].body()).appendTo(outerdiv);
+                //Expects the modules to return a d3 encapsulated element
+                $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
+                scaleAxes(arguments[i], null);
             }
         }
 

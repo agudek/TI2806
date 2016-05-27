@@ -3,7 +3,18 @@
 
 //Helper functions for usage within octopeer
 function OctopeerHelper() {
+	this.defaultModule = null;
 	
+
+	this.getSafeModuleValue = function(module,fieldname) {
+		var moduleValue = module[fieldname];
+		if(moduleValue === undefined) {
+			return this.defaultModule[fieldname];
+		} else {
+			return moduleValue;
+		}
+	};
+
 	/**	svg line creator
 	* data - The data in JSON with defined x and y fields
 	* interpolationType - String describing the path shape, defaults to cardinal. 

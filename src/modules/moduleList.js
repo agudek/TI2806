@@ -17,12 +17,15 @@ define([], function () {
 	    'services/GithubService',
         'services/BitbucketAPI',
 	    'services/BitBucketService',
+        'svgCreator',
         'services/DataAggregator',
-	    'example-services',
+        'example-services',
         'globals'
 	    ],
+        //Module with default values. Needs to be loaded in seperately 
+        //so that they can be used in the visualistaion modules without problems
+        ['modules/default-module-values'],
 	    [// Array of visualisation modules
-    	'modules/scatter',
     	'modules/pull-requests',
     	'modules/time-and-pr-size',
     	'modules/time',
@@ -30,7 +33,7 @@ define([], function () {
     	'modules/average-comment-size-compared',
     	'modules/average-comment-size-yours',
     	'modules/average-comment-size-total',
-        'modules/users'
+        'modules/graph1.js'
     	]
     ]; 
 });
