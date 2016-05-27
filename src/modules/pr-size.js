@@ -4,7 +4,7 @@ define(function () {
     	name: "pr-size",
         title: "Size of pr",
     	size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#project-modules",
         xAxisLabel: "Number of lines changed",
         yAxisLabel: "Pull request",
         xAxisLine: true,

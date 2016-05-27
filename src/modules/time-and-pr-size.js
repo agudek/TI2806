@@ -4,7 +4,7 @@ define(function () {
     	name: "time-and-pr-size",
         title: "Time spent + size pr",
     	size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#personal-modules",
         yRightAxis: true,
         xAxisLabel: "Number of lines changed",
         yAxisLabel: "Pull request",
