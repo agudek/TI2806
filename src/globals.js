@@ -1,4 +1,4 @@
-/* globals OctopeerHelper, OctopeerService, GithubService, BitBucketService */
+/* globals OctopeerHelper, OctopeerService, GithubService, BitBucketService, DataAggregator */
 /* exported modules, octopeerHelper, octopeerService, githubService, bitbucketService */
 
 //Global modules list for if the module objects are needed elsewhere.
@@ -9,3 +9,4 @@ var octopeerHelper = new OctopeerHelper();
 var octopeerService = new OctopeerService();
 var githubService = new GithubService();
 var bitbucketService = new BitBucketService();
+var dataAggregator = new DataAggregator();
