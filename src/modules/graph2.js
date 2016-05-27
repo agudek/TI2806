@@ -6,7 +6,7 @@ define(function () {
         size: 1,
         parentSelector: '#bodyrow',
         body: function () {
-            var w = 720,
+            /*var w = 720,
                 h = 350,
                 pad = 50,
                 padTop = 10,
@@ -100,6 +100,50 @@ define(function () {
                 .attr("style", "fill:rgb(77, 136, 255);")
                 .transition()
                 .attr("y", function (d) { return h - padBottom - ySizeScale(d.y); });
+
+            return svg[0];*/
+            var w = 720,
+                h = 350,
+                pad = 50,
+                padTop = 10,
+                padBottom = 50,
+                sizeData = [
+                    { 'x': 1, 'y': 6 },
+                    { 'x': 2, 'y': 5 },
+                    { 'x': 4, 'y': 5 }
+                ];
+
+            var svg = d3.select(document.createElementNS(d3.ns.prefix.svg, 'svg'))
+                .attr("width", '100%')
+                .attr("height", '100%')
+                .attr("viewBox", "0 0 " + w + " " + h);
+
+            var layers = [
+              {
+                  "name": "apples",
+                  "values": [
+                    { "x": 0, "y": 91 },
+                    { "x": 1, "y": 290 }
+                  ]
+              },
+              {
+                  "name": "oranges",
+                  "values": [
+                    { "x": 0, "y": 9 },
+                    { "x": 1, "y": 49 }
+                  ]
+              }
+            ];
+            var stack = d3.layout.stack()(layers)
+                .offset("wiggle")
+                .values(function (d) { return d.values; });
+
+            svg.selectAll('rect').data(stack).enter()
+                .append('rect')
+                .attr("x", function (d) { return x(d.x); })
+                .attr("y", function (d) { return -y(d.y0) - y(d.y); })
+                .attr("height", function (d) { return y(d.y); })
+                .attr("width", x.rangeBand());
 
             return svg[0];
         }
