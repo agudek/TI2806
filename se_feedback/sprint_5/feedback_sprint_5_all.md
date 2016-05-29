@@ -63,3 +63,13 @@ Total: ****
 | Code Review            |      |
 
 ##Notes
+* ADD
+	* See ADD feedback for Sprint 4
+	* How have you met you're design goals so far?
+	* Sequence diagrams / flow charts of the system would be useful
+		* The user starts up the program and then what happens?
+		* What happens in the background when the user does certain actions?
+* Much better reviewing process, keep it up!
+* `graph1.js` is not a proper name
+* `time.js` is a misleading name
+	* `time_spent_per_pr` or `time_spent_on_pr` would be better
