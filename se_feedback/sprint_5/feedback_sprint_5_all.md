@@ -23,6 +23,11 @@ Total: ****
 | reflection            |      |
 
 ## Notes
+* Link on the ReadMe points to Sprint 4 (fix it when sprint-docs-6 is merged into master)
+* Missing a quick overview of which tasks were not completed (column with done)
+* Good adjustments and explanation of the issues
+	* Just add a list of what you thought was smart to work on so I know what to look for in the next Retrospective
+* Additional Tasks (not Adittional) ;)
 
 #Code Evolution Quality Feedback
 
