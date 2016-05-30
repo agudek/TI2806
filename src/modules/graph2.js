@@ -60,7 +60,7 @@ define(function () {
             .style("stroke", function (d, i) { return d3.rgb(z(i)).darker(); });
 
             // Add a rect for each date.
-            var rect = valgroup.selectAll("rect")
+            valgroup.selectAll("rect")
             .data(function (d) { return d; })
             .enter().append("svg:rect")
             .attr("x", function (d) { return x(d.x); })
