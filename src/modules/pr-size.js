@@ -47,7 +47,10 @@ define(function () {
                     {"x":18, "y":717},
                     {"x":19, "y":4772}
                 ];
-            return d3.svg.axis().scale(d3.scale.linear().domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))]));
+            return d3.svg.axis().scale(
+                d3.scale.linear()
+                    .domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))])
+            );
         },
         body: function () {
             var w = 720,

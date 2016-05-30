@@ -44,7 +44,9 @@ define(['modules/moduleList'], function (dynModules) {
 
                 d3.select(module.svg).select("."+axisname+"Axis")
                     .selectAll("text")
-                    .attr("transform", "rotate("+octopeerHelper.getSafeModuleValue(module,axisname+"AxisLabelRotation")+")");
+                    .attr("transform", 
+                        "rotate("+octopeerHelper.getSafeModuleValue(module,axisname+"AxisLabelRotation")+")"
+                    );
             }
         }
 
