@@ -47,6 +47,7 @@ jQuery(function($) {
 3. [Sprint backlog for week 4](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_3.pdf) (May 9–13)
 4. [Sprint backlog for week 5](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_4.pdf) (May 16–20)
 5. [Sprint backlog for week 6](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_5.pdf) (May 23-27)
+6. [Sprint backlog for week 7](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_backlog_6.pdf) (May 30-June 3)
 
 
 ##### Sprint retrospectives
@@ -54,6 +55,7 @@ jQuery(function($) {
 2. [Sprint retro for week 3](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_2.pdf) (May 2–4)
 3. [Sprint retro for week 4](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_3.pdf) (May 9–13)
 4. [Sprint retro for week 5](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_4.pdf) (May 16–20)
+5. [Sprint retro for week 6](https://github.com/mboom/TI2806/blob/master/doc/project/sprint_retro_5.pdf) (May 23–27)
 
 
 ### Project reports
