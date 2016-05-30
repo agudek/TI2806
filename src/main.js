@@ -14,11 +14,11 @@ define(['modules/moduleList'], function (dynModules) {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
 
-        function scaleAxis(module, object, axisname) {
+        function scaleAxis(module, objects, axisname) {
             /*jshint maxcomplexity:7 */
             if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
                 var Scale = d3.scale.linear()
-                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")())
+                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")(objects))
                     .range([350-50-10,0])
                     .nice();
                 var Axis = d3.svg.axis().scale(Scale);
