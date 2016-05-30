@@ -60,9 +60,9 @@ define(function () {
             .style("stroke", function (d, i) { return d3.rgb(z(i)).darker(); });
 
             // Add a rect for each date.
-            var rect = valgroup.selectAll(".rect")
+            var rect = valgroup.selectAll("rect")
             .data(function (d) { return d; })
-            .enter().append("svg:rect")
+            .enter().append("rect")
             .attr("x", function (d) { return x(d.x); })
             .attr("y", function (d) { return -y(d.y0) - y(d.y) +300; })
             .attr("height", function (d) { return y(d.y); })
