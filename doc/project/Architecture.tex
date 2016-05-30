@@ -54,10 +54,8 @@ For the client itself a basic structure will be described. The calls to the Octo
 \begin{figure}[htp]
 \centering
 \includegraphics[width=10cm]{octopeerviewdecomposition.png}
-\caption{Ocotpeer viewer decomposition}
+\caption{Octopeer viewer decomposition}
 \end{figure}
-
-To handle the asynchronous calls easier, we made use of RSVP.js. This is a library which implements the Promises paradigm. This way you can send multiple asynchronous HTTP requests and handle them as if they are responded to synchronously.
 
 \subsection{Subsystems}
 
@@ -84,6 +82,10 @@ The database is on the external Octopeer domain. This domain handles the data wi
 \subsection{Concurrency}
 
 A goal of this project is scalability. This means that when the user base grows rapidly big, the tool should not break down. A lot of concurrent users should not be hold back. The external Octopeer domain should be able to handle a lot of traffic.
+
+\subsubsection{Promises}
+
+To handle the asynchronous calls easier, we made use of RSVP.js. This is a library which implements the Promises paradigm. This way you can send multiple asynchronous HTTP requests and handle them as if they are responded to synchronously.
 
 \subsection{Modularity}
 
