@@ -18,7 +18,7 @@ define(function () {
 
             x = d3.scale.ordinal().rangeRoundBands([pad, w - pad]),
             y = d3.scale.linear().range([0, h - padBottom - padTop]),
-            z = d3.scale.ordinal().range(["darkblue", "blue", "lightblue"]);
+            z = d3.scale.ordinal().range(["rgba(0, 0, 255, 1.00)", "rgba(255, 255, 255, 1.00)", "rgba(255, 0, 0, 1.00)"]);
 
             console.log("RAW MATRIX---------------------------");
             // 4 columns: ID,c1,c2,c3
@@ -64,9 +64,10 @@ define(function () {
             .data(function (d) { return d; })
             .enter().append("svg:rect")
             .attr("x", function (d) { return x(d.x); })
-            .attr("y", function (d) { return -y(d.y0) - y(d.y) +300; })
+            .attr("y", function (d) { return -y(d.y0) - y(d.y) + 300; })
             .attr("height", function (d) { return y(d.y); })
-            .attr("width", x.rangeBand());
+            .attr("width", x.rangeBand())
+            .attr("style", "stroke: none;");
 
 
             return svg;
