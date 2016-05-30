@@ -62,7 +62,7 @@ define(function () {
             // Add a rect for each date.
             var rect = valgroup.selectAll("rect")
             .data(function (d) { return d; })
-            .enter().append("rect")
+            .enter().append("svg:rect")
             .attr("x", function (d) { return x(d.x); })
             .attr("y", function (d) { return -y(d.y0) - y(d.y) +300; })
             .attr("height", function (d) { return y(d.y); })
