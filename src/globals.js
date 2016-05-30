@@ -1,5 +1,5 @@
 /* globals OctopeerHelper, OctopeerService, GithubService, BitBucketService, DataAggregator */
-/* exported modules, octopeerHelper, octopeerService, githubService, bitbucketService */
+/* exported modules, octopeerHelper, octopeerService, githubService, bitbucketService, dataAggregator */
 
 //Global modules list for if the module objects are needed elsewhere.
 var modules = [];
