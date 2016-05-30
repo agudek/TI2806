@@ -24,6 +24,7 @@ define(['modules/moduleList'], function (dynModules) {
                 var Axis = d3.svg.axis().scale(Scale);
                 if(axisname === "x") {
                     Axis.orient("bottom");
+                    Axis.scale().range([0, 720 - 50 - 50]);
                     if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
                         Axis.tickSize(-350+50+10);
                     }
