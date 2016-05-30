@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
+    "coveralls": "^2.11.9",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-concat": "~0.3.0",
@@ -16,9 +17,11 @@
     "grunt-contrib-qunit": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.4.0",
-    "grunt-mocha": "^1.0.2",
-    "grunt-mocha-istanbul": "^4.0.2",
-    "mocha": "^2.4.5"
+    "grunt-coveralls": "0.3.0",
+    "grunt-qunit-cov": "~0.3.2",
+    "grunt-qunit-istanbul": "^0.6.0",
+    "istanbul": "^0.4.3",
+    "istanbul-coveralls": "^1.0.3"
   },
   "dependencies": {
     "jQuery": "~1.7.3"
