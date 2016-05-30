@@ -21,7 +21,7 @@ define(function () {
                 .rangePoints(
                     [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
                 );
-            return scale;
+            return d3.svg.axis().scale(scale);
         },
         yAxisFitFunction: function() { 
             var sizeData = [
@@ -55,7 +55,7 @@ define(function () {
 
             var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
 
-            return [0, maxValue];            
+            return d3.svg.axis().scale(d3.scale.linear().domain([0,maxValue]));           
          },
         xAxis: true,
         yAxis: true,

@@ -22,7 +22,7 @@ define(function () {
                     "pr16", "pr17", "pr18", "pr19"
                 ])
                 .rangePoints([0, 720-2*50]);
-            return axisScale;
+            return d3.svg.axis().scale(axisScale);
         },
         yAxisFitFunction: function() {
             var sizeData = [
@@ -72,7 +72,7 @@ define(function () {
             var maxValue = Math.max ( 
                 Math.max.apply(Math,sizeData.map(function(o){return o.y;})),
                  Math.max.apply(Math,sizeData2.map(function(o){return o.y;})));
-            return [0,maxValue];
+            return d3.svg.axis().scale(d3.scale.linear().domain([0,maxValue]));
         },
         body: function () {
             var w = 720,

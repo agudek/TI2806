@@ -17,13 +17,11 @@ define(['modules/moduleList'], function (dynModules) {
         function scaleAxis(module, object, axisname) {
             /*jshint maxcomplexity:7 */
             if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
-                var Scale = d3.scale.linear()
-                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")())
-                    .range([350-50-10,0])
-                    .nice();
-                var Axis = d3.svg.axis().scale(Scale);
+                var Axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")();
+                Axis.scale().range([350-50-10,0]).nice();
                 if(axisname === "x") {
                     Axis.orient("bottom");
+                    Axis.scale().range([720-50-50,0]);
                     if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
                         Axis.tickSize(-350+50+10);
                     }
@@ -43,6 +41,10 @@ define(['modules/moduleList'], function (dynModules) {
                     .duration(500)
                     .ease("sin-in-out")
                     .call(Axis);
+
+                d3.select(module.svg).select("."+axisname+"Axis")
+                    .selectAll("text")
+                    .attr("transform", "rotate("+octopeerHelper.getSafeModuleValue(module,axisname+"AxisLabelRotation")+")");
             }
         }
 
