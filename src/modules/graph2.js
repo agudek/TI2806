@@ -18,7 +18,11 @@ define(function () {
 
             x = d3.scale.ordinal().rangeRoundBands([pad, w - pad]),
             y = d3.scale.linear().range([0, h - padBottom - padTop]),
-            z = d3.scale.ordinal().range(["rgba(0, 0, 255, 1.00)", "rgba(255, 255, 255, 1.00)", "rgba(255, 0, 0, 1.00)"]);
+            z = d3.scale.ordinal().range([
+                "rgba(0, 0, 255, 1.00)",
+                "rgba(255, 255, 255, 1.00)",
+                "rgba(255, 0, 0, 1.00)"
+            ]);
 
             console.log("RAW MATRIX---------------------------");
             // 4 columns: ID,c1,c2,c3
