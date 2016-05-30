@@ -4,7 +4,7 @@ define(function () {
     	name: "average-comment-size-yours",
         title: "Your average comment size",
     	size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#personal-modules",
         xAxisLabel: "Average comment size (size/count)",
         yAxisLabel: "Pull request",
         xAxisLine: true,

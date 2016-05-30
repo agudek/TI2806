@@ -7,7 +7,7 @@ define(function () {
         name: "pull-requests",
         title: "Pull requests",
         size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#project-modules",
         xAxisLabel: "Date",
         yAxisLabel: "",
         yAxis: false,
