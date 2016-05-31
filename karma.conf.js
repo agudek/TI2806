@@ -2,6 +2,11 @@
 // Generated on Tue May 31 2016 10:31:05 GMT+0200 (W. Europe Daylight Time)
 
 module.exports = function (config) {
+
+    if (process.env.TRAVIS) {
+        cfg.browsers = ['Chrome_travis_ci'];
+    }
+
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
