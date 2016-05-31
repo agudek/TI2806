@@ -76,6 +76,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   // Default task.=
   grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);

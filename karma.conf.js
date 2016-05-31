@@ -78,11 +78,12 @@ module.exports = function (config) {
         concurrency: Infinity,
 
         coverageReporter: {
-            type: 'html',
+            type: 'lcov',
             dir: 'coverage/'
         },
 
         plugings: [
+            'karma-coverage',
             'karma-chrome-launcher',
             'karma-jasmine',
             'karma-requirejs'

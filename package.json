@@ -19,6 +19,7 @@
     "grunt-contrib-watch": "~0.4.0",
     "grunt-coveralls": "0.3.0",
     "grunt-karma": "^2.0.0",
+    "grunt-karma-coveralls": "^2.5.4",
     "grunt-qunit-cov": "~0.3.2",
     "grunt-qunit-istanbul": "^0.6.0",
     "istanbul": "^0.4.3",
