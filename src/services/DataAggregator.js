@@ -131,6 +131,23 @@ function DataAggregator() {
         return pullRequests;
     }
     
+    function pullRequestsSessionObject(pullRequests) {
+        var objectMatrix = [], mIndex;
+        pullRequests.forEach(function (pr) {
+            objectMatrix.push([]);
+            mIndex = objectMatrix.length - 1;
+            objectMatrix[mIndex].push(pr.pull_request_number);
+            pr.sessions.forEach(function (session) {
+                var summedDuration = 0;
+                session.events.forEach(function (se) {
+                    summedDuration += se.duration;
+                });
+                objectMatrix[mIndex].push(summedDuration);
+            });
+        });
+        return objectMatrix;
+    }
+    
     /**
         public graph 1 function (comment count and pullrequests)
     */
@@ -163,6 +180,7 @@ function DataAggregator() {
                 .then(setSemanticEventsForSessionsFromPullRequests)
                 .then(filterSessionStartFromSessionsFromPullRequests)
                 .then(sumDurationOfSessionsFromPullRequests)
+                .then(pullRequestsSessionObject)
                 .then(fulfill);
         });
         return promise;
