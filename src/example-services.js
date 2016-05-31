@@ -10,7 +10,7 @@ data.graphCommentAmountPerPullRequests("borek2").then(function (result) {
 ////	console.log(pullrequest);
 //});
 //
-//var bitbucketService = new BitBucketService();
+//var bitbucketService = new BitbucketService();
 //bitbucketService.getPullRequests('jespern','django-piston', function (pullrequests){
 ////	console.log(pullrequests);
 //});

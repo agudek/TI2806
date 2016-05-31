@@ -16,7 +16,7 @@ define([], function () {
         'services/GitHubAPI',
 	    'services/GitHubService',
         'services/BitbucketAPI',
-	    'services/BitBucketService',
+	    'services/BitbucketService',
         'svgCreator',
         'services/DataAggregator',
         'example-services',
