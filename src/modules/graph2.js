@@ -20,9 +20,15 @@ define(function () {
         });
     }),
     stacked = d3.layout.stack()(remapped),
-    x = d3.scale.ordinal().domain(stacked[0].map(function (d) { return d.x; })).rangeRoundBands([pad, w - pad]),
-    y = d3.scale.linear().domain([0, d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; })]).range([0, h - padBottom - padTop]),
-    yAxisRange = d3.scale.linear().domain([d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; }), 0]).range([0, h - padBottom - padTop]),
+    x = d3.scale.ordinal()
+        .domain(stacked[0].map(function (d) { return d.x; }))
+        .rangeRoundBands([pad, w - pad]),
+    y = d3.scale.linear()
+        .domain([0, d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; })])
+        .range([0, h - padBottom - padTop]),
+    yAxisRange = d3.scale.linear()
+        .domain([d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; }), 0])
+        .range([0, h - padBottom - padTop]),
     z = d3.scale.ordinal().range([
         "rgba(0, 0, 255, 1.00)",
         "rgba(255, 255, 255, 1.00)",
