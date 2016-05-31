@@ -5,8 +5,8 @@ define(function () {
         title: "Size of pr",
     	size: 1,
         parentSelector: "#project-modules",
-        xAxisLabel: "Number of lines changed",
-        yAxisLabel: "Pull request",
+        xAxisLabel: "Pull request",
+        yAxisLabel: "Number of lines changed",
         xAxisLine: true,
         yAxisLine: true,
         xAxisTicks: false,
@@ -52,6 +52,13 @@ define(function () {
                     .domain([0,Math.max.apply(Math,sizeData.map(function(o){return o.y;}))])
             );
         },
+        legend: [
+            {
+                "type":"line",
+                "style":"stroke:rgb(212, 51, 51);stroke-width:3px;",
+                "text":"Number of lines changed"
+            }
+        ],
         body: function () {
             var w = 720,
                 h = 350,

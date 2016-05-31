@@ -60,6 +60,13 @@ define(function () {
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
+        legend: [
+            {
+                "type":"rect",
+                "style":"fill:rgb(77, 136, 255);",
+                "text":"Number of pull requests with x number of comments"
+            }
+        ],
         body: function () {
             var w = 720,
                 h = 350,

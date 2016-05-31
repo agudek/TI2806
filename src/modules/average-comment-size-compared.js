@@ -5,8 +5,8 @@ define(function () {
         title: "Average comment sizes",
     	size: 1,
         parentSelector: "#personal-modules",
-        xAxisLabel: "Average comment size (size/count)",
-        yAxisLabel: "Pull request",
+        xAxisLabel: "Pull request",
+        yAxisLabel: "Average comment size (size/count)",
         xAxisLine: true,
         yAxisLine: true,
         xAxisTicks: true,
@@ -74,6 +74,18 @@ define(function () {
                  Math.max.apply(Math,sizeData2.map(function(o){return o.y;})));
             return d3.svg.axis().scale(d3.scale.linear().domain([0,maxValue]));
         },
+        legend: [
+            {
+                "type":"rect",
+                "style":"stroke:rgb(212, 51, 51);stroke-width:2px;fill:rgba(212, 51, 51,0.5);",
+                "text":"Your average comment sizes"
+            },
+            {
+                "type":"rect",
+                "style":"stroke:rgb(51, 125, 212);stroke-width:2px;fill:rgba(51, 125, 212,0.5);",
+                "text":"Total average comment sizes"
+            }
+        ],
         body: function () {
             var w = 720,
                 h = 350,

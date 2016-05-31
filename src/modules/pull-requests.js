@@ -28,6 +28,23 @@ define(function () {
             return axis;
         },
         xAxisLabelRotation: 65,
+        legend: [
+            {
+                "type":"dot",
+                "style":"fill:green;",
+                "text":"Merged pull request"
+            },
+            {
+                "type":"dot",
+                "style":"fill:orange;",
+                "text":"Open pull requests"
+            },
+            {
+                "type":"dot",
+                "style":"fill:red;",
+                "text":"Closed pull requests"
+            }
+        ],
         body: function () {
 
             function processPRs(prs) {

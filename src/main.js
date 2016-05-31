@@ -17,30 +17,30 @@ define(['modules/moduleList'], function (dynModules) {
         function scaleAxis(module, object, axisname) {
             /*jshint maxcomplexity:7 */
             if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
-                var Axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")();
-                Axis.scale().range([350-50-10,0]).nice();
+                var axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")();
+                axis.scale().range([350-50-10,0]).nice();
                 if(axisname === "x") {
-                    Axis.orient("bottom");
-                    Axis.scale().range([720-50-50,0]);
+                    axis.orient("bottom");
+                    axis.scale().range([720-50-50,0]);
                     if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                        Axis.tickSize(-350+50+10);
+                        axis.tickSize(-350+50+10);
                     }
                 } else if (axisname === "y") {
-                    Axis.orient("left");
+                    axis.orient("left");
                     if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                        Axis.tickSize(-720+50+50);
+                        axis.tickSize(-720+50+50);
                     }
                 } else {
-                    Axis.orient("right");
+                    axis.orient("right");
                     if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                        Axis.tickSize(720-50-50);
+                        axis.tickSize(720-50-50);
                     }
                 }
                 d3.select(module.svg).select("."+axisname+"Axis")
                     .transition()
                     .duration(500)
                     .ease("sin-in-out")
-                    .call(Axis);
+                    .call(axis);
 
                 d3.select(module.svg).select("."+axisname+"Axis")
                     .selectAll("text")
@@ -86,10 +86,35 @@ define(['modules/moduleList'], function (dynModules) {
             var legend = d3.select(module.svg).append("g")
                 .attr("class","legend");
             for (var i = 0 ; i < legendData.length ; i++) {
-                switch(legendData.type) {
+                switch(legendData[i].type) {
                     case "linewith" : 
-                    case "line" : break;
-                    case "rect" : break;
+                    case "line" : 
+                        legend.append("line")
+                            .attr("x1",635)
+                            .attr("y1",20+i*25)
+                            .attr("x2",665)
+                            .attr("y2",20+i*25)
+                            .attr("style",legendData[i].style);
+                        legend.append("text")
+                            .attr("x",630)
+                            .attr("y",25+i*25)
+                            .attr("text-anchor","end")
+                            .text(legendData[i].text);
+                        break;
+                    case "dot":
+                    case "rect" : 
+                        legend.append("rect")
+                            .attr("x",635)
+                            .attr("y",10+i*25)
+                            .attr("width",30)
+                            .attr("height",20)
+                            .attr("style",legendData[i].style);
+                        legend.append("text")
+                            .attr("x",630)
+                            .attr("y",25+i*25)
+                            .attr("text-anchor","end")
+                            .text(legendData[i].text);
+                        break;
                 }
             }
         }
