@@ -2,7 +2,7 @@
     module('Test GitHubAPI object', {
         // Set up this module
         setup: function () {
-            this.ghapi = new GithubAPI();
+            this.ghapi = new GitHubAPI();
         }
     });
 
