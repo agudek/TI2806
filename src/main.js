@@ -62,7 +62,7 @@ define(['modules/moduleList'], function (dynModules) {
             }
         }
 
-        function performDataRequests(data, module, outerdiv) {
+        function performDataRequests(data, module) {
             var promises = [];
             for(var i = 0 ; i < data.length ; i++){
                 var promise = data[i].serviceCall();
@@ -70,7 +70,7 @@ define(['modules/moduleList'], function (dynModules) {
                 promises.push(promise);
             }
             RSVP.all(promises).then(function (objects) {
-                $(module.body(objects)).appendTo(outerdiv);
+                $(module.body(objects).node()).appendTo($(module.svg).find('g.content'));
                 scaleAxes(module, objects);
                 /* TODO if (singleFail(objects) && module.failBody) {
                     $(module.failBody()).appendTo(outerdiv);
@@ -79,6 +79,19 @@ define(['modules/moduleList'], function (dynModules) {
                     $(module.body(objects)).appendTo(outerdiv);
                 }*/
             });
+        }
+
+        function drawLegend(module) {
+            var legendData = octopeerHelper.getSafeModuleValue(module,"legend");
+            var legend = d3.select(module.svg).append("g")
+                .attr("class","legend");
+            for (var i = 0 ; i < legendData.length ; i++) {
+                switch(legendData.type) {
+                    case "linewith" : 
+                    case "line" : break;
+                    case "rect" : break;
+                }
+            }
         }
 
         //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
@@ -118,14 +131,18 @@ define(['modules/moduleList'], function (dynModules) {
                     .addClass("errorBadge")
                     .html("error")
                     .appendTo(outerdiv);
+                var svg = createSVG(arguments[i]);
+                svg.append('g')
+                    .attr("class","content");
+                arguments[i].svg = svg.node();
             }
-            arguments[i].svg = createSVG(arguments[i])[0][0];
             $(arguments[i].svg).appendTo(outerdiv);
             if(arguments[i].data) {
-                performDataRequests(arguments[i].data, arguments[i], outerdiv);
+                performDataRequests(arguments[i].data, arguments[i]);
             } else {
                 //Expects the modules to return a d3 encapsulated element
-                $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
+                $(arguments[i].body().node()).appendTo($(arguments[i].svg).find('g.content'));
+                drawLegend(arguments[i]);
                 scaleAxes(arguments[i], null);
             }
         }
