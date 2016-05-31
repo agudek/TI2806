@@ -14,10 +14,10 @@ define(['modules/moduleList'], function (dynModules) {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
 
-        function scaleAxis(module, object, axisname) {
+        function scaleAxis(module, objects, axisname) {
             /*jshint maxcomplexity:7 */
             if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
-                var axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")();
+                var axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")(objects);
                 axis.scale().range([350-50-10,0]).nice();
                 if(axisname === "x") {
                     axis.orient("bottom");
@@ -162,12 +162,12 @@ define(['modules/moduleList'], function (dynModules) {
                 arguments[i].svg = svg.node();
             }
             $(arguments[i].svg).appendTo(outerdiv);
+            drawLegend(arguments[i]);
             if(arguments[i].data) {
                 performDataRequests(arguments[i].data, arguments[i]);
             } else {
                 //Expects the modules to return a d3 encapsulated element
                 $(arguments[i].body().node()).appendTo($(arguments[i].svg).find('g.content'));
-                drawLegend(arguments[i]);
                 scaleAxes(arguments[i], null);
             }
         }
