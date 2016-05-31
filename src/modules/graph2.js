@@ -38,6 +38,8 @@ define(function () {
     return {
         name: 'graph2',
         title: 'Session durations per pull-request',
+        xAxisLabel: 'Pull-requests',
+        yAxisLabel: 'Sessions and session duration',
         size: 1,
         parentSelector: '#bodyrow',
         xAxisScale: function () {
