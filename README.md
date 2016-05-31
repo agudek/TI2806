@@ -4,8 +4,6 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/mboom/TI2806/badge.svg?branch=master)](https://coveralls.io/github/mboom/TI2806?branch=master)
 
-[![Coverage Status](https://coveralls.io/repos/github/mboom/TI2806/badge.svg?branch=test-setup)](https://coveralls.io/github/mboom/TI2806?branch=test-setup)
-
 Repository homepage: https://mboom.github.io/TI2806/
 
 View on Travis-CI: https://travis-ci.org/mboom/TI2806
