@@ -62,6 +62,11 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
+    karma: {
+        unit: {
+            configFile: 'karma.conf.js'
+        }
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -70,6 +75,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
 
   // Default task.=
   grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
