@@ -1,5 +1,5 @@
 /*exported DataAggregator*/
-/*globals OctopeerService, GithubService, BitBucketService, RSVP*/
+/*globals OctopeerService, GitHubService, BitbucketService, RSVP*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function DataAggregator() {
@@ -7,8 +7,8 @@ function DataAggregator() {
     var opService, ghService, bbService;
     
     opService = new OctopeerService();
-    ghService = new GithubService();
-    bbService = new BitBucketService();
+    ghService = new GitHubService();
+    bbService = new BitbucketService();
     
     
     /**

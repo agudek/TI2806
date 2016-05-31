@@ -4,14 +4,14 @@ function PullRequestTransformer() {
     this.transform = function (pullrequest, type) {
         switch (type) {
             case "GITHUB":
-                return transformGithubPullrequest(pullrequest);
+                return transformGitHubPullrequest(pullrequest);
             case "BITBUCKET":
                 return transformBitbucketPullrequest(pullrequest);
             default:
                 console.log("Unaccepted type");
         }
     };
-    this.transformGithubFiles = function (files) {
+    this.transformGitHubFiles = function (files) {
         return files.map(function (file) {
             return {
                 "filename": file.filename,
@@ -22,7 +22,7 @@ function PullRequestTransformer() {
         });
     };
 
-    function transformGithubPullrequest(pullrequest) {
+    function transformGitHubPullrequest(pullrequest) {
         var merged = (pullrequest.merged_at !== null);
         return {
             "title": pullrequest.title,

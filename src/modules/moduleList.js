@@ -13,10 +13,10 @@ define([], function () {
         'resolvers/objectResolver',
 	    'services/OctopeerAPI',
 	    'services/OctopeerService',
-        'services/GithubAPI',
-	    'services/GithubService',
+        'services/GitHubAPI',
+	    'services/GitHubService',
         'services/BitbucketAPI',
-	    'services/BitBucketService',
+	    'services/BitbucketService',
         'svgCreator',
         'services/DataAggregator',
         'globals'
