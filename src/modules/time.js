@@ -4,7 +4,7 @@ define(function () {
     	name: "time",
         title: "Time spent on pr",
     	size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#personal-modules",
         xAxisLabel: "Time spent on pr",
         yAxisLabel: "Pull request",
         xAxisLine: true,
