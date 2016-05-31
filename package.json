@@ -24,7 +24,8 @@
     "istanbul": "^0.4.3",
     "istanbul-coveralls": "^1.0.3",
     "karma": "^0.13.22",
-    "karma-chrome-launcher": "^1.0.1"
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0"
   },
   "dependencies": {
     "jQuery": "~1.7.3"
