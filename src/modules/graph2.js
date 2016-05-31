@@ -1,20 +1,14 @@
-/* globals define */
+/* globals define, dataAggregator */
 define(function () {
     var w = 720,
     h = 350,
     pad = 50,
     padTop = 10,
     padBottom = 50,
+    maxNumberOfSessions = 0;
 
-    // 4 columns: ID,c1,c2,c3
-    matrix = [
-                [1, 5871, 8916, 2868],
-                [2, 10048, 2060, 6171],
-                [3, 16145, 8090, 8045],
-                [4, 990, 940, 6907],
-                [5, 450, 430, 5000]
-    ],
-    remapped = ["c1", "c2", "c3"].map(function (dat, i) {
+    matrix = [],
+    remapped = [[]].map(function (dat, i) {
         return matrix.map(function (d, ii) {
             return { x: ii, y: d[i + 1] };
         });
@@ -35,20 +29,54 @@ define(function () {
         "rgba(255, 0, 0, 1.00)"
     ]);
 
+    function updateData(data) {
+        matrix = data;
+        var mapping = []
+        for (var i = 0; i < matrix.length; ++i) {
+            if (matrix[i].length - 1 > maxNumberOfSessions - 1) {
+                maxNumberOfSessions = matrix[i].length - 1;
+            }
+        }
+        for (i = 1; i <= maxNumberOfSessions; ++i) {
+            mapping.push("c" + i);
+        }
+        remapped = mapping.map(function (dat, i) {
+            return matrix.map(function (d, ii) {
+                return { x: ii, y: d[i + 1] };
+            });
+        });
+        stacked = d3.layout.stack()(remapped);
+        x = d3.scale.ordinal()
+            .domain(stacked[0].map(function (d) { return d.x; }))
+            .rangeRoundBands([pad, w - pad]);
+        y = d3.scale.linear()
+            .domain([0, d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; })])
+            .range([0, h - padBottom - padTop]);
+        yAxisRange = d3.scale.linear()
+            .domain([d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; }), 0])
+            .range([0, h - padBottom - padTop]);
+    }
+
     return {
         name: 'graph2',
         title: 'Session durations per pull-request',
         xAxisLabel: 'Pull-requests',
         yAxisLabel: 'Sessions and session duration',
         size: 1,
-        parentSelector: '#bodyrow',
-        xAxisScale: function () {
+        parentSelector: '#project-modules',
+        data: [{
+            "serviceCall": function () { return dataAggregator.graphPrDividedInSessions('', 10); },
+            "required": true
+        }],
+        xAxisFitFunction: function (res) {
             return x;
         },
-        yAxisScale: function () {
+        yAxisFitFunction: function (res) {
             return yAxisRange;
         },
-        body: function () {
+        body: function (res) {
+            updateData(res[0]);
+
             // create canvas
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g'))
             .attr("class", "chart");

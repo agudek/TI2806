@@ -5,16 +5,16 @@ define(function () {
     pad = 50,
     padTop = 10,
     padBottom = 50,
-    sizeData = [
-                { 'x': 1, 'y': 6 },
-                { 'x': 2, 'y': 5 },
-                { 'x': 4, 'y': 5 }
-    ],
+    sizeData = [],
     domain = ['0-2', '3-5', '5-10', '<10'],
-    buckets = [];
-    for (var i = 0; i < domain.length; ++i) {
-        buckets.push(0);
-    }
+    buckets = [],
+    maxValue = 0,
+    xSizeScale = d3.scale.linear()
+        .domain([0, domain.length])
+        .range([pad, w - 30]),
+    ySizeScale = d3.scale.linear()
+        .domain([0, maxValue])
+        .range([padTop, h - padBottom]).nice();
 
     function devide(x) {
         switch (true) {
@@ -25,22 +25,29 @@ define(function () {
             default: return 0;
         }
     }
-    for (i = 0; i < sizeData.length; ++i) {
-        var item = sizeData[i];
-        buckets[devide(item.x)] += item.y;
-    }
-    sizeData = [];
-    for (i = 0; i < buckets.length; ++i) {
-        sizeData.push({ 'x': i, 'y': buckets[i] });
-    }
 
-    var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; })),
-    xSizeScale = d3.scale.linear()
-        .domain([0, domain.length])
-        .range([pad, w - 30]),
-    ySizeScale = d3.scale.linear()
-        .domain([0, maxValue])
-        .range([padTop, h - padBottom]).nice();
+    function updateData(data) {
+        buckets = [];
+        sizeData = data;
+        for (var i = 0; i < domain.length; ++i) {
+            buckets.push(0);
+        }
+        for (i = 0; i < sizeData.length; ++i) {
+            var item = sizeData[i];
+            buckets[devide(item.x)] += item.y;
+        }
+        sizeData = [];
+        for (i = 0; i < buckets.length; ++i) {
+            sizeData.push({ 'x': i, 'y': buckets[i] });
+        }
+        maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
+        xSizeScale = d3.scale.linear()
+            .domain([0, domain.length])
+            .range([pad, w - 30]);
+        ySizeScale = d3.scale.linear()
+            .domain([0, maxValue])
+            .range([padTop, h - padBottom]);
+    }
 
     return {
         name: 'graph1',
@@ -63,20 +70,18 @@ define(function () {
                     [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
                 );
         },
-        yAxisFitFunction: function(res) {
-            sizeData = res[0];
+        yAxisFitFunction: function (res) {
             return [0, maxValue];            
          },
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
         data: [{
-            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(); },
+            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(''); },
             "required": true
         }],
         body: function(res) {
-            sizeData = res[0];
-
+            updateData(res[0]);
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
             g.selectAll("rect").data(sizeData).enter()
                 .append("rect")

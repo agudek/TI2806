@@ -19,7 +19,6 @@ define([], function () {
 	    'services/BitBucketService',
         'svgCreator',
         'services/DataAggregator',
-        'example-services',
         'globals'
 	    ],
         //Module with default values. Needs to be loaded in seperately 
