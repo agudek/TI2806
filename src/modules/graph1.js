@@ -1,4 +1,4 @@
-/* globals define */
+/* globals define, dataAggregator */
 define(function () {
     var w = 720,
     h = 350,
@@ -63,15 +63,21 @@ define(function () {
                     [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
                 );
         },
-        yAxisFitFunction: function() {
+        yAxisFitFunction: function(res) {
+            sizeData = res[0];
             return [0, maxValue];            
          },
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
-        body: function () {
-            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
+        data: [{
+            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(); },
+            "required": true
+        }],
+        body: function(res) {
+            sizeData = res[0];
 
+            var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
             g.selectAll("rect").data(sizeData).enter()
                 .append("rect")
                 .attr("x", function (d) { return xSizeScale(d.x); })
@@ -81,7 +87,6 @@ define(function () {
                 .attr("style", "fill:rgb(77, 136, 255);")
                 .transition()
                 .attr("y", function (d) { return h - padBottom - ySizeScale(d.y); });
-
             return g;
         }
     };

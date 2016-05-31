@@ -14,11 +14,11 @@ define(['modules/moduleList'], function (dynModules) {
         // Set global modules variable to a list of all imported modules after converting pseudo-array to array
         modules = Array.prototype.slice.call(arguments);
 
-        function scaleAxis(module, object, axisname) {
+        function scaleAxis(module, objects, axisname) {
             /*jshint maxcomplexity:7 */
             if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
                 var Scale = d3.scale.linear()
-                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")())
+                    .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")(objects))
                     .range([350-50-10,0])
                     .nice();
                 var Axis = d3.svg.axis().scale(Scale);
@@ -67,7 +67,7 @@ define(['modules/moduleList'], function (dynModules) {
                 promises.push(promise);
             }
             RSVP.all(promises).then(function (objects) {
-                $(module.body(objects)).appendTo(outerdiv);
+                $(module.body(objects).node()).appendTo(outerdiv);
                 scaleAxes(module, objects);
                 /* TODO if (singleFail(objects) && module.failBody) {
                     $(module.failBody()).appendTo(outerdiv);
@@ -119,7 +119,7 @@ define(['modules/moduleList'], function (dynModules) {
             arguments[i].svg = createSVG(arguments[i])[0][0];
             $(arguments[i].svg).appendTo(outerdiv);
             if(arguments[i].data) {
-                performDataRequests(arguments[i].data, arguments[i], outerdiv);
+                performDataRequests(arguments[i].data, arguments[i], arguments[i].svg);
             } else {
                 //Expects the modules to return a d3 encapsulated element
                 $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
