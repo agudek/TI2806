@@ -3,12 +3,7 @@
 
 module.exports = function (config) {
 
-    if (process.env.TRAVIS) {
-        cfg.browsers = ['Chrome_travis_ci'];
-    }
-
-    config.set({
-
+    var cfg = {
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
 
@@ -92,5 +87,12 @@ module.exports = function (config) {
             'karma-jasmine',
             'karma-requirejs'
         ]
-    })
+    };
+
+    if (process.env.TRAVIS) {
+        cfg.browsers = ['Chrome_travis_ci'];
+    }
+
+    config.set(cfg);
 }
+
