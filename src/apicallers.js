@@ -1,4 +1,4 @@
-/*exported OctopeerCaller, GitHubAPICaller, BitBucketAPICaller, get, getJSON */
+/*exported OctopeerCaller, GitHubAPICaller, BitbucketAPICaller, get, getJSON */
 /*globals console, cache, $*/
 function get(url, callback, bypassCash) {
     "use strict";

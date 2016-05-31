@@ -1,11 +1,11 @@
-/*exported GithubAPI*/
+/*exported GitHubAPI*/
 /**
 * This will try to easily create an url to call for the github api
 *
 * @constructor
-* @this {GithubAPI}
+* @this {GitHubAPI}
 */
-function GithubAPI() {
+function GitHubAPI() {
     "use strict";
 
     this.apiUrl = "http://api.github.com/";

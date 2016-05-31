@@ -1,9 +1,9 @@
-/* globals BitBucketAPI, PullRequestTransformer, getJSON */
-/* exported BitBucketService */
-function BitBucketService() {
+/* globals BitbucketAPI, PullRequestTransformer, getJSON */
+/* exported BitbucketService */
+function BitbucketService() {
     "use strict";
     var api;
-    api = new BitBucketAPI();
+    api = new BitbucketAPI();
     
     this.getPullRequests = function (owner, repo, callback) {
         getJSON(api.urlBuilder('repositories/' +

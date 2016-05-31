@@ -1,9 +1,9 @@
-/* globals PullRequestTransformer, getJSON, GithubAPI */
-/* exported GithubService */
-function GithubService() {
+/* globals PullRequestTransformer, getJSON, GitHubAPI */
+/* exported GitHubService */
+function GitHubService() {
     "use strict";
     var api;
-    api = new GithubAPI();
+    api = new GitHubAPI();
     
     this.getPullRequests = function (owner, repo, callback) {
         getJSON(api.urlBuilder('repos/' +
@@ -43,7 +43,7 @@ function GithubService() {
                                number + '/files', {}), function (files) {
             var transformer, transformed;
             transformer = new PullRequestTransformer();
-            transformed = transformer.transformGithubFiles(files);
+            transformed = transformer.transformGitHubFiles(files);
             callback(transformed);
         });
     }
