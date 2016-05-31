@@ -9,7 +9,7 @@ function GithubService() {
         getJSON(api.urlBuilder('repos/' +
                                owner + '/' +
                                repo +
-                               '/pulls?state=all', {}), function (pullrequests) {
+                               '/pulls', {state: "all"}), function (pullrequests) {
             var transformer, transformed;
             transformer = new PullRequestTransformer();
             transformed = pullrequests.map(function (pr) {
