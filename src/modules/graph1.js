@@ -4,7 +4,7 @@ define(function () {
     h = 350,
     pad = 50,
     padTop = 10,
-    padBottom = 50
+    padBottom = 50,
     sizeData = [
                 { 'x': 1, 'y': 6 },
                 { 'x': 2, 'y': 5 },
