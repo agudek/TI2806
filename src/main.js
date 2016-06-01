@@ -16,32 +16,36 @@ define(['modules/moduleList'], function (dynModules) {
     function scaleAxis(module, objects, axisname) {
         /*jshint maxcomplexity:7 */
         if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisScale")() === "fit"){
-            var Scale = d3.scale.linear()
-                .domain(octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")(objects))
-                .range([350-50-10,0])
-                .nice();
-            var Axis = d3.svg.axis().scale(Scale);
+            var axis = octopeerHelper.getSafeModuleValue(module,axisname+"AxisFitFunction")(objects);
+            axis.scale().range([350-50-10,0]).nice();
             if(axisname === "x") {
-                Axis.orient("bottom");
+                axis.orient("bottom");
+                axis.scale().range([720-50-50,0]);
                 if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                    Axis.tickSize(-350+50+10);
+                    axis.tickSize(-350+50+10);
                 }
             } else if (axisname === "y") {
-                Axis.orient("left");
+                axis.orient("left");
                 if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                    Axis.tickSize(-720+50+50);
+                    axis.tickSize(-720+50+50);
                 }
             } else {
-                Axis.orient("right");
+                axis.orient("right");
                 if(octopeerHelper.getSafeModuleValue(module,axisname+"AxisTicks")) {
-                    Axis.tickSize(720-50-50);
+                    axis.tickSize(720-50-50);
                 }
             }
             d3.select(module.svg).select("."+axisname+"Axis")
                 .transition()
                 .duration(500)
                 .ease("sin-in-out")
-                .call(Axis);
+                .call(axis);
+
+            d3.select(module.svg).select("."+axisname+"Axis")
+                .selectAll("text")
+                .attr("transform", 
+                    "rotate("+octopeerHelper.getSafeModuleValue(module,axisname+"AxisLabelRotation")+")"
+                );
         }
     }
 
@@ -65,7 +69,7 @@ define(['modules/moduleList'], function (dynModules) {
             promises.push(promise);
         }
         RSVP.all(promises).then(function (objects) {
-            $(module.body(objects).node()).appendTo(module.svg);
+            $(module.body(objects).node()).appendTo($(module.svg).find('g.content'));
             scaleAxes(module, objects);
             outerdiv.find(".spinner").addClass("hidden");
             /* TODO if (singleFail(objects) && module.failBody) {
@@ -76,6 +80,45 @@ define(['modules/moduleList'], function (dynModules) {
             }*/
         });
     }
+
+    function drawLegend(module) {
+        var legendData = octopeerHelper.getSafeModuleValue(module,"legend");
+        var legend = d3.select(module.svg).append("g")
+            .attr("class","legend");
+        for (var i = 0 ; i < legendData.length ; i++) {
+            switch(legendData[i].type) {
+                case "linewith" : 
+                case "line" : 
+                    legend.append("line")
+                        .attr("x1",635)
+                        .attr("y1",20+i*25)
+                        .attr("x2",665)
+                        .attr("y2",20+i*25)
+                        .attr("style",legendData[i].style);
+                    legend.append("text")
+                        .attr("x",630)
+                        .attr("y",25+i*25)
+                        .attr("text-anchor","end")
+                        .text(legendData[i].text);
+                    break;
+                case "dot":
+                case "rect" : 
+                    legend.append("rect")
+                        .attr("x",635)
+                        .attr("y",10+i*25)
+                        .attr("width",30)
+                        .attr("height",20)
+                        .attr("style",legendData[i].style);
+                    legend.append("text")
+                        .attr("x",630)
+                        .attr("y",25+i*25)
+                        .attr("text-anchor","end")
+                        .text(legendData[i].text);
+                    break;
+            }
+        }
+    }
+
 
     //For each module, read its arguments, set up divs to append to, execute the Ajax calls 
     //if available and append it to the DOM.
@@ -114,15 +157,19 @@ define(['modules/moduleList'], function (dynModules) {
                 .addClass("errorBadge")
                 .html("error")
                 .appendTo(outerdiv);
+            var svg = createSVG(arguments[i]);
+            svg.append('g')
+                .attr("class","content");
+            arguments[i].svg = svg.node();
         }
-        arguments[i].svg = createSVG(arguments[i])[0][0];
         $(arguments[i].svg).appendTo(outerdiv);
+        drawLegend(arguments[i]);
         $(outerdiv).append($('#spinner-template').html());
         if(arguments[i].data) {
             performDataRequests(arguments[i].data, arguments[i], outerdiv);
         } else {
             //Expects the modules to return a d3 encapsulated element
-            $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
+            $(arguments[i].body().node()).appendTo($(arguments[i].svg).find('g.content'));
             scaleAxes(arguments[i], null);
             outerdiv.find(".spinner").addClass("hidden");
         }
