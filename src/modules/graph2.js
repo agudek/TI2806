@@ -31,7 +31,7 @@ define(function () {
 
     function updateData(data) {
         matrix = data;
-        var mapping = []
+        var mapping = [];
         for (var i = 0; i < matrix.length; ++i) {
             if (matrix[i].length - 1 > maxNumberOfSessions - 1) {
                 maxNumberOfSessions = matrix[i].length - 1;
