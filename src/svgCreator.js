@@ -194,7 +194,7 @@ function SvgCreator() {
         }
     }
 
-    createAxisLabels = function(svg, module){
+    this.createAxisLabels = function(svg, module){
         if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
             createXAxisLabel(svg, module);
         }
@@ -204,9 +204,9 @@ function SvgCreator() {
         if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
             createRightYAxisLabel(svg, module);
         }
-    }
+    };
 
-    createAxes = function(svg, module) {
+    this.createAxes = function(svg, module) {
         if(octopeerHelper.getSafeModuleValue(module,"xAxis")) {
             d3append(svg,createXAxis(module));
         }
@@ -216,13 +216,13 @@ function SvgCreator() {
         if(octopeerHelper.getSafeModuleValue(module,"yRightAxis")) {
             d3append(svg, createRightYAxis(module));
         }
-    }
+    };
 
     this.createSVG = function(module) {
         var svg = createSvgContainer();
-        createAxes(svg, module);
-        createAxisLabels(svg, module);
+        this.createAxes(svg, module);
+        this.createAxisLabels(svg, module);
         return svg;
-    }
+    };
 
 }

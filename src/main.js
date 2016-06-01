@@ -1,4 +1,4 @@
-/* globals define, octopeerHelper, createSVG, RSVP, modules : true, ajax */
+/* globals define, octopeerHelper, svgCreator, RSVP, modules : true, ajax */
 /* exported ajax */
 
 //http://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
