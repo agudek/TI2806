@@ -70,7 +70,7 @@ define(function () {
                     [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
                 );
         },
-        yAxisFitFunction: function (res) {
+        yAxisFitFunction: function() {
             return [0, maxValue];            
          },
         xAxis: true,

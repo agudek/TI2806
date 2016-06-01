@@ -8,11 +8,7 @@ define(function () {
     maxNumberOfSessions = 0;
 
     matrix = [],
-    remapped = [[]].map(function (dat, i) {
-        return matrix.map(function (d, ii) {
-            return { x: ii, y: d[i + 1] };
-        });
-    }),
+    remapped = [[]],
     stacked = d3.layout.stack()(remapped),
     x = d3.scale.ordinal()
         .domain(stacked[0].map(function (d) { return d.x; }))
@@ -31,7 +27,7 @@ define(function () {
 
     function updateData(data) {
         matrix = data;
-        var mapping = []
+        var mapping = [];
         for (var i = 0; i < matrix.length; ++i) {
             if (matrix[i].length - 1 > maxNumberOfSessions - 1) {
                 maxNumberOfSessions = matrix[i].length - 1;
@@ -68,10 +64,10 @@ define(function () {
             "serviceCall": function () { return dataAggregator.graphPrDividedInSessions('', 10); },
             "required": true
         }],
-        xAxisFitFunction: function (res) {
+        xAxisFitFunction: function () {
             return x;
         },
-        yAxisFitFunction: function (res) {
+        yAxisFitFunction: function () {
             return yAxisRange;
         },
         body: function (res) {
