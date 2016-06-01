@@ -71,11 +71,18 @@ define(function () {
                 );
         },
         yAxisFitFunction: function() {
-            return [0, maxValue];            
-         },
+            return d3.svg.axis().scale(d3.scale.linear().domain([0,maxValue]));
+        },
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
+        legend: [
+            {
+                "type":"rect",
+                "style":"fill:rgb(77, 136, 255);",
+                "text":"Number of pull requests with x number of comments"
+            }
+        ],
         data: [{
             "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(''); },
             "required": true
