@@ -1,11 +1,11 @@
-/*exported BitBucketAPI*/
+/*exported BitbucketAPI*/
 /**
 * This will try to easily create an url to call for the Bitbucket api
 *
 * @constructor
 * @this {BitbucketAPI}
 */
-function BitBucketAPI() {
+function BitbucketAPI() {
     "use strict";
 
     this.apiUrl = "http://api.bitbucket.org/2.0/";

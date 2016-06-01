@@ -1,7 +1,7 @@
 /*globals DataAggregator, console*/
 
 var data = new DataAggregator();
-data.graphPrDividedInSessions("borek2", 5).then(function (result) {
+data.graphCommentAmountPerPullRequests("borek2").then(function (result) {
     console.log(result);
 });
 
@@ -10,7 +10,7 @@ data.graphPrDividedInSessions("borek2", 5).then(function (result) {
 ////	console.log(pullrequest);
 //});
 //
-//var bitbucketService = new BitBucketService();
+//var bitbucketService = new BitbucketService();
 //bitbucketService.getPullRequests('jespern','django-piston', function (pullrequests){
 ////	console.log(pullrequests);
 //});

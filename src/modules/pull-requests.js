@@ -1,4 +1,4 @@
-/* globals define, githubService */
+/* globals define, gitHubService */
 /* exported xAxisGroup, yAxisGroup */
 /* jshint unused : vars */
 
@@ -7,7 +7,7 @@ define(function () {
         name: "pull-requests",
         title: "Pull requests",
         size: 1,
-        parentSelector: "#bodyrow",
+        parentSelector: "#project-modules",
         xAxisLabel: "Date",
         yAxisLabel: "",
         yAxis: false,
@@ -67,7 +67,7 @@ define(function () {
             var yScale = d3.scale.linear().domain([300, 0]).range([15, h - 50]);
             var parser = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
             var arr = [];
-            githubService.getPullRequests("mboom", "TI2806", processPRs);
+            gitHubService.getPullRequests("mboom", "TI2806", processPRs);
 
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
 

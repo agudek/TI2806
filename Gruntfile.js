@@ -34,21 +34,6 @@ module.exports = function(grunt) {
         dest: 'dist/jquery.<%= pkg.name %>.min.js'
       },
     },
-    qunit: {
-      files: ['test/TI2806.html'],
-      options: {
-        timeout: 30000,
-        "--web-security": "no",
-        coverage: {
-            src: [ "src/*.js" ],
-            instrumentedFiles: "temp/",
-            coberturaReport: "report/",
-            htmlReport: "build/report/coverage",
-            lcovReport: "build/report/lcov",
-            linesThresholdPct: 70
-        }
-      }
-    },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -63,45 +48,24 @@ module.exports = function(grunt) {
         src: ['test/**/*.js']
       },
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
-    },
-    coveralls: {
-      options: {
-        
-
-        // dont fail if coveralls fails
-        force: true
-      },
-      main_target: {
-        src: "build/report/lcov/lcov.info"
-      }
-    },
+    karma: {
+        unit: {
+            configFile: 'karma.conf.js'
+        }
+    }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks("grunt-coveralls");
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   // Default task.=
-  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'qunit']);
-  grunt.registerTask('test', ['qunit']);
-  grunt.registerTask('travis', ['qunit', 'jshint']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'karma']);
+  grunt.registerTask('travis', ['jshint', 'karma']);
 
 };

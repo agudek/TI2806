@@ -1,5 +1,5 @@
 /*exported DataAggregator*/
-/*globals OctopeerService, GithubService, BitBucketService, RSVP*/
+/*globals OctopeerService, GitHubService, BitbucketService, RSVP*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function DataAggregator() {
@@ -7,8 +7,8 @@ function DataAggregator() {
     var opService, ghService, bbService;
     
     opService = new OctopeerService();
-    ghService = new GithubService();
-    bbService = new BitBucketService();
+    ghService = new GitHubService();
+    bbService = new BitbucketService();
     
     
     /**
@@ -59,6 +59,22 @@ function DataAggregator() {
             }
         });
         return pullRequests;
+    }
+    
+    function convertGraph1ToXY(pullRequests) {
+        var xy = [], i, j;
+        for (i = 0; i < 5; i += 1) {
+            xy.push({
+                "x": i,
+                "y": 2
+            });
+            for (j = 0; j < pullRequests.length; j += 1) {
+                if (pullRequests[j].commentCount === i) {
+                    xy[i].y += 1;
+                }
+            }
+        }
+        return xy;
     }
     
     /**
@@ -115,6 +131,23 @@ function DataAggregator() {
         return pullRequests;
     }
     
+    function pullRequestsSessionObject(pullRequests) {
+        var objectMatrix = [], mIndex;
+        pullRequests.forEach(function (pr) {
+            objectMatrix.push([]);
+            mIndex = objectMatrix.length - 1;
+            objectMatrix[mIndex].push(pr.pull_request_number);
+            pr.sessions.forEach(function (session) {
+                var summedDuration = 0;
+                session.events.forEach(function (se) {
+                    summedDuration += se.duration;
+                });
+                objectMatrix[mIndex].push(summedDuration);
+            });
+        });
+        return objectMatrix;
+    }
+    
     /**
         public graph 1 function (comment count and pullrequests)
     */
@@ -126,9 +159,8 @@ function DataAggregator() {
                 .then(setSemanticEvents)
                 .then(filterSessionsForComments)
                 .then(pullRequestCommentObject)
-                .then(function (pullRequests) {
-                    fulfill(pullRequests);
-                });
+                .then(convertGraph1ToXY)
+                .then(fulfill);
         });
         
         return promise;
@@ -148,6 +180,7 @@ function DataAggregator() {
                 .then(setSemanticEventsForSessionsFromPullRequests)
                 .then(filterSessionStartFromSessionsFromPullRequests)
                 .then(sumDurationOfSessionsFromPullRequests)
+                .then(pullRequestsSessionObject)
                 .then(fulfill);
         });
         return promise;

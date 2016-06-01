@@ -1,10 +1,10 @@
-/* globals define */
+/* globals define, dataAggregator */
 define(function () {
     return {
         name: 'graph1',
         title: 'Number of pull-request per number of comments',
         size: 1,
-        parentSelector: '#bodyrow',
+        parentSelector: '#project-modules',
         xAxisLabel: "Number of comments",
         yAxisLabel: "Number of pull-requests",
         yRightAxisLabel: "",
@@ -23,12 +23,8 @@ define(function () {
                 );
             return scale;
         },
-        yAxisFitFunction: function() { 
-            var sizeData = [
-                { 'x': 1, 'y': 6 },
-                { 'x': 2, 'y': 5 },
-                { 'x': 4, 'y': 5 }
-            ],
+        yAxisFitFunction: function (res) {
+            var sizeData = res[0],
             domain = ['0-2', '3-5', '5-10', '<10'],
             buckets = [];
             for (var i = 0; i < domain.length; ++i) {
@@ -52,7 +48,6 @@ define(function () {
             for (i = 0; i < buckets.length; ++i) {
                 sizeData.push({ 'x': i, 'y': buckets[i] });
             }
-
             var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
 
             return [0, maxValue];            
@@ -60,23 +55,22 @@ define(function () {
         xAxis: true,
         yAxis: true,
         yRightAxis: false,
-        body: function () {
+        data: [{
+            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(); },
+            "required": true
+        }],
+        body: function (res) {
             var w = 720,
                 h = 350,
                 pad = 50,
                 padTop = 10,
                 padBottom = 50,
-                sizeData = [
-                    { 'x': 1, 'y': 6 },
-                    { 'x': 2, 'y': 5 },
-                    { 'x': 4, 'y': 5 }
-                ],
+                sizeData = res[0],
                 domain = ['0-2', '3-5', '5-10', '<10'],
                 buckets = [];
             for (var i = 0; i < domain.length; ++i) {
                 buckets.push(0);
             }
-
             function devide(x) {
                 switch (true) {
                     case (x > 10): return 3; // > 10
@@ -94,7 +88,6 @@ define(function () {
             for (i = 0; i < buckets.length; ++i) {
                 sizeData.push({ 'x': i, 'y': buckets[i] });
             }
-
             var maxValue = Math.max.apply(Math, sizeData.map(function (o) { return o.y; }));
 
             var xSizeScale = d3.scale.linear()
@@ -103,9 +96,8 @@ define(function () {
             ySizeScale = d3.scale.linear()
                     .domain([0, maxValue])
                     .range([padTop, h - padBottom]).nice();
-
+            
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, "g"));
-
             g.selectAll("rect").data(sizeData).enter()
                 .append("rect")
                 .attr("x", function (d) { return xSizeScale(d.x); })
@@ -115,7 +107,6 @@ define(function () {
                 .attr("style", "fill:rgb(77, 136, 255);")
                 .transition()
                 .attr("y", function (d) { return h - padBottom - ySizeScale(d.y); });
-
             return g;
         }
     };
