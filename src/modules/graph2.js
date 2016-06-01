@@ -17,9 +17,6 @@ define(function () {
     x = d3.scale.ordinal()
         .domain(stacked[0].map(function (d) { return d.x; }))
         .rangeRoundBands([pad, w - pad]),
-    /*x = d3.scale.linear()
-        .domain(matrix.map(function (obj) { return obj[0]; }))
-        .range([pad, w - pad]),*/
     y = d3.scale.linear()
         .domain([0, d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; })])
         .range([0, h - padBottom - padTop]),
@@ -52,9 +49,6 @@ define(function () {
         x = d3.scale.ordinal()
             .domain(stacked[0].map(function (d) { return d.x; }))
             .rangeRoundBands([pad, w - pad]);
-        /*x = d3.scale.linear()
-            .domain(matrix.map(function (obj) { return obj[0]; }))
-            .range([pad, w - pad]);*/
         y = d3.scale.linear()
             .domain([0, d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; })])
             .range([0, h - padBottom - padTop]);
