@@ -115,13 +115,13 @@ define(['modules/moduleList'], function (dynModules) {
                     .html("error")
                     .appendTo(outerdiv);
             }
-            arguments[i].svg = createSVG(arguments[i])[0][0];
+            arguments[i].svg = svgCreator.createSVG(arguments[i]).node();
             $(arguments[i].svg).appendTo(outerdiv);
             if(arguments[i].data) {
                 performDataRequests(arguments[i].data, arguments[i], arguments[i].svg);
             } else {
                 //Expects the modules to return a d3 encapsulated element
-                $(arguments[i].body()[0][0]).appendTo(arguments[i].svg);
+                $(arguments[i].body().node()).appendTo(arguments[i].svg);
                 scaleAxes(arguments[i], null);
             }
         }

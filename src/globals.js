@@ -1,5 +1,5 @@
-/* globals OctopeerHelper, OctopeerService, GitHubService, BitbucketService, DataAggregator */
-/* exported modules, octopeerHelper, octopeerService, gitHubService, bitbucketService, dataAggregator */
+/* globals OctopeerHelper, OctopeerService, GitHubService, BitbucketService, DataAggregator, SvgCreator */
+/* exported modules, octopeerHelper, octopeerService, gitHubService, bitbucketService, dataAggregator, svgCreator */
 
 //Global modules list for if the module objects are needed elsewhere.
 var modules = [];
@@ -10,3 +10,4 @@ var octopeerService = new OctopeerService();
 var gitHubService = new GitHubService();
 var bitbucketService = new BitbucketService();
 var dataAggregator = new DataAggregator();
+var svgCreator = new SvgCreator();
