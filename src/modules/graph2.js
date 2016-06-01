@@ -94,7 +94,7 @@ define(function () {
             .data(function (d) { return d; })
             .enter().append("svg:rect")
             .attr("x", function (d) { return x(d.x); })
-            .attr("y", function (d) { return -y(d.y0) - y(d.y) + 300; })
+            .attr("y", function (d) { return h - padBottom -y(d.y0) - y(d.y); })
             .attr("height", function (d) { return y(d.y); })
             .attr("width", x.rangeBand())
             .attr("style", "stroke: none;");
