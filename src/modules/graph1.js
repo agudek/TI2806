@@ -6,7 +6,7 @@ define(function () {
     padTop = 10,
     padBottom = 50,
     sizeData = [],
-    domain = ['0-2', '3-5', '5-10', '<10'],
+    domain = ['0-2', '3-5', '5-10', '>10'],
     buckets = [],
     maxValue = 0,
     xSizeScale = d3.scale.linear()
