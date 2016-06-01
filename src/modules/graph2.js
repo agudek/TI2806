@@ -5,10 +5,14 @@ define(function () {
     pad = 50,
     padTop = 10,
     padBottom = 50,
-    maxNumberOfSessions = 0;
+    maxNumberOfSessions = 0,
 
     matrix = [],
-    remapped = [[]],
+    remapped = [[]].map(function (dat, i) {
+        return matrix.map(function (d, ii) {
+            return { x: ii, y: d[i + 1] };
+        });
+    }),
     stacked = d3.layout.stack()(remapped),
     x = d3.scale.ordinal()
         .domain(stacked[0].map(function (d) { return d.x; }))
@@ -27,7 +31,7 @@ define(function () {
 
     function updateData(data) {
         matrix = data;
-        var mapping = [];
+        var mapping = []
         for (var i = 0; i < matrix.length; ++i) {
             if (matrix[i].length - 1 > maxNumberOfSessions - 1) {
                 maxNumberOfSessions = matrix[i].length - 1;
