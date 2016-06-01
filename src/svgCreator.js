@@ -20,14 +20,13 @@ function SvgCreator() {
     }
 
     function createLeftYAxis(module) {
-    	var scale;
-    	if ((scale = octopeerHelper.getSafeModuleValue(module,"yAxisScale")()) === "fit") {
-    		scale = d3.scale.linear().domain([0,100]).range([350-50-10,0]).nice();
+    	var axis;
+    	if ((axis = octopeerHelper.getSafeModuleValue(module,"yAxisScale")()) === "fit") {
+    		axis = d3.svg.axis().scale(d3.scale.linear().domain([0,100]).nice());
     	}
 
-    	var axis = d3.svg.axis()
-            .scale(scale)
-            .orient("left");
+    	axis.orient("left")
+            .scale().range([350-50-10,0]);
 
         if(octopeerHelper.getSafeModuleValue(module,"yAxisTicks")) {
             axis.tickSize(-720+50+50);
@@ -45,7 +44,7 @@ function SvgCreator() {
                 .attr("y", 0)
                 .attr("x", 9)
                 .attr("dy", ".35em")
-                .attr("transform", "rotate("+degrees+")")
+                .attr("transform", "rotate("+octopeerHelper.getSafeModuleValue(module,"yAxisLabelRotation")+")")
                 .style("text-anchor", "start");
         }
 
@@ -59,14 +58,13 @@ function SvgCreator() {
     }
 
     function createRightYAxis(module) {
-    	var scale;
-    	if ((scale = octopeerHelper.getSafeModuleValue(module,"yRightAxisScale")()) === "fit") {
-    		scale = d3.scale.linear().domain([0,100]).range([350-50-10,0]).nice();
-    	}
+    	var axis;
+        if ((axis = octopeerHelper.getSafeModuleValue(module,"yRightAxisScale")()) === "fit") {
+            axis = d3.svg.axis().scale(d3.scale.linear().domain([0,100]).nice());
+        }
 
-    	var axis = d3.svg.axis()
-            .scale(scale)
-            .orient("right");
+        axis.orient("right")
+            .scale().range([350-50-10,0]);
 
         if(octopeerHelper.getSafeModuleValue(module,"yRightAxisTicks")) {
             axis.tickSize(720-50-10);
@@ -97,14 +95,19 @@ function SvgCreator() {
         return g;
     }
 
+    function xAxisOrientAndFit(module, axis) {
+        axis.orient("bottom");
+        if(typeof axis.scale().rangePoints === "undefined") {
+            axis.scale().range([0,720-50-50]);
+        }
+    }
+
     function createXAxis(module) {
-    	var scale;
-    	if ((scale = octopeerHelper.getSafeModuleValue(module,"xAxisScale")()) === "fit") {
-    		scale = d3.scale.linear().domain([0,100]).range([0,720-50-50]).nice();
+    	var axis;
+    	if ((axis = octopeerHelper.getSafeModuleValue(module,"xAxisScale")()) === "fit") {
+    		axis = d3.svg.axis().scale(d3.scale.linear().domain([0,100]).nice());
     	}
-    	var axis = d3.svg.axis()
-            .scale(scale)
-            .orient("bottom");
+        xAxisOrientAndFit(module, axis);
 
         if(octopeerHelper.getSafeModuleValue(module,"xAxisTicks")) {
             axis.tickSize(-350+50+10);
@@ -138,38 +141,21 @@ function SvgCreator() {
     function createXAxisLabel(svg, module) {
         var label = "";
         if((label = octopeerHelper.getSafeModuleValue(module,"xAxisLabel")) !== "") {
-        var g = svg.append("g");
-            
-            //var rect = g.append("rect");
-
-            //var text = 
+            var g = svg.append("g");
             g.append("text")
                 .attr("x",720/2)
                 .attr("y",360)
                 .attr("text-anchor", "middle")
                 .text(label);
-    /*
-            var bbox = text.node().getBBox();
-            console.log(text);
-            console.log(text.node());
-            console.log(bbox);
-
-            rect.attr("x",(720/2)-(bbox.width/2)-10)
-                .attr("y",350-5)
-                .attr("height",bbox.height+10)
-                .attr("width",bbox.width+20)
-                .attr("style", "stroke:none; fill:rgba(255,255,255,0.3)");
-                */
-
         }
 
     }
+        
 
     function createLeftYAxisLabel(svg, module) {
         var label = "";
         if((label = octopeerHelper.getSafeModuleValue(module,"yAxisLabel")) !== "") {
         var g = svg.append("g");
-        
             g.append("text")
                 .attr("y",0)
                 .attr("x",-(350-50)/2)
