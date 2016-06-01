@@ -48,20 +48,6 @@ module.exports = function(grunt) {
         src: ['test/**/*.js']
       },
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
-    },
     karma: {
         unit: {
             configFile: 'karma.conf.js'
@@ -79,8 +65,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma-coveralls');
 
   // Default task.=
-  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify']);
-  grunt.registerTask('test', ['jshint', 'karma']);
+  grunt.registerTask('default', ['jshint', 'clean', 'concat', 'uglify', 'karma']);
   grunt.registerTask('travis', ['jshint', 'karma']);
 
 };
