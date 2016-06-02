@@ -56,7 +56,7 @@ define(function () {
         yAxis: true,
         yRightAxis: false,
         data: [{
-            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests(); },
+            "serviceCall": function () { return dataAggregator.graphCommentAmountPerPullRequests("borek2"); },
             "required": true
         }],
         body: function (res) {

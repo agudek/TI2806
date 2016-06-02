@@ -2,7 +2,7 @@
 
 var data = new DataAggregator();
 data.graphCommentAmountPerPullRequests("borek2").then(function (result) {
-    console.log(result);
+    //console.log(result);
 });
 
 //var githubService = new GithubService();
