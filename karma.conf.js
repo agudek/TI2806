@@ -78,6 +78,7 @@ module.exports = function (config) {
         concurrency: Infinity,
 
         coverageReporter: {
+            includeAllSources: true,
             type: 'lcov',
             dir: 'coverage/'
         },
