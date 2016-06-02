@@ -24,9 +24,14 @@ define(function () {
         .domain([d3.max(stacked[stacked.length - 1], function (d) { return d.y0 + d.y; }), 0])
         .range([0, h - padBottom - padTop]),
     z = d3.scale.ordinal().range([
-        "rgba(0, 0, 255, 1.00)",
-        "rgba(255, 255, 255, 1.00)",
-        "rgba(255, 0, 0, 1.00)"
+        'rgba(51, 125, 212, 0.5)',
+        'rgba(255, 255, 255, 1.00)',
+        'rgba(51, 125, 212, 0.5)'
+    ]);
+    zBorder = d3.scale.ordinal().range([
+        'rgba(51, 125, 212, 1.00)',
+        'rgba(255, 255, 255, 1.00)',
+        'rgba(51, 125, 212, 0.5)'
     ]);
 
     function updateData(data) {
@@ -38,7 +43,7 @@ define(function () {
             }
         }
         for (i = 1; i <= maxNumberOfSessions; ++i) {
-            mapping.push("c" + i);
+            mapping.push('c' + i);
         }
         remapped = mapping.map(function (dat, i) {
             return matrix.map(function (d, ii) {
@@ -65,39 +70,38 @@ define(function () {
         size: 1,
         parentSelector: '#project-modules',
         data: [{
-            "serviceCall": function () { return dataAggregator.graphPrDividedInSessions('', 10); },
-            "required": true
+            'serviceCall': function () { return dataAggregator.graphPrDividedInSessions('', 10); },
+            'required': true
         }],
         xAxisFitFunction: function () {
-            return x;
+            return d3.svg.axis().linear().scale(x);
         },
         yAxisFitFunction: function () {
-            return yAxisRange;
+            return d3.svg.axis().linear().scale(yAxisRange);
         },
         body: function (res) {
             updateData(res[0]);
 
             // create canvas
             var g = d3.select(document.createElementNS(d3.ns.prefix.svg, 'g'))
-            .attr("class", "chart");
+            .attr('class', 'chart');
 
             // Add a group for each column.
-            var valgroup = g.selectAll(".valgroup")
+            var valgroup = g.selectAll('.valgroup')
             .data(stacked)
-            .enter().append("svg:g")
-            .attr("class", "valgroup")
-            .style("fill", function (d, i) { return z(i); })
-            .style("stroke", function (d, i) { return d3.rgb(z(i)).darker(); });
+            .enter().append('svg:g')
+            .attr('class', 'valgroup')
+            .style('fill', function (d, i) { return z(i); })
+            .style('stroke', function (d, i) { return zBorder(i); });
 
             // Add a rect for each date.
-            valgroup.selectAll("rect")
+            valgroup.selectAll('rect')
             .data(function (d) { return d; })
-            .enter().append("svg:rect")
-            .attr("x", function (d) { return x(d.x); })
-            .attr("y", function (d) { return h - padBottom -y(d.y0) - y(d.y); })
-            .attr("height", function (d) { return y(d.y); })
-            .attr("width", x.rangeBand())
-            .attr("style", "stroke: none;");
+            .enter().append('svg:rect')
+            .attr('x', function (d) { return x(d.x); })
+            .attr('y', function (d) { return h - padBottom -y(d.y0) - y(d.y); })
+            .attr('height', function (d) { return y(d.y); })
+            .attr('width', x.rangeBand())
 
             return g;
         }

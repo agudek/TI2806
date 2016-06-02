@@ -64,11 +64,11 @@ define(function () {
         xAxisLabelRotation: 65,
         yAxisScale: function() { return "fit"; },
         xAxisScale: function() { 
-            return d3.scale.ordinal()
+            return d3.svg.axis().scale(d3.scale.ordinal()
                 .domain(domain)
                 .rangePoints(
                     [0.5 * (720 / domain.length - 40), 720 - 2 * 50 - 0.5 * (720 / domain.length - 40)]
-                );
+                ));
         },
         yAxisFitFunction: function() {
             return d3.svg.axis().scale(d3.scale.linear().domain([0,maxValue]));
@@ -96,7 +96,7 @@ define(function () {
                 .attr("y", h - padBottom)
                 .attr("width", function () { return (w / (domain.length)) - 40; })
                 .attr("height", function (d) { return ySizeScale(d.y); })
-                .attr("style", "fill:rgb(77, 136, 255);")
+                .attr("style", "stroke: rgba(51, 125, 212, 1.00); fill: rgba(51, 125, 212, 0.5)")
                 .transition()
                 .attr("y", function (d) { return h - padBottom - ySizeScale(d.y); });
             return g;
