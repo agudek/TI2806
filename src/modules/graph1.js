@@ -1,4 +1,4 @@
-/* globals define, dataAggregator */
+/* globals define, Graph1Aggregator */
 define(function () {
     return {
         name: 'graph1',

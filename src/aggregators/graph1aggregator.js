@@ -1,10 +1,10 @@
-/*exported DataAggregator*/
-/*globals OctopeerService, GitHubService, BitbucketService, RSVP, ObjectResolver*/
+/*exported Graph1Aggregator*/
+/*globals OctopeerService, RSVP*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function Graph1Aggregator(userName) {
     "use strict";
-    var promise, objectResolver = new ObjectResolver(), opService;
+    var promise, opService;
     opService = new OctopeerService();
     
     function setSemanticEvents(sessions) {

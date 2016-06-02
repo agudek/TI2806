@@ -1,10 +1,10 @@
-/*exported DataAggregator*/
-/*globals OctopeerService, GitHubService, BitbucketService, RSVP, ObjectResolver*/
+/*exported Graph2Aggregator*/
+/*globals OctopeerService, RSVP*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function Graph2Aggregator(userName, amountOfPr) {
     "use strict";
-    var promise, objectResolver = new ObjectResolver(), opService;
+    var promise, opService;
     opService = new OctopeerService();
     
     function setSemanticEvents(sessions) {
@@ -32,17 +32,6 @@ function Graph2Aggregator(userName, amountOfPr) {
             pullRequests[dictionary[session.pull_request.url]].sessions.push(session);
         });
         return pullRequests;
-    }
-    
-    function setSemanticEventsForSessionsFromPullRequests(pullRequests) {
-        var promises = [];
-        pullRequests.forEach(function (pr) {
-            promises.push(setSemanticEvents(pr.sessions).then(function (sessions) {
-                pr.sessions = sessions;
-                return pr;
-            }));
-        });
-        return RSVP.all(promises);
     }
     
     function filterSessionStartFromSessionsFromPullRequests(pullRequests) {
