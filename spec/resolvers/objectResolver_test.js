@@ -1,6 +1,6 @@
 define(['src/resolvers/objectResolver'], function (resolver) {
-    describe('isUrl test', function () {
-        it('should recognize the url as valid', function () {
+    describe('ObjectResolver test', function () {
+        it('should resolve an empty object correctly', function () {
             var oResolver = new ObjectResolver("");
             expect(oResolver.resolveSingleObject(JSON.stringify({}))).toBe(JSON.stringify({}));
         });
