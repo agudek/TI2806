@@ -10,7 +10,6 @@ function PullRequestResolver() {
     function resolvePullRequest(pullRequest) {
         var promise = new RSVP.Promise(function (fulfill) {
             if (pullRequest.repository.platform === "GitHub") {
-                //console.log(pullRequest);
                 ghService.getPullRequest(pullRequest.repository.owner,
                                          pullRequest.repository.name,
                                          pullRequest.pull_request_number,

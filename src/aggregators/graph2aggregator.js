@@ -9,7 +9,7 @@ function Graph2Aggregator(userName, amountOfPr) {
     prResolver = new PullRequestResolver();
     
     function setSemanticEvents(sessions) {
-        opService.getSemanticEvents()
+        return opService.getSemanticEvents()
             .then(function (events) {
                 sessions.forEach(function (session) {
                     session.events = events.filter(function (event) {
@@ -78,9 +78,12 @@ function Graph2Aggregator(userName, amountOfPr) {
     }
     
     promise = new RSVP.Promise(function (fulfill) {
-        opService.getSessionsFromUser(userName) //Gets sessions from user
+        opService
+            //.getSessionsFromUser(userName) //Gets sessions from user
+            .getSessions()
             .then(setSemanticEvents) //Set semantic events for sessions
             .then(createPullRequestsObjectFromSessions) //Create pullrequests object
+            .then(prResolver.resolvePullRequests)
             .then(function (pullRequests) { //Filter to amount of wanted Prs
                 return pullRequests.splice(0, amountOfPr);
             })

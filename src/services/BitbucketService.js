@@ -16,7 +16,9 @@ function BitbucketService() {
                                        return transformer.transform(item, "BITBUCKET");
                                    });
                                    callback(transformed);
-                               });
+                               }, function(error) {
+            callback({});
+        });
     };
     
     this.getPullRequest = function (owner, repo, number, callback) {
@@ -31,7 +33,9 @@ function BitbucketService() {
                                        return transformer.transform(item, "BITBUCKET");
                                    });
                                    callback(transformed);
-                               });
+                               }, function(error) {
+            callback({});
+        });
         
     }
 }

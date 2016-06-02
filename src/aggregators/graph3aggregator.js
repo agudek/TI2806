@@ -9,7 +9,7 @@ function Graph3Aggregator(userName, amountOfPr) {
     prResolver = new PullRequestResolver();
     
     function setSemanticEvents(sessions) {
-        opService.getSemanticEvents()
+        return opService.getSemanticEvents()
             .then(function (events) {
                 sessions.forEach(function (session) {
                     session.events = events.filter(function (event) {
@@ -49,10 +49,13 @@ function Graph3Aggregator(userName, amountOfPr) {
             });
             pullRequest.eventDurations = eventDuration;
         });
+        return pullRequests;
     }
     
     promise = new RSVP.Promise(function (fulfill) {
-        opService.getSessionsFromUser(userName) //Gets sessions from user
+        opService
+            //.getSessionsFromUser(userName) //Gets sessions from user
+            .getSessions()
             .then(setSemanticEvents) //Set semantic events for sessions
             .then(createPullRequestsObjectFromSessions) //Create pullrequests object
             .then(prResolver.resolvePullRequests)

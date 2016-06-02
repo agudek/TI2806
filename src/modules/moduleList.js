@@ -20,6 +20,8 @@ define([], function () {
         'resolvers/pullRequestResolver',
         'svgCreator',
         'aggregators/graph1aggregator.js',
+        'aggregators/graph2aggregator.js',
+        'aggregators/graph3aggregator.js',
         'aggregators/graph4aggregator.js',
         'example-services',
         'globals'

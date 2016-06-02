@@ -39,13 +39,13 @@ function Graph4Aggregator(owner, reponame, pullRequestNumber) {
         var matrix = {};
         pullRequest.sessions.forEach(function (session) {
             session.events.forEach(function (event) {
-                if (!matrix.hasOwnProperty(event.element_type)) {
-                    matrix[event.element_type] = {};
-                    matrix[event.element_type][event.event_type] = 1;
-                } else if (!matrix[event.element_type].hasOwnProperty([event.event_type])) {
-                    matrix[event.element_type][event.event_type] = 1;
+                if (!matrix.hasOwnProperty(event.element_type.url)) {
+                    matrix[event.element_type.url] = {};
+                    matrix[event.element_type.url][event.event_type.url] = 1;
+                } else if (!matrix[event.element_type.url].hasOwnProperty([event.event_type.url])) {
+                    matrix[event.element_type.url][event.event_type.url] = 1;
                 } else {
-                    matrix[event.element_type][event.event_type] += 1;
+                    matrix[event.element_type.url][event.event_type.url] += 1;
                 }
             });
         });
