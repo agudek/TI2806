@@ -10,13 +10,13 @@ function BitbucketService() {
                                owner + '/' +
                                repo +
                                '/pullrequests', {}), function (pullrequests) {
-                                   var transformer, transformed;
-                                   transformer = new PullRequestTransformer();
-                                   transformed = pullrequests.values.map(function (item) {
-                                       return transformer.transform(item, "BITBUCKET");
-                                   });
-                                   callback(transformed);
-                               }, function(error) {
+            var transformer, transformed;
+            transformer = new PullRequestTransformer();
+            transformed = pullrequests.values.map(function (item) {
+                return transformer.transform(item, "BITBUCKET");
+            });
+            callback(transformed);
+        }, function () {
             callback({});
         });
     };
@@ -27,15 +27,15 @@ function BitbucketService() {
                                repo +
                                '/pullrequests/' +
                                number, {}), function (pullrequests) {
-                                   var transformer, transformed;
-                                   transformer = new PullRequestTransformer();
-                                   transformed = pullrequests.values.map(function (item) {
-                                       return transformer.transform(item, "BITBUCKET");
-                                   });
-                                   callback(transformed);
-                               }, function(error) {
+            var transformer, transformed;
+            transformer = new PullRequestTransformer();
+            transformed = pullrequests.values.map(function (item) {
+                return transformer.transform(item, "BITBUCKET");
+            });
+            callback(transformed);
+        }, function () {
             callback({});
         });
         
-    }
+    };
 }

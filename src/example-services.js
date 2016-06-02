@@ -1,4 +1,4 @@
-/*globals Graph3Aggregator, console*/
+/*globals Graph2Aggregator, console*/
 
 new Graph2Aggregator("mboom", 5).then(function (result) {
     console.log(result);

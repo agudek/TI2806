@@ -1,11 +1,10 @@
 /* exported PullRequestResolver */
-/* globals RSVP, getJSON, GitHubService, BitbucketService, pullrequestTransformer */
+/* globals RSVP, GitHubService, BitbucketService */
 function PullRequestResolver() {
     "use strict";
-    var ghService, bbService, transformer;
+    var ghService, bbService;
     ghService = new GitHubService();
     bbService = new BitbucketService();
-    transformer = new PullRequestTransformer();
     
     function resolvePullRequest(pullRequest) {
         var promise = new RSVP.Promise(function (fulfill) {
@@ -14,20 +13,19 @@ function PullRequestResolver() {
                                          pullRequest.repository.name,
                                          pullRequest.pull_request_number,
                                          function (pr) {
-                    pullRequest.prInfo = pr;
-                    fulfill(pullRequest);
-                });
+                        pullRequest.prInfo = pr;
+                        fulfill(pullRequest);
+                    });
             } else {
                 bbService.getPullRequest(pullRequest.repository.owner,
                                         pullRequest.repository.name,
                                         pullRequest.pull_request_number,
                                         function (pr) {
-                    pullRequest.prInfo = pr;
-                    fulfill(pullRequest);
-                });
+                        pullRequest.prInfo = pr;
+                        fulfill(pullRequest);
+                    });
             }
         });
-
         return promise;
     }
     

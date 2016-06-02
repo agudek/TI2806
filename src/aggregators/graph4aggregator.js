@@ -35,7 +35,6 @@ function Graph4Aggregator(owner, reponame, pullRequestNumber) {
     }
     
     function createMatrix(pullRequest) {
-        console.log(pullRequest);
         var matrix = {};
         pullRequest.sessions.forEach(function (session) {
             session.events.forEach(function (event) {
