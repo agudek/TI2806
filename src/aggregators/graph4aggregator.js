@@ -1,11 +1,12 @@
 /*exported Graph4Aggregator*/
-/*globals OctopeerService, RSVP*/
+/*globals OctopeerService, RSVP, PullRequestResolver*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function Graph4Aggregator(owner, reponame, pullRequestNumber) {
     "use strict";
-    var promise, opService;
+    var promise, opService, prResolver;
     opService = new OctopeerService();
+    prResolver = new PullRequestResolver();
     
     function setSemanticEvents(sessions) {
         return opService.getSemanticEvents()
@@ -34,6 +35,7 @@ function Graph4Aggregator(owner, reponame, pullRequestNumber) {
     }
     
     function createMatrix(pullRequest) {
+        console.log(pullRequest);
         var matrix = {};
         pullRequest.sessions.forEach(function (session) {
             session.events.forEach(function (event) {
@@ -56,6 +58,7 @@ function Graph4Aggregator(owner, reponame, pullRequestNumber) {
             .then(setSemanticEvents) //Set semantic events for sessions
             .then(filterForPullRequest)
             .then(createPullRequestObjectFromSessions) //Create pullrequests object
+            .then(prResolver.resolveSinglePullRequest)
             .then(createMatrix)
             .then(fulfill);
     });

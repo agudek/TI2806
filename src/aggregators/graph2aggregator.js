@@ -1,11 +1,12 @@
 /*exported Graph2Aggregator*/
-/*globals OctopeerService, RSVP*/
+/*globals OctopeerService, RSVP, PullRequestResolver*/
 //https://docs.google.com/document/d/1QUu1MP9uVMH9VlpEFx2SG99j9_TgxlhHo38_bgkUNKk/edit?usp=sharing
 /*jshint unused: vars*/
 function Graph2Aggregator(userName, amountOfPr) {
     "use strict";
-    var promise, opService;
+    var promise, opService, prResolver;
     opService = new OctopeerService();
+    prResolver = new PullRequestResolver();
     
     function setSemanticEvents(sessions) {
         opService.getSemanticEvents()
@@ -83,6 +84,7 @@ function Graph2Aggregator(userName, amountOfPr) {
             .then(function (pullRequests) { //Filter to amount of wanted Prs
                 return pullRequests.splice(0, amountOfPr);
             })
+            .then(prResolver.resolvePullRequests)
             .then(filterSessionStartFromSessionsFromPullRequests)
             .then(sumDurationOfSessionsFromPullRequests)
             .then(graphObject)

@@ -18,4 +18,20 @@ function BitbucketService() {
                                    callback(transformed);
                                });
     };
+    
+    this.getPullRequest = function (owner, repo, number, callback) {
+        getJSON(api.urlBuilder('repositories/' +
+                               owner + '/' +
+                               repo +
+                               '/pullrequests/' +
+                               number, {}), function (pullrequests) {
+                                   var transformer, transformed;
+                                   transformer = new PullRequestTransformer();
+                                   transformed = pullrequests.values.map(function (item) {
+                                       return transformer.transform(item, "BITBUCKET");
+                                   });
+                                   callback(transformed);
+                               });
+        
+    }
 }
