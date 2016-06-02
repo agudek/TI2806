@@ -37,11 +37,11 @@ function OctopeerAPI() {
     */
     this.urlBuilder = function (endpoint, parameters) {
         var url, firstParameter, attribute;
-        if (endpoint.charAt(0) == '/') {
+        if (endpoint.charAt(0) === '/') {
             url = this.apiUrl + endpoint;
         } else {
             throw "endpoints must start with a slash (\'/\')";
-        };
+        }
         
         firstParameter = true;
         for (attribute in parameters) {
