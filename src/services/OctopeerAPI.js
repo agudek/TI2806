@@ -8,7 +8,8 @@
 function OctopeerAPI() {
     "use strict";
 
-    this.apiUrl = "http://10.0.22.6/api";
+    //this.apiUrl = "http://10.0.22.6/api";
+    this.apiUrl = "http://146.185.128.124/api";
     this.endpoints = {
         'repositories' : "/repositories",
         'users' : "/users/",
