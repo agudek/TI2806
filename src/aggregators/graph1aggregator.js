@@ -70,7 +70,7 @@ function Graph1Aggregator(userName) {
         opService
             //.getSessionsFromUser(userName) //first get the session array of urls
             .getSessions()
-            .then(objectResolver.resolveArrayOfUrls) //resolve them to session objects
+            //.then(objectResolver.resolveArrayOfUrls) //resolve them to session objects
             .then(setSemanticEvents) //Add events attribute to all the sessions
             .then(filterSessionsForComments) //filter those events for comments
             .then(pullRequestCommentObject) //count comments

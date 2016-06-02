@@ -1,7 +1,7 @@
 /*globals Graph4Aggregator, console*/
 
 Graph4Aggregator("mboom", "TI2806", 1).then(function (result) {
-    console.log(result);
+    //console.log(result);
 });
 
 //var githubService = new GithubService();
